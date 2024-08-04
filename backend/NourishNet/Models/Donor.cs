@@ -6,6 +6,7 @@ namespace NourishNet.Models
     public class Donor : IdentityUser
     {
         public string OrganizaTionName { get; set; }
+        public OrganizationType OrganizationType { get; set; }
         public string ContactPersoon { get; set; }
         public string Phone { get; set; }
         public District BaseDistrict { get; set; }
