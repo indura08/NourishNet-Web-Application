@@ -1,0 +1,6 @@
+@NourishNet_HostAddress = http://localhost:5223
+
+GET {{NourishNet_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
