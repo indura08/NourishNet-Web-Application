@@ -14,7 +14,5 @@ namespace NourishNet.Models
         public  string Address { get; set; }
         public TimeOnly OperatingHours { get; set; }
 
-
-
     }
 }
