@@ -13,5 +13,7 @@ namespace NourishNet.Models
         public string Address { get; set; }
         public RecipientType RecipientType { get; set; }
 
+        public Role Role { get; set; }
+
     }
 }

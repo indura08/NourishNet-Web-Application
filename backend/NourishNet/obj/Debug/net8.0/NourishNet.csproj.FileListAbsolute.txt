@@ -30,3 +30,4 @@ F:\intern projecrts\Food waste reduction asp.net and react project\Project\backe
 F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\obj\Debug\net8.0\NourishNet.pdb
 F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\obj\Debug\net8.0\NourishNet.genruntimeconfig.cache
 F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\obj\Debug\net8.0\ref\NourishNet.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\obj\Debug\net8.0\NourishNet.sourcelink.json
