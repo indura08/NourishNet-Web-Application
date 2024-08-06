@@ -14,7 +14,7 @@ namespace NourishNet.Models
         public Donor Donor { get; set; }
         public FoodType FoodType { get; set; }
         public string Description { get; set; }
-        public int Quantity { get; set; }
+        public double Quantity { get; set; }
         public DateOnly PostedDate { get; set; }
         public DateOnly ExpiryDate { get; set; }
         public string ImagePath { get; set; }
