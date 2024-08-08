@@ -17,16 +17,4 @@ namespace NourishNet.Data
         public DbSet<Recipient> Recipients { get; set; }
     }
 
-    public class DonorDbContext : IdentityDbContext<Donor>
-    {
-        public DonorDbContext(DbContextOptions<DonorDbContext> options) : base(options) { }
-    }
-
-    public class RecipientDbContext : IdentityDbContext<Recipient> 
-    {
-        public RecipientDbContext(DbContextOptions<RecipientDbContext> options) : base(options) { }
-
-    }
-
-
 }
