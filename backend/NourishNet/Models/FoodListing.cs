@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using NourishNet.Models.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.OpenApi;
 
 namespace NourishNet.Models
 {
@@ -21,4 +23,48 @@ namespace NourishNet.Models
         public FoodListingStatus CurrentStatus { get; set; }
 
     }
+
+
+//public static class FoodListingEndpoints
+//{
+//	public static void MapFoodListingEndpoints (this IEndpointRouteBuilder routes)
+//    {
+//        var group = routes.MapGroup("/api/FoodListing").WithTags(nameof(FoodListing));
+
+//        group.MapGet("/", () =>
+//        {
+//            return new [] { new FoodListing() };
+//        })
+//        .WithName("GetAllFoodListings")
+//        .WithOpenApi();
+
+//        group.MapGet("/{id}", (int id) =>
+//        {
+//            //return new FoodListing { ID = id };
+//        })
+//        .WithName("GetFoodListingById")
+//        .WithOpenApi();
+
+//        group.MapPut("/{id}", (int id, FoodListing input) =>
+//        {
+//            return TypedResults.NoContent();
+//        })
+//        .WithName("UpdateFoodListing")
+//        .WithOpenApi();
+
+//        group.MapPost("/", (FoodListing model) =>
+//        {
+//            //return TypedResults.Created($"/api/FoodListings/{model.ID}", model);
+//        })
+//        .WithName("CreateFoodListing")
+//        .WithOpenApi();
+
+//        group.MapDelete("/{id}", (int id) =>
+//        {
+//            //return TypedResults.Ok(new FoodListing { ID = id });
+//        })
+//        .WithName("DeleteFoodListing")
+//        .WithOpenApi();
+//    }
+//}
 }

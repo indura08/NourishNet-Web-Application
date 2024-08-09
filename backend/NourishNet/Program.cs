@@ -1,6 +1,9 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using NourishNet.Data;
 using NourishNet.Models;
+using NourishNet.Controllers;
+using NourishNet.Data.Services.Interfaces;
+using NourishNet.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +34,8 @@ builder.Services.AddDbContext<RecipeintDbContext>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IFoodListing, FoodListingsService>();
 
 var app = builder.Build();
 
