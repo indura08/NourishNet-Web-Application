@@ -12,7 +12,7 @@ namespace NourishNet.Controllers
     {
         IFoodListing _foodListingService;
         public FoodListingController(IFoodListing foodListService) {
-            
+
             _foodListingService = foodListService;
         }
 
@@ -41,5 +41,26 @@ namespace NourishNet.Controllers
             await _foodListingService.Add(newFoodListing);
             return Ok("new food listing created successfully");
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<FoodListing>> getFoodListingById(int id) {
+            var currentFoodList = _foodListingService.GetById(id);
+
+            if (currentFoodList != null)
+            {
+                return Ok(currentFoodList);
+            }
+            else {
+                return NotFound();
+            }
+        }
+
+        //[HttpPut("update/{id}")]
+        //public async Task<ActionResult<string>> updateById(int id, FoodListing foodListing) { 
+
+        //    var status = _foodListingService.UpdateByID(id, foodListing);
+
+            
+        //}methn idl krnn one
     }
 }

@@ -24,7 +24,7 @@ namespace NourishNet.Data.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<FoodListing> GetById(int? id)
+        public async Task<FoodListing> GetById(int id)
         {
             var foodListing = await _dbContext.FoodListings.FindAsync(id);
             
@@ -37,7 +37,7 @@ namespace NourishNet.Data.Services
             }
         }
 
-        public async Task<string> UpdateByID(int? id, FoodListing foodListing)
+        public async Task<string> UpdateByID(int id, FoodListing foodListing)
         {
             var currentFoodList = await _dbContext.FoodListings.FindAsync(id);
 
@@ -46,15 +46,15 @@ namespace NourishNet.Data.Services
                 _dbContext.Entry(currentFoodList).CurrentValues.SetValues(foodListing);
                 await _dbContext.SaveChangesAsync();
                 
-                return "FoodListing Updated Succesfully";
+                return "updated";
             }
             else {
-                return "Error occured please try agian";
+                return "error occured";
 
             }
         }
 
-        public async Task<string> DeleteById(int? id)
+        public async Task<string> DeleteById(int id)
         {
             await _dbContext.FoodListings.Where(foodList => foodList.Id == id).ExecuteDeleteAsync();
             return "Your food Lsit has been deleted successfully";
