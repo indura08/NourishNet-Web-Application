@@ -12,7 +12,5 @@ namespace NourishNet.Models
         public DateOnly CreatedDate { get; set; }
         public TimeOnly Createtime { get; set; }
 
-
-
     }
 }

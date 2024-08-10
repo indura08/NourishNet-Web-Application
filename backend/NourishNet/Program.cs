@@ -36,6 +36,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IFoodListing, FoodListingsService>();
+builder.Services.AddScoped<INOtificationDonorService, NotificationDonorService>();
 
 var app = builder.Build();
 

@@ -43,7 +43,7 @@ namespace NourishNet.Data.Services
 
             if (currentFoodList != null)
             {
-                _dbContext.Entry(currentFoodList).CurrentValues.SetValues(foodListing);
+                _dbContext.Entry(currentFoodList).CurrentValues.SetValues(foodListing);     //another widiyak = _dbContext.Entry(product).State = EntityState.Modified; : mekn attama wenne = This marks the entire entity as modified, which means Entity Framework will generate an update statement that affects all columns. This is simpler when you want to update all fields in the entity but might be less efficient if only a few fields need to be updated.
                 await _dbContext.SaveChangesAsync();
                 
                 return "updated";

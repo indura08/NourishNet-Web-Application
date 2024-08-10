@@ -27,7 +27,7 @@ namespace NourishNet.Controllers
         public async Task<ActionResult<List<FoodListing>>> GetAllFoodListings() {
 
             var foodListings = await _foodListingService.GetAll();
-            if (foodListings != null)
+            if (foodListings.Count > 0)
             {
                 return Ok(foodListings);
             }
@@ -45,7 +45,7 @@ namespace NourishNet.Controllers
 
         [HttpGet("{id}")]
         public async Task<ActionResult<FoodListing>> getFoodListingById(int id) {
-            var currentFoodList = _foodListingService.GetById(id);
+            var currentFoodList = await _foodListingService.GetById(id);
 
             if (currentFoodList != null)
             {
@@ -60,7 +60,7 @@ namespace NourishNet.Controllers
         public async Task<ActionResult<string>> updateById(int id, FoodListing foodListing)     //ActionResult<string> indicates that the method will either return a string (usually indicating success) or any other action result like BadRequest, NotFound, etc.
         {
 
-            var status = _foodListingService.UpdateByID(id, foodListing);
+            var status = await _foodListingService.UpdateByID(id, foodListing);
             string statusText = status.ToString();
 
             if (statusText == "updated")
@@ -74,8 +74,8 @@ namespace NourishNet.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public IActionResult DeleteById(int id) { 
-            var foodListing = _foodListingService.GetById(id);
+        public async Task<IActionResult> DeleteById(int id) { 
+            var foodListing = await _foodListingService.GetById(id);
             if (foodListing != null)
             {
                 _foodListingService.DeleteById(id);
@@ -90,3 +90,5 @@ namespace NourishNet.Controllers
         }
     }
 }
+
+//In the code you provided earlier, you didn't explicitly use the [FromBody] attribute in your controller methods. However, by default, ASP.NET Core assumes that complex types like your FoodListing model should be bound from the request body. So, the framework automatically interprets the input data as coming from the request body unless you specify otherwise.
