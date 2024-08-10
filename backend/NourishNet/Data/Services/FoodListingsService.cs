@@ -57,7 +57,7 @@ namespace NourishNet.Data.Services
         public async Task<string> DeleteById(int id)
         {
             await _dbContext.FoodListings.Where(foodList => foodList.Id == id).ExecuteDeleteAsync();
-            return "Your food Lsit has been deleted successfully";
+            return "Your food List has been deleted successfully";
         }
 
         public async Task SaveChanges()
