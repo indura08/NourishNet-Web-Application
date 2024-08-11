@@ -8,6 +8,6 @@ namespace NourishNet.Data.Services.Interfaces
         Task Add(NotificationDonor notificaionono);
         Task<NotificationDonor> GetById(int id);
         Task<string> UpdateById(int id, NotificationDonor notificationDonor);
-        Task<string> DeleteById(int id);
+        Task DeleteById(int id);
     }
 }

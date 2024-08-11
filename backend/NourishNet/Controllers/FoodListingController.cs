@@ -11,7 +11,7 @@ namespace NourishNet.Controllers
     [ApiController]
     public class FoodListingController : ControllerBase
     {
-        IFoodListing _foodListingService;
+        private readonly IFoodListing _foodListingService;
         public FoodListingController(IFoodListing foodListService) {
 
             _foodListingService = foodListService;

@@ -19,17 +19,9 @@ namespace NourishNet.Data.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<string> DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            var foundNotification = await this.GetById(id);
-            if (foundNotification != null)
-            {
-                return "Success";
-            }
-            else
-            {
-                return "Error";
-            }
+            await _dbContext.DonorNotifications.Where(notification => notification.Id == id).ExecuteDeleteAsync();
         }
 
         public async Task<List<NotificationDonor>> GetAll()
@@ -41,15 +33,7 @@ namespace NourishNet.Data.Services
         {
             var currentNotification = await _dbContext.DonorNotifications.FindAsync(id);
 
-            if (currentNotification != null)
-            {
-
-                return currentNotification;
-            }
-
-            else {
-                return null;
-            }
+            return currentNotification;
         }
 
         public async Task<string> UpdateById(int id, NotificationDonor notificationDonor)
