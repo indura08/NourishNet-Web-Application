@@ -38,6 +38,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IFoodListing, FoodListingsService>();
 builder.Services.AddScoped<INOtificationDonorService, NotificationDonorService>();
 builder.Services.AddScoped<INotificationRecipeintService, NotificationRecipientService>();
+builder.Services.AddScoped<IDonorService, DonorService>();
 
 var app = builder.Build();
 
