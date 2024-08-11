@@ -35,7 +35,7 @@ namespace NourishNet.Data.Services
 
         public async Task<string> UpdateDonorById(int id, Donor donor)
         {
-            var currentDonor = _dbContext.Donors.Find(donor.Id);
+            var currentDonor = await _dbContext.Donors.FindAsync(donor.Id);
             if (currentDonor != null)
             {
                 _dbContext.Entry(donor).CurrentValues.SetValues(currentDonor);
@@ -47,6 +47,7 @@ namespace NourishNet.Data.Services
             }
         }
 
+        //aye patn ganiddi meke controller ek hdna eke idla patn gnna 
         
     }
 }

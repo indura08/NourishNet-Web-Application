@@ -77,6 +77,8 @@ namespace NourishNet.Controllers
             }
             else {
                 return Conflict("Donor account could'nt be deleted please check again or try again later");
+            
+                //return StatusCode(500, "Error occured") = mehm dannath puluwan
             }
         }
 
