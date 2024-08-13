@@ -28,12 +28,12 @@ namespace NourishNet.Data.Services
             return DonorList;
         }
 
-        public async Task<Donor> GetDonorById(int id)
+        public async Task<Donor> GetDonorById(string id)
         {
             return await _dbContext.Donors.FindAsync(id);
         }
 
-        public async Task<string> UpdateDonorById(int id, Donor donor)
+        public async Task<string> UpdateDonorById(string id, Donor donor)
         {
             var currentDonor = await _dbContext.Donors.FindAsync(donor.Id);
             if (currentDonor != null)
@@ -47,7 +47,7 @@ namespace NourishNet.Data.Services
             }
         }
 
-        //aye patn ganiddi meke controller ek hdna eke idla patn gnna 
+         
         
     }
 }

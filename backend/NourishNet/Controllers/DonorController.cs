@@ -34,7 +34,7 @@ namespace NourishNet.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Donor>> GetDonorById(int id) { 
+        public async Task<ActionResult<Donor>> GetDonorById(string id) { 
             var currentDonor = await _donorService.GetDonorById(id);
 
             if (currentDonor != null) { 
@@ -54,7 +54,7 @@ namespace NourishNet.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdaetDonorById(int id, Donor donor) { 
+        public async Task<IActionResult> UpdaetDonorById(string id, Donor donor) { 
             var Status = await _donorService.UpdateDonorById(id, donor);
             string statusText = Status.ToString();
 
