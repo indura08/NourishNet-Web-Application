@@ -40,6 +40,7 @@ builder.Services.AddScoped<INOtificationDonorService, NotificationDonorService>(
 builder.Services.AddScoped<INotificationRecipeintService, NotificationRecipientService>();
 builder.Services.AddScoped<IDonorService, DonorService>();
 builder.Services.AddScoped<IRecipientService, RecipientService>();
+builder.Services.AddScoped<IDonationHistory, DonationHistoryService>();
 
 var app = builder.Build();
 
