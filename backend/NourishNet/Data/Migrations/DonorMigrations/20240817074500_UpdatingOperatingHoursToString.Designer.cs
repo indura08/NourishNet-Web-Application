@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NourishNet.Data;
 
@@ -10,9 +11,11 @@ using NourishNet.Data;
 namespace NourishNet.Data.Migrations.DonorMigrations
 {
     [DbContext(typeof(DonorDbContext))]
-    partial class DonorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240817074500_UpdatingOperatingHoursToString")]
+    partial class UpdatingOperatingHoursToString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

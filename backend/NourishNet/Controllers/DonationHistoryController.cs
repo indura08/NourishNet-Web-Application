@@ -44,5 +44,38 @@ namespace NourishNet.Controllers
                 return NotFound("Not found any donation history with id : " + id);
             }
         }
+
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateNewDonationHistory(DonationHistory donationHistory) { 
+            await _donationHistoryService.AddNewDonoationHistory(donationHistory);
+            return Ok(donationHistory);
+        }
+
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateDonationHistory(int id, DonationHistory donationHistory) { 
+            var status = await _donationHistoryService.UpdateDonationHistroyById(id, donationHistory);
+            string statusText = status.ToString();
+
+            if (statusText == "Update")
+            {
+                return Ok("Successfully updated");
+            }
+            else {
+                return NotFound("not foud any donation history with id : " + id);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteById(int id) {
+            var currentdonationHistory = await _donationHistoryService.GetById(id);
+            if (currentdonationHistory != null)
+            {
+                await _donationHistoryService.DeleteDonationHistory(id);
+                return Ok("Deleted Successfully");
+            }
+            else {
+                return NotFound("Not found any donationHistory with id : " + id);
+            }
+        }
     }
 }

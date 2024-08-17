@@ -12,7 +12,7 @@ namespace NourishNet.Models
         public District BaseDistrict { get; set; }
         public Province BaseProvince { get; set; }
         public  string Address { get; set; }
-        public TimeOnly OperatingHours { get; set; }
+        public string OperatingHours { get; set; }
 
     }
 }
