@@ -13,6 +13,7 @@ namespace NourishNet.Models
         public Province BaseProvince { get; set; }
         public  string Address { get; set; }
         public string OperatingHours { get; set; }
+        public Role Role { get; set; }
 
     }
 }
