@@ -46,8 +46,5 @@ namespace NourishNet.Data.Services
                 return "Error Occured";
             }
         }
-
-         
-        
     }
 }
