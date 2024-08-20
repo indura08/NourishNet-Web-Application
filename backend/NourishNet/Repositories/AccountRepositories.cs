@@ -47,7 +47,7 @@ namespace NourishNet.Repositories
             var existingDonor = await _userManager.FindByEmailAsync(donorDTO.Email);
             if (existingDonor is not null) return new ServiceResponse.GeneralResponse(false, "User registered already , try with diffrent email");
 
-            var createdDonor = await _userManager.CreateAsync(newDonor , donorDTO.Password);
+            var createdDonor = await _userManager.CreateAsync(newDonor! , donorDTO.Password);
             if (!createdDonor.Succeeded) return new ServiceResponse.GeneralResponse(false, "Error occured , please check your password or try again later");
 
             var checkDonorRole = await _roleManager.FindByNameAsync("Donor");
