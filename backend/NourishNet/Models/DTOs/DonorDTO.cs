@@ -30,5 +30,8 @@ namespace NourishNet.Models.DTOs
         [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; } = string.Empty;
 
+        [Required]
+        public string UserName { get; set; } = string.Empty;
+
     }
 }

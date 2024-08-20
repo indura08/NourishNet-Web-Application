@@ -4,6 +4,7 @@ using NourishNet.Models;
 using NourishNet.Controllers;
 using NourishNet.Data.Services.Interfaces;
 using NourishNet.Data.Services;
+using NourishNet.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,8 @@ builder.Services.AddScoped<INotificationRecipeintService, NotificationRecipientS
 builder.Services.AddScoped<IDonorService, DonorService>();
 builder.Services.AddScoped<IRecipientService, RecipientService>();
 builder.Services.AddScoped<IDonationHistory, DonationHistoryService>();
+
+builder.Services.AddScoped<IDonorUserAccount, AccountRepositories>();
 
 var app = builder.Build();
 
