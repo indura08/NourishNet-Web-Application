@@ -5,6 +5,10 @@ using NourishNet.Controllers;
 using NourishNet.Data.Services.Interfaces;
 using NourishNet.Data.Services;
 using NourishNet.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +32,38 @@ builder.Services.AddDbContext<RecipeintDbContext>(options =>
 {
 
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
+
+//add identity JWT authentication for donor accounts
+
+builder.Services.AddIdentity<Donor, IdentityRole>().AddEntityFrameworkStores<DonorDbContext>()
+                                                    .AddSignInManager()
+                                                    .AddRoles<IdentityRole>();
+
+//jwt
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+}).AddJwtBearer( options => 
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+
+        ValidateAudience = true,
+
+        ValidateIssuerSigningKey = true,
+
+        ValidateLifetime = true,
+
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+    };
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

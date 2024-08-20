@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NourishNet.Data.Services.Interfaces;
 using NourishNet.Models;
+using NourishNet.Models.DTOs;
 
 namespace NourishNet.Controllers
 {
@@ -10,17 +12,22 @@ namespace NourishNet.Controllers
     public class DonorController : ControllerBase
     {
         private readonly IDonorService _donorService;
+        private readonly IDonorUserAccount _donorUserAccountService;
 
-        public DonorController(IDonorService donorService) {
+        public DonorController(IDonorService donorService, IDonorUserAccount donorUserAccountService)
+        {
             _donorService = donorService;
+            _donorUserAccountService = donorUserAccountService;
         }
 
         [HttpGet("hi")]
+        [Authorize(Roles = "Donor")]
         public IActionResult sayHello() {
             return Ok("hello this is donor class controller");
         }   //this is for testing purposes
 
         [HttpGet("all")]
+        [Authorize(Roles = "Donor")]
         public async Task<ActionResult<List<Donor>>> GetAllDonors() {
 
             var donors = await _donorService.GetAll();
@@ -34,6 +41,7 @@ namespace NourishNet.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Donor")]
         public async Task<ActionResult<Donor>> GetDonorById(string id) { 
             var currentDonor = await _donorService.GetDonorById(id);
 
@@ -46,14 +54,15 @@ namespace NourishNet.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateNewDonor([FromBody] Donor donor) { 
+        public async Task<IActionResult> CreateNewDonor([FromBody] DonorDTO donorDTO) {
 
-            await _donorService.AddNewDonor(donor);
-            return Ok(donor);
+            var response = await _donorUserAccountService.CreateAccount(donorDTO);
+            return Ok(response);
             
         }
 
         [HttpPut("update/{id}")]
+        [Authorize(Roles = "Donor")]
         public async Task<IActionResult> UpdaetDonorById(string id, Donor donor) { 
             var Status = await _donorService.UpdateDonorById(id, donor);
             string statusText = Status.ToString();
@@ -68,6 +77,7 @@ namespace NourishNet.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize(Roles = "Donor")]
         public async Task<IActionResult> DeleteById(string id) {
             var currentDonor = await _donorService.GetDonorById(id);
             if (currentDonor != null)

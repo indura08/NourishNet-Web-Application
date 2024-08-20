@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using NourishNet.Data.Services.Interfaces;
 using NourishNet.Models;
 using NourishNet.Models.DTOs;
 using NourishNet.Models.Enums;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace NourishNet.Repositories
 {
@@ -76,7 +80,36 @@ namespace NourishNet.Repositories
 
             if (!checkUserPassword) return new ServiceResponse.LoginResponse(false, null!, "Incorrect Email/Password");
 
-            var getUserRole = await _userManager.GetRolesAsync(currentUser); //methanin nawattuwe
+            var getUserRole = await _userManager.GetRolesAsync(currentUser);
+            var userSession = new UserSession(currentUser.Id, currentUser.OrganizaTionName, currentUser.Email, getUserRole.First());
+
+            string Token = GenerateToken(userSession);
+            return new ServiceResponse.LoginResponse(true, Token!, "Login succeeded");
+        }
+
+        private string GenerateToken(UserSession userSession) 
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_iConfig["Jwt:Key"]!));
+
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var userClaims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userSession.Id),
+                new Claim(ClaimTypes.Name, userSession.Name),
+                new Claim(ClaimTypes.Email, userSession.Email),
+                new Claim(ClaimTypes.Role, userSession.Role)
+            };
+
+            var Token = new JwtSecurityToken(
+                issuer: _iConfig["Jwt:Issuer"],
+                audience: _iConfig["Jwt: Audience"],
+                claims: userClaims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: credentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(Token);
         }
     }
 }

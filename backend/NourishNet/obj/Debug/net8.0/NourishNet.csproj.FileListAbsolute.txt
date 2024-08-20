@@ -232,3 +232,14 @@ F:\intern projecrts\Food waste reduction asp.net and react project\Project\backe
 F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\Scrutor.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+F:\intern projecrts\Food waste reduction asp.net and react project\Project\backend\NourishNet\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
