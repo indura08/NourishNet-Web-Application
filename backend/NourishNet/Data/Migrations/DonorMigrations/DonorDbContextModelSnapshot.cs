@@ -159,11 +159,13 @@ namespace NourishNet.Data.Migrations.DonorMigrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("BaseDistrict")
-                        .HasColumnType("int");
+                    b.Property<string>("BaseDistrict")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("BaseProvince")
-                        .HasColumnType("int");
+                    b.Property<string>("BaseProvince")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -202,8 +204,9 @@ namespace NourishNet.Data.Migrations.DonorMigrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("OrganizationType")
-                        .HasColumnType("int");
+                    b.Property<string>("OrganizationType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
@@ -218,8 +221,9 @@ namespace NourishNet.Data.Migrations.DonorMigrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");

@@ -11,7 +11,7 @@ using NourishNet.Data;
 namespace NourishNet.Data.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240808090057_InitialCreate")]
+    [Migration("20240828141736_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -84,8 +84,9 @@ namespace NourishNet.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("DataReceived")
-                        .HasColumnType("date");
+                    b.Property<string>("DataReceived")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("FoodListingId")
                         .HasColumnType("int");
@@ -115,11 +116,13 @@ namespace NourishNet.Data.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("BaseDistrict")
-                        .HasColumnType("int");
+                    b.Property<string>("BaseDistrict")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("BaseProvince")
-                        .HasColumnType("int");
+                    b.Property<string>("BaseProvince")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("longtext");
@@ -146,15 +149,17 @@ namespace NourishNet.Data.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasColumnType("longtext");
 
-                    b.Property<TimeOnly>("OperatingHours")
-                        .HasColumnType("time(6)");
+                    b.Property<string>("OperatingHours")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("OrganizaTionName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("OrganizationType")
-                        .HasColumnType("int");
+                    b.Property<string>("OrganizationType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
@@ -168,6 +173,10 @@ namespace NourishNet.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
@@ -189,8 +198,9 @@ namespace NourishNet.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CurrentStatus")
-                        .HasColumnType("int");
+                    b.Property<string>("CurrentStatus")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -200,18 +210,21 @@ namespace NourishNet.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<DateOnly>("ExpiryDate")
-                        .HasColumnType("date");
+                    b.Property<string>("ExpiryDate")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("FoodType")
-                        .HasColumnType("int");
+                    b.Property<string>("FoodType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateOnly>("PostedDate")
-                        .HasColumnType("date");
+                    b.Property<string>("PostedDate")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<double>("Quantity")
                         .HasColumnType("double");
@@ -229,11 +242,13 @@ namespace NourishNet.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("CreatedDate")
-                        .HasColumnType("date");
+                    b.Property<string>("CreatedDate")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<TimeOnly>("Createtime")
-                        .HasColumnType("time(6)");
+                    b.Property<string>("Createtime")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -256,11 +271,13 @@ namespace NourishNet.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("CreatedDate")
-                        .HasColumnType("date");
+                    b.Property<string>("CreatedDate")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<TimeOnly>("CreatedTime")
-                        .HasColumnType("time(6)");
+                    b.Property<string>("CreatedTime")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -289,11 +306,13 @@ namespace NourishNet.Data.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("BaseDistrict")
-                        .HasColumnType("int");
+                    b.Property<string>("BaseDistrict")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("BaseProvince")
-                        .HasColumnType("int");
+                    b.Property<string>("BaseProvince")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("longtext");
@@ -337,11 +356,13 @@ namespace NourishNet.Data.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("RecipientType")
-                        .HasColumnType("int");
+                    b.Property<string>("RecipientType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");

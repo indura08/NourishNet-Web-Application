@@ -17,7 +17,7 @@ namespace NourishNet.Models
         [ForeignKey("FoodListingId")]
         public FoodListing FoodListing { get; set; }
 
-        public DateOnly DataReceived { get; set; }
+        public string DataReceived { get; set; }
         
 
     }

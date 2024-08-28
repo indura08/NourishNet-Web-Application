@@ -9,8 +9,8 @@ namespace NourishNet.Models
         [ForeignKey("RecipientId")]
         public Recipient Recipient { get; set; }
         public string Description { get; set; }
-        public DateOnly CreatedDate { get; set; }
-        public TimeOnly CreatedTime { get; set; }
+        public string CreatedDate { get; set; }
+        public string CreatedTime { get; set; }
 
     }
 }

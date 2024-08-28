@@ -48,17 +48,17 @@ namespace NourishNet.Repositories
             if (existingDonor is not null) return new ServiceResponse.GeneralResponse(false, "User registered already , try with diffrent email");
 
             var createdDonor = await _userManager.CreateAsync(newDonor! , donorDTO.Password);
-            if (!createdDonor.Succeeded) return new ServiceResponse.GeneralResponse(false, "Error occured , please check your password or try again later");
+            if (!createdDonor.Succeeded) return new ServiceResponse.GeneralResponse(false, "Error occured ,try again later");
 
             var checkDonorRole = await _roleManager.FindByNameAsync("Donor");
             
-            if (newDonor.Role == Role.Donor && checkDonorRole is null)
+            if (newDonor.Role == Role.Donor.ToString() && checkDonorRole is null)
             {
                 await _roleManager.CreateAsync(new IdentityRole() { Name = "Donor" });
                 await _userManager.AddToRoleAsync(newDonor, "Donor");
                 return new ServiceResponse.GeneralResponse(true, "Account created successfully");
             }
-            else if (newDonor.Role == Role.Donor && checkDonorRole is not null)
+            else if (newDonor.Role == Role.Donor.ToString() && checkDonorRole is not null)
             {
                 await _userManager.AddToRoleAsync(newDonor, "Donor");
                 return new ServiceResponse.GeneralResponse(true, "Account created successfully");

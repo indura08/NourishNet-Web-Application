@@ -3,6 +3,7 @@ using NourishNet.Models.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.OpenApi;
+using System.ComponentModel.DataAnnotations;
 
 namespace NourishNet.Models
 {
@@ -14,13 +15,15 @@ namespace NourishNet.Models
 
         [ForeignKey("DonorId")]
         public Donor Donor { get; set; }
-        public FoodType FoodType { get; set; }
+        [EnumDataType(typeof(FoodType), ErrorMessage = "Wrong district name")]
+        public string FoodType { get; set; }
         public string Description { get; set; }
         public double Quantity { get; set; }
-        public DateOnly PostedDate { get; set; }
-        public DateOnly ExpiryDate { get; set; }
+        public string PostedDate { get; set; }
+        public String ExpiryDate { get; set; }
         public string ImagePath { get; set; }
-        public FoodListingStatus CurrentStatus { get; set; }
+        [EnumDataType(typeof(FoodListingStatus), ErrorMessage = "check status again , the current status is wrong")]
+        public string CurrentStatus { get; set; }
 
     }
 

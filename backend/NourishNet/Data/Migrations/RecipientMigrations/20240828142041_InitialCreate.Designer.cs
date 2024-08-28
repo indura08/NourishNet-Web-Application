@@ -8,11 +8,11 @@ using NourishNet.Data;
 
 #nullable disable
 
-namespace NourishNet.Data.Migrations.DonorMigrations
+namespace NourishNet.Data.Migrations.RecipientMigrations
 {
-    [DbContext(typeof(DonorDbContext))]
-    [Migration("20240820143415_AddingRoleColumnToTable")]
-    partial class AddingRoleColumnToTable
+    [DbContext(typeof(RecipeintDbContext))]
+    [Migration("20240828142041_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,7 +150,7 @@ namespace NourishNet.Data.Migrations.DonorMigrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("NourishNet.Models.Donor", b =>
+            modelBuilder.Entity("NourishNet.Models.Recipient", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
@@ -162,17 +162,19 @@ namespace NourishNet.Data.Migrations.DonorMigrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("BaseDistrict")
-                        .HasColumnType("int");
+                    b.Property<string>("BaseDistrict")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("BaseProvince")
-                        .HasColumnType("int");
+                    b.Property<string>("BaseProvince")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ContactPersoon")
+                    b.Property<string>("ContactPerson")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -197,17 +199,6 @@ namespace NourishNet.Data.Migrations.DonorMigrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<string>("OperatingHours")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("OrganizaTionName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("OrganizationType")
-                        .HasColumnType("int");
-
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
 
@@ -221,8 +212,17 @@ namespace NourishNet.Data.Migrations.DonorMigrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
+                    b.Property<string>("RecipientName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RecipientType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
@@ -257,7 +257,7 @@ namespace NourishNet.Data.Migrations.DonorMigrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("NourishNet.Models.Donor", null)
+                    b.HasOne("NourishNet.Models.Recipient", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -266,7 +266,7 @@ namespace NourishNet.Data.Migrations.DonorMigrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("NourishNet.Models.Donor", null)
+                    b.HasOne("NourishNet.Models.Recipient", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -281,7 +281,7 @@ namespace NourishNet.Data.Migrations.DonorMigrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NourishNet.Models.Donor", null)
+                    b.HasOne("NourishNet.Models.Recipient", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -290,7 +290,7 @@ namespace NourishNet.Data.Migrations.DonorMigrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("NourishNet.Models.Donor", null)
+                    b.HasOne("NourishNet.Models.Recipient", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

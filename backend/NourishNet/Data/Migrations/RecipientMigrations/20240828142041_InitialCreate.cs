@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace NourishNet.Data.Migrations.DonorMigrations
+namespace NourishNet.Data.Migrations.RecipientMigrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -40,18 +40,22 @@ namespace NourishNet.Data.Migrations.DonorMigrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OrganizaTionName = table.Column<string>(type: "longtext", nullable: false)
+                    RecipientName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OrganizationType = table.Column<int>(type: "int", nullable: false),
-                    ContactPersoon = table.Column<string>(type: "longtext", nullable: false)
+                    ContactPerson = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    BaseDistrict = table.Column<int>(type: "int", nullable: false),
-                    BaseProvince = table.Column<int>(type: "int", nullable: false),
+                    BaseDistrict = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BaseProvince = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Address = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OperatingHours = table.Column<TimeOnly>(type: "time(6)", nullable: false),
+                    RecipientType = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Role = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)

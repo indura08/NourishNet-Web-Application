@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using NourishNet.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace NourishNet.Models
 {
@@ -8,12 +9,15 @@ namespace NourishNet.Models
         public string RecipientName { get; set; }
         public string ContactPerson { get; set; }
         public string Phone { get; set; }
-        public District BaseDistrict { get; set; }
-        public Province BaseProvince { get; set; }
+        [EnumDataType(typeof(District), ErrorMessage = "Wrong district name")]
+        public string BaseDistrict { get; set; }
+        [EnumDataType(typeof(Province), ErrorMessage = "wrong province name")]
+        public string BaseProvince { get; set; }
         public string Address { get; set; }
-        public RecipientType RecipientType { get; set; }
-
-        public Role Role { get; set; }
+        [EnumDataType(typeof(RecipientType), ErrorMessage = "Wrong recipient type name")]
+        public string RecipientType { get; set; }
+        [EnumDataType(typeof(Role), ErrorMessage = "Wrong role value")]
+        public string Role { get; set; }
 
     }
 }

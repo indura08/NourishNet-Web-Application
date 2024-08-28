@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NourishNet.Data;
 
 #nullable disable
 
-namespace NourishNet.Data.Migrations.RecipeintMigrations
+namespace NourishNet.Data.Migrations.DonorMigrations
 {
-    [DbContext(typeof(RecipeintDbContext))]
-    partial class RecipeintDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DonorDbContext))]
+    [Migration("20240828141711_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,7 +150,7 @@ namespace NourishNet.Data.Migrations.RecipeintMigrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("NourishNet.Models.Recipient", b =>
+            modelBuilder.Entity("NourishNet.Models.Donor", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
@@ -159,17 +162,19 @@ namespace NourishNet.Data.Migrations.RecipeintMigrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("BaseDistrict")
-                        .HasColumnType("int");
+                    b.Property<string>("BaseDistrict")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("BaseProvince")
-                        .HasColumnType("int");
+                    b.Property<string>("BaseProvince")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ContactPerson")
+                    b.Property<string>("ContactPersoon")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -194,6 +199,18 @@ namespace NourishNet.Data.Migrations.RecipeintMigrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
+                    b.Property<string>("OperatingHours")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OrganizaTionName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OrganizationType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
 
@@ -207,15 +224,9 @@ namespace NourishNet.Data.Migrations.RecipeintMigrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("RecipientName")
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("RecipientType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
@@ -250,7 +261,7 @@ namespace NourishNet.Data.Migrations.RecipeintMigrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("NourishNet.Models.Recipient", null)
+                    b.HasOne("NourishNet.Models.Donor", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -259,7 +270,7 @@ namespace NourishNet.Data.Migrations.RecipeintMigrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("NourishNet.Models.Recipient", null)
+                    b.HasOne("NourishNet.Models.Donor", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -274,7 +285,7 @@ namespace NourishNet.Data.Migrations.RecipeintMigrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NourishNet.Models.Recipient", null)
+                    b.HasOne("NourishNet.Models.Donor", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -283,7 +294,7 @@ namespace NourishNet.Data.Migrations.RecipeintMigrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("NourishNet.Models.Recipient", null)
+                    b.HasOne("NourishNet.Models.Donor", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
