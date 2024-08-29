@@ -92,6 +92,14 @@ namespace NourishNet.Controllers
             }
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> DonorLogin(LoginDTO loginDto)
+        {
+            var response = await _donorUserAccountService.Login(loginDto);
+            return Ok(response);
+        
+        }
+
 
     }
 }

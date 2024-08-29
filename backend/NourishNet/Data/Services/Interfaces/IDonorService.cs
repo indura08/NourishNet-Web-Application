@@ -1,4 +1,5 @@
 ﻿using NourishNet.Models;
+using NourishNet.Models.DTOs;
 
 namespace NourishNet.Data.Services.Interfaces
 {

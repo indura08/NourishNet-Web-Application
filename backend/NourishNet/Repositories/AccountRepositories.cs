@@ -15,12 +15,14 @@ namespace NourishNet.Repositories
         private readonly UserManager<Donor> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _iConfig;
+        private readonly IDonorService _donorService;
 
-        public AccountRepositories(UserManager<Donor> userManager, RoleManager<IdentityRole> roleManager, IConfiguration iConfig)
+        public AccountRepositories(IDonorService iDonorService ,UserManager<Donor> userManager, RoleManager<IdentityRole> roleManager, IConfiguration iConfig)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _iConfig = iConfig;
+            _donorService = iDonorService;
         }
 
         public async Task<ServiceResponse.GeneralResponse> CreateAccount(DonorDTO donorDTO)
@@ -48,7 +50,14 @@ namespace NourishNet.Repositories
             if (existingDonor is not null) return new ServiceResponse.GeneralResponse(false, "User registered already , try with diffrent email");
 
             var createdDonor = await _userManager.CreateAsync(newDonor! , donorDTO.Password);
-            if (!createdDonor.Succeeded) return new ServiceResponse.GeneralResponse(false, "Error occured ,try again later");
+            await _donorService.AddNewDonor(newDonor);
+            //if (!createdDonor.Succeeded) return new ServiceResponse.GeneralResponse(false, "Error occured ,try again later");
+
+            if (!createdDonor.Succeeded)
+            {
+                var errors = string.Join(", ", createdDonor.Errors.Select(e => e.Description));
+                return new ServiceResponse.GeneralResponse(false, $"Error occurred: {errors}");
+            }
 
             var checkDonorRole = await _roleManager.FindByNameAsync("Donor");
             

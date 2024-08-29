@@ -22,6 +22,7 @@ namespace NourishNet.Controllers
             return Ok("Hello this is Notification Recipient controller");       //this was a test code
         }
 
+        [HttpGet("all")]
         public async Task<ActionResult<List<NotificationRecipient>>> GetAll() { 
             var notificationList = await _notificationRecipientService.GetAll();
 
