@@ -90,7 +90,12 @@ namespace NourishNet.Repositories
             if (!checkUserPassword) return new ServiceResponse.LoginResponse(false, null!, "Incorrect Email/Password");
 
             var getUserRole = await _userManager.GetRolesAsync(currentUser);
-            var userSession = new UserSession(currentUser.Id, currentUser.OrganizaTionName, currentUser.Email, getUserRole.First());
+            if (!getUserRole.Any())
+            {
+                return new ServiceResponse.LoginResponse(false, null!, "User does not have any roles assigned");
+            }
+            var userRole = getUserRole.First(); // Assuming user has at least one role
+            var userSession = new UserSession(currentUser.Id, currentUser.OrganizaTionName, currentUser.Email, userRole);
 
             string Token = GenerateToken(userSession);
             return new ServiceResponse.LoginResponse(true, Token!, "Login succeeded");
@@ -112,7 +117,7 @@ namespace NourishNet.Repositories
 
             var Token = new JwtSecurityToken(
                 issuer: _iConfig["Jwt:Issuer"],
-                audience: _iConfig["Jwt: Audience"],
+                audience: _iConfig["Jwt:Audience"],
                 claims: userClaims,
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: credentials

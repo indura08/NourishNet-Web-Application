@@ -46,7 +46,7 @@ namespace NourishNet.Controllers
             var currentDonor = await _donorService.GetDonorById(id);
 
             if (currentDonor != null) { 
-                return Ok(currentDonor + currentDonor.PasswordHash);
+                return Ok(currentDonor);
             }
             else {
                 return NotFound("Not found any donor matching with id : " + id);
