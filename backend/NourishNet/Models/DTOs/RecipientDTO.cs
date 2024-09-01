@@ -8,12 +8,15 @@ namespace NourishNet.Models.DTOs
         public string RecipientName { get; set; }
         public string ContactPerson { get; set; }
         public string Phone { get; set; }
-        public District BaseDistrict { get; set; }
-        public Province BaseProvince { get; set; }
+        [EnumDataType(typeof(District), ErrorMessage = "Enter a valid ditrict value")]
+        public string BaseDistrict { get; set; }
+        [EnumDataType(typeof(Province), ErrorMessage = "Enter a valid province value")]
+        public string BaseProvince { get; set; }
         public string Address { get; set; }
-        public RecipientType RecipientType { get; set; }
-
-        public Role Role { get; set; }
+        [EnumDataType(typeof(RecipientType), ErrorMessage = "Enter a valid recipient Type value")]
+        public string RecipientType { get; set; }
+        [EnumDataType(typeof(District), ErrorMessage = "Enter a valid Role value")]
+        public string Role { get; set; }
 
         [Required]
         [EmailAddress]
@@ -28,5 +31,8 @@ namespace NourishNet.Models.DTOs
         [DataType(DataType.Password)]
         [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; } = string.Empty;
+
+        [Required]
+        public string UserName { get; set; } = string.Empty;
     }
 }
