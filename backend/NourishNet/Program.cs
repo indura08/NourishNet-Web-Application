@@ -39,9 +39,23 @@ builder.Services.AddDbContext<RecipeintDbContext>(options =>
 
 //add identity JWT authentication for donor accounts
 
-builder.Services.AddIdentity<Donor, IdentityRole>().AddEntityFrameworkStores<DonorDbContext>()
-                                                    .AddSignInManager()
-                                                    .AddRoles<IdentityRole>();
+//builder.Services.AddIdentity<Donor, IdentityRole>().AddEntityFrameworkStores<DonorDbContext>()
+//                                                    .AddSignInManager()
+//                                                    .AddRoles<IdentityRole>();
+
+builder.Services.AddIdentityCore<Donor>().AddRoles<IdentityRole>()
+        .AddEntityFrameworkStores<DonorDbContext>()
+        .AddSignInManager<SignInManager<Donor>>();
+
+builder.Services.AddIdentityCore<Recipient>().AddRoles<IdentityRole>()
+        .AddEntityFrameworkStores<RecipeintDbContext>()
+        .AddSignInManager<SignInManager<Recipient>>();
+
+//add identity JWT authentication for recipient account
+//builder.Services.AddIdentity<Recipient, IdentityRole>()
+//        .AddEntityFrameworkStores<RecipeintDbContext>()
+//        .AddSignInManager()
+//        .AddRoles<IdentityRole>();
 
 //jwt
 builder.Services.AddAuthentication(options =>
@@ -107,6 +121,7 @@ builder.Services.AddScoped<IRecipientService, RecipientService>();
 builder.Services.AddScoped<IDonationHistory, DonationHistoryService>();
 
 builder.Services.AddScoped<IDonorUserAccount, AccountRepositories>();
+builder.Services.AddScoped<IRecipientUserAccount, RecipientRepository>();
 
 var app = builder.Build();
 

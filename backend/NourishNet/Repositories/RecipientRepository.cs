@@ -10,7 +10,7 @@ using System.Text;
 
 namespace NourishNet.Repositories
 {
-    public class RecipientRepository
+    public class RecipientRepository : IRecipientUserAccount
     {
         private readonly UserManager<Recipient> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
