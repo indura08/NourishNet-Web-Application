@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using NourishNet.Data;
 using NourishNet.Data.Services.Interfaces;
 using NourishNet.Models;
 using NourishNet.Models.DTOs;
@@ -16,13 +17,15 @@ namespace NourishNet.Repositories
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _iConfig;
         private readonly IRecipientService _recipientService;
+        private readonly RecipeintDbContext _recipientdbContext;
 
-        public RecipientRepository(UserManager<Recipient> userManager, RoleManager<IdentityRole> roleManager, IConfiguration iConfig, IRecipientService recipientService)
+        public RecipientRepository(RecipeintDbContext recipeintDbContext, UserManager<Recipient> userManager, RoleManager<IdentityRole> roleManager, IConfiguration iConfig, IRecipientService recipientService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _iConfig = iConfig;
             _recipientService = recipientService;
+            _recipientdbContext = recipeintDbContext;
         }
 
         public async Task<ServiceResponse.GeneralResponse> CreateAccount(RecipientDTO recipientDto)

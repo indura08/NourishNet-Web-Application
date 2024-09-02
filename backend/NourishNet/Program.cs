@@ -37,6 +37,12 @@ builder.Services.AddDbContext<RecipeintDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+builder.Services.AddDbContext<SharedDbContext>(options =>
+{
+
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
+
 //add identity JWT authentication for donor accounts
 
 //builder.Services.AddIdentity<Donor, IdentityRole>().AddEntityFrameworkStores<DonorDbContext>()

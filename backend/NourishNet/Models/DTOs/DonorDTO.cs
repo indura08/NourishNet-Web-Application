@@ -8,7 +8,7 @@ namespace NourishNet.Models.DTOs
         public string OrganizaTionName { get; set; }
         [EnumDataType(typeof(OrganizationType), ErrorMessage = "Wrong organizational type name")]
         public string OrganizationType { get; set; }
-        public string ContactPersoon { get; set; }
+        public string ContactPerson { get; set; }
         public string Phone { get; set; }
         [EnumDataType(typeof(District), ErrorMessage = "Wrong district name")]
         public string BaseDistrict { get; set; }

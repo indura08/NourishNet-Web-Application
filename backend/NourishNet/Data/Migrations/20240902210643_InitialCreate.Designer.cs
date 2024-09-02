@@ -11,7 +11,7 @@ using NourishNet.Data;
 namespace NourishNet.Data.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240828141736_InitialCreate")]
+    [Migration("20240902210643_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -127,7 +127,7 @@ namespace NourishNet.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ContactPersoon")
+                    b.Property<string>("ContactPerson")
                         .IsRequired()
                         .HasColumnType("longtext");
 

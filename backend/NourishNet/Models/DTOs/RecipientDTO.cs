@@ -15,7 +15,7 @@ namespace NourishNet.Models.DTOs
         public string Address { get; set; }
         [EnumDataType(typeof(RecipientType), ErrorMessage = "Enter a valid recipient Type value")]
         public string RecipientType { get; set; }
-        [EnumDataType(typeof(District), ErrorMessage = "Enter a valid Role value")]
+        [EnumDataType(typeof(Role), ErrorMessage = "Enter a valid Role value")]
         public string Role { get; set; }
 
         [Required]

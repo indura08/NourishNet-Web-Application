@@ -124,7 +124,7 @@ namespace NourishNet.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ContactPersoon")
+                    b.Property<string>("ContactPerson")
                         .IsRequired()
                         .HasColumnType("longtext");
 

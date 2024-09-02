@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NourishNet.Data.Services;
 using NourishNet.Data.Services.Interfaces;
 using NourishNet.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace NourishNet.Controllers
 {
@@ -18,12 +18,14 @@ namespace NourishNet.Controllers
         }
 
         [HttpGet("hi")]
+        [Authorize(Roles = "Donor, Admin")]
         public string SayHello()
         {
             return "hello world this is foodlisting";
         }
 
         [HttpGet("all")]
+        [Authorize(Roles = "Donor, Recipient , Admin")]
         public async Task<ActionResult<List<FoodListing>>> GetAllFoodListings() {
 
             var foodListings = await _foodListingService.GetAll();
@@ -37,6 +39,7 @@ namespace NourishNet.Controllers
         }
 
         [HttpPost("create")]
+        [Authorize(Roles = "Donor, Admin")]
         public async Task<ActionResult<string>> NewFoodListing(FoodListing newFoodListing) {
 
             await _foodListingService.Add(newFoodListing);

@@ -61,7 +61,7 @@ namespace NourishNet.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OrganizationType = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ContactPersoon = table.Column<string>(type: "longtext", nullable: false)
+                    ContactPerson = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),

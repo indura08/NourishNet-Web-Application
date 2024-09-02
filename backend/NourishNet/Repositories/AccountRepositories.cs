@@ -33,7 +33,7 @@ namespace NourishNet.Repositories
             {
                 OrganizaTionName = donorDTO.OrganizaTionName,
                 OrganizationType = donorDTO.OrganizationType,
-                ContactPersoon = donorDTO.ContactPersoon,
+                ContactPerson = donorDTO.ContactPerson,
                 Phone = donorDTO.Phone,
                 BaseDistrict = donorDTO.BaseDistrict,
                 BaseProvince = donorDTO.BaseProvince,

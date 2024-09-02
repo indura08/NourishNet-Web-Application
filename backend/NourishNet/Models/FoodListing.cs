@@ -15,7 +15,7 @@ namespace NourishNet.Models
 
         [ForeignKey("DonorId")]
         public Donor Donor { get; set; }
-        [EnumDataType(typeof(FoodType), ErrorMessage = "Wrong district name")]
+        [EnumDataType(typeof(FoodType), ErrorMessage = "Wrong foodtype name")]
         public string FoodType { get; set; }
         public string Description { get; set; }
         public double Quantity { get; set; }

@@ -39,7 +39,7 @@ namespace NourishNet.Controllers
             }
         }
 
-        [HttpGet("create")]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateNewRecipient([FromBody] RecipientDTO recipientdto)
         {
             var response = await _recipientUserAccountService.CreateAccount(recipientdto);
@@ -60,7 +60,8 @@ namespace NourishNet.Controllers
             }
         }
 
-        [HttpPost("update/{id}")]
+        [HttpPut("update/{id}")]
+        [Authorize(Roles = "Recipient,Admin")]
         public async Task<IActionResult> UpdateById(string id, Recipient recipientUpdate) {
             
             var status = await _recipientService.UpdateRecipientById(id, recipientUpdate);
