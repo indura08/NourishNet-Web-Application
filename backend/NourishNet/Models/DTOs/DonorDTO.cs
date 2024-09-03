@@ -19,6 +19,8 @@ namespace NourishNet.Models.DTOs
         [EnumDataType(typeof(Role), ErrorMessage = "Wrong role value")]
         public string Role { get; set; }
 
+        public string UserType { get; set; }
+
         [Required]
         [EmailAddress]
         [DataType(DataType.EmailAddress)]

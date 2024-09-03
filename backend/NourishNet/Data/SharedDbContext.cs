@@ -13,30 +13,26 @@ namespace NourishNet.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<IdentityUser>(entity =>
-            {
-                entity.ToTable("aspnetusers");
-            });
+            builder.Entity<UserBase>()
+                .ToTable("AspNetUsers") 
+                .HasDiscriminator<string>("UserType") 
+                .HasValue<Recipient>("Recipient")
+                .HasValue<Donor>("Donor");
 
             builder.Entity<Recipient>(entity =>
             {
-                entity.ToTable("aspnetusers");
+                entity.ToTable("AspNetUsers");
                 entity.Property(r => r.RecipientName).HasColumnName("recipientName");
                 entity.Property(r => r.RecipientType).HasColumnName("RecipientType");
             });
 
             builder.Entity<Donor>(entity =>
             {
-                entity.ToTable("aspnetusers");
+                entity.ToTable("AspNetUsers");
                 entity.Property(d => d.OrganizaTionName).HasColumnName("OrganizationName");
                 entity.Property(d => d.OrganizationType).HasColumnName("OrganizationType");
                 entity.Property(d => d.OperatingHours).HasColumnName("OperatingHours");
             });
-
-            builder.Entity<Recipient>()
-                .HasDiscriminator<string>("UserType")
-                .HasValue<Recipient>("Recipient")
-                .HasValue<Donor>("Donor");
         }
     }
 }

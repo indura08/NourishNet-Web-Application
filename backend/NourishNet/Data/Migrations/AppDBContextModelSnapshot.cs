@@ -184,6 +184,10 @@ namespace NourishNet.Data.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("UserType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.ToTable("Donors");
@@ -368,6 +372,10 @@ namespace NourishNet.Data.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserType")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");

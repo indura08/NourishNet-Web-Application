@@ -17,6 +17,7 @@ namespace NourishNet.Models.DTOs
         public string RecipientType { get; set; }
         [EnumDataType(typeof(Role), ErrorMessage = "Enter a valid Role value")]
         public string Role { get; set; }
+        public string UserType { get; set; }
 
         [Required]
         [EmailAddress]

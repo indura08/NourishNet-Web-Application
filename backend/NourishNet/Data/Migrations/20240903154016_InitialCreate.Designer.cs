@@ -11,7 +11,7 @@ using NourishNet.Data;
 namespace NourishNet.Data.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240902210643_InitialCreate")]
+    [Migration("20240903154016_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -185,6 +185,10 @@ namespace NourishNet.Data.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserType")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
@@ -371,6 +375,10 @@ namespace NourishNet.Data.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserType")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
