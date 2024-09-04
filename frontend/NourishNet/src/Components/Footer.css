@@ -1,0 +1,29 @@
+
+    .div-text-wrap{
+        word-wrap: break-word;
+    }
+
+    .image-resize{
+        width:30px;
+        height:30px;
+    }
+
+    .image-resize-linked-in{
+        height:25px;
+        width:25px;
+    }
+
+    .a-decorations{
+        text-decoration: none;
+        color:white;
+        font-size: 12px;;
+    }
+
+    /* hr {
+      border: none;
+      height: 2px; 
+      background-color: #000000; 
+      margin-right:30px;
+      margin-left: 30px; 
+    } */
+
