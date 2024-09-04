@@ -11,11 +11,11 @@ const Footer:React.FC = () => {
         <div className="container-fluid d-flex py-3 bg-dark">
             <div className="w-50 d-flex row">
                 <div>
-                    <span className="fs-2 text-white">Workiez</span>
+                    <span className="fs-2 text-white">NourishNet</span>
                 </div>
 
                 <div>
-                    <span className="fs-7 text-white">Empowering Your Work, Simplifying Your Success</span>
+                    <span className="fs-7 text-white">Do not feed your bin, feed the people who need it!</span>
                 </div>
 
                 <div className="d-flex mt-3">
@@ -27,7 +27,7 @@ const Footer:React.FC = () => {
             </div>
 
             <div className="w-25 div-text-wrap">
-                <span className="fs-7 text-white">More workiez</span><br/>
+                <span className="fs-7 text-white">More NourishNet</span><br/>
                 <a href="#" className="a-decorations">sign up as Donor</a><br/>
                 <a href="#" className="a-decorations">sign up as Recipient</a><br/>
                 <a href="#" className="a-decorations">View services</a><br/>
@@ -45,7 +45,7 @@ const Footer:React.FC = () => {
 
                     <div className="d-flex mb-2">
                         {/* <img src="assets/email.png" className="image-resize-linked-in"/> */}
-                        <span className="text-white">worikez&#64;info.workiezmail.com</span>
+                        <span className="text-white">nourishnet&#64;info.nourishnetmail.com</span>
                     </div>
 
                     <div className="d-flex">

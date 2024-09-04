@@ -2,13 +2,13 @@ import { useState } from 'react'
 import './App.css'
 import Header from './Components/Header'
 import Home from './Pages/Home'
+import DonorSignUp from './Pages/DonorSignUp'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <Home></Home>
+      {/* <Home></Home> */}
+      <DonorSignUp></DonorSignUp>
     </>
   )
 }
