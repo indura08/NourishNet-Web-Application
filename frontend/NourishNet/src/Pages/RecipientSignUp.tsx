@@ -1,10 +1,10 @@
 import React from 'react'
-import Header from '../Components/Header'
-import loginimg from "../assets/login.png"
-import "./RecipientSignUp.css"
 import Footer from '../Components/Footer'
+import Header from '../Components/Header'
+import "./RecipientSignUp.css"
+import loginimg from "../assets/login2.jpeg"
 
-const DonorSignUp:React.FC = () => {
+const RecipientSignUp:React.FC = () => {
   return (
     <>
         <Header></Header>
@@ -14,13 +14,13 @@ const DonorSignUp:React.FC = () => {
                 <img src={loginimg} className="imgstyle"/>
             </div>
 
-            <div className='border w-50 py-2 justify-content-center divMargin border border-dark border-3 main-div-margin'>
-                <center><h3>Register Your Donor Account</h3></center>
+            <div className='border w-50 py-2 mx-3 justify-content-center divMargin border border-dark border-3 main-div-margin'>
+                <center><h3>Register Your Recipient Account</h3></center>
 
-                <form className='mx-4 mt-5'>
+                <form className='mx-4 mt-4'>
                     <div className="mb-3 row">
-                        <input type="text" className="form-control input-type-custom col mx-1" name='OrganizaTionName' placeholder='OrganizaTion Name'/>
-                        <input type="text" className="form-control input-type-custom col mx-1" name='OrganizationType' placeholder='OrganizationType'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='RecipientName' placeholder='RecipientName'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='RecipientType' placeholder='RecipientType'/>
                     </div>
 
                     <div className="mb-3 row">
@@ -40,7 +40,7 @@ const DonorSignUp:React.FC = () => {
 
                     <div className="mb-3 row">
                         <input type="email" className="form-control input-type-custom col mx-1" name='Email' placeholder='Email'/>
-                        <input type="password" className="form-control input-type-custom col mx-1" name='OrganizaTionName' placeholder='OrganizaTionName'/>
+                        <input type="email" className="form-control input-type-custom col mx-1" name='UserName' placeholder='UserName'/>
                     </div>
 
                     <div className="mb-3 row">
@@ -49,7 +49,6 @@ const DonorSignUp:React.FC = () => {
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='UserName' placeholder='UserName'/>
                         <input type="password" className="form-control input-type-custom col mx-1" name='Role' placeholder='Role'/>
                     </div>
                     
@@ -59,7 +58,7 @@ const DonorSignUp:React.FC = () => {
                     </div>
 
                     <div>
-                        <p className="mb-3 fw-normal">Are you a Recipient?<a href=""><span>Register as Recipient</span></a></p> 
+                        <p className="mb-3 fw-normal">Are you a Donor?<a href=""><span>Register as Donor</span></a></p> 
                     </div>
 
                     <div className="row mb-3">
@@ -77,4 +76,4 @@ const DonorSignUp:React.FC = () => {
   )
 }
 
-export default DonorSignUp
+export default RecipientSignUp

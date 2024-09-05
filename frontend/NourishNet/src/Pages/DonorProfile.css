@@ -1,0 +1,22 @@
+.btn-custom{
+    width:50%
+}
+
+.card-custom{
+    max-width: 100%;
+}
+
+.div-width{
+    max-width: 50%;
+}
+
+.fixed-size-scrollable {
+    max-height: 450px;
+    border: 1px solid #000; 
+    overflow-y: auto; 
+    overflow-x: hidden;
+}
+
+.img-custom{
+    width: 100%;
+}

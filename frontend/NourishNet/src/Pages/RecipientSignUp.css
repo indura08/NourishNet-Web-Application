@@ -1,0 +1,21 @@
+.imgstyle{
+    width: 35rem;
+    height:25rem;
+}
+
+.input-type-custom{
+    max-width: 50%;
+    display: inline-block;
+    border-color: black;
+    border-width: 1.6px;
+}
+
+.divMargin{
+    margin-left:50px;
+}
+
+.main-div-margin{
+    margin-top: 10px;
+    border-radius: 15px;
+
+}
