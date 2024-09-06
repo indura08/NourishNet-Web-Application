@@ -1,0 +1,11 @@
+.desc-div{
+    background-image: url("../assets/background3.png");
+    background-size: cover;
+    width:100%;
+    height: 400px;
+    background-position: center;
+}
+
+.h1-font{
+    font-size: 60px;
+}

@@ -6,6 +6,7 @@ import DonorSignUp from './Pages/DonorSignUp'
 import RecipientSignUp from './Pages/RecipientSignUp'
 import DonorProfile from './Pages/DonorProfile'
 import RecipientProfile from './Pages/RecipientProfile'
+import FoodListsPage from './Pages/FoodListsPage'
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
       {/* <DonorSignUp></DonorSignUp> */}
       {/* <RecipientSignUp></RecipientSignUp> */}
       {/* <DonorProfile></DonorProfile> */}
-
-      <RecipientProfile></RecipientProfile>
+      <FoodListsPage></FoodListsPage>
+      {/* <RecipientProfile></RecipientProfile> */}
     </>
   )
 }
