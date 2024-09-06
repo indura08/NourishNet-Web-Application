@@ -129,10 +129,10 @@ const DonorProfile: React.FC = () => {
 
                 <div className='d-flex'>
                     <div className='w-50 mb-4 d-flex justify-content-center'>
-                        <img src={donation}/>
+                        <img src={donation} style={{width:"100%", height:"35rem"}} />
                     </div>
 
-                    <div className='div-custom-margin border rounded-5 w-50 py-2 justify-content-center divMargin border mb-4 border-dark border-3 main-div-margin'>
+                    <div className='div-custom-margin border rounded-5 w-50 py-2 justify-content-center border mb-4 border-dark border-3 main-div-margin'>
                         <center><h3>Simply Fill This Food Listing form</h3></center>
 
                         <form className='mx-4 mt-5'>
