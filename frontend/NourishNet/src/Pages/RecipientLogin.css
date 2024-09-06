@@ -1,0 +1,15 @@
+.background-custom{
+    background-image: url("../assets/background4.png");
+    height: 600px;
+    background-size:cover;
+    background-position: center;
+}
+
+.input-custom {
+    max-width: 100%;
+}
+
+.btn-custom{
+    color:inherit; 
+    text-decoration: none;
+}
