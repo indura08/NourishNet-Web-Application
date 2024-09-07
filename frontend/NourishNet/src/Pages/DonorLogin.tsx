@@ -13,7 +13,7 @@ const DonorLogin: React.FC = () => {
 
     const handleclick = (e:any):void => {
         e.preventDefault();
-        login(dispatch, { email, password});
+        login(dispatch, { email, password });
     }
   return (
     <>
