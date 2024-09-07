@@ -1,10 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../Components/Header'
 import loginimg from "../assets/login.png"
 import "./RecipientSignUp.css"
 import Footer from '../Components/Footer'
+import { Donor } from '../../Models/Donor'
+import { District } from '../../Models/Enums/DistrictValue'
+import { Province } from '../../Models/Enums/ProvinceValue'
+import { Role } from '../../Models/Enums/Role'
+import axios from 'axios'
 
 const DonorSignUp:React.FC = () => {
+    const [donorData, setDonorData] = useState<Donor>({
+        Id: '',
+        OrganizationName: '',
+        OrganizationType: '',
+        ContactPerson: '',
+        Phone: '',
+        BaseDistrict: District.COLOMBO , 
+        BaseProvince: Province.WESTERN, 
+        Address: '',
+        OperatingHours: '',
+        Email: '',
+        Password: '',
+        ConfirmPassword: '',
+        UserName: '',
+        Role: Role.Donor, 
+        UserType: ''
+    })
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name , value } = e.target
+        setDonorData({
+            ...donorData,
+            [name]: value
+        })
+        // console.log(donorData.OrganizationName); this was fro debugging purposes
+    }
+
+    const handleSubmit  = async (e: React.FormEvent) => {
+        e.preventDefault()
+        try {
+            const response = axios.post("http://localhost:5223/api/Donor/create" , donorData)
+            if((await response).status === 200 || (await response).status === 201){
+                //to do = mekn passe DonorProfile page ekat direct krnwanna
+                console.log("test complete user has been created successfully") //this line is for debugginf purposes 
+            }
+        }catch(error){
+            console.log(error);
+        }
+    }
   return (
     <>
         <Header></Header>
@@ -17,40 +61,40 @@ const DonorSignUp:React.FC = () => {
             <div className='border w-50 py-2 justify-content-center divMargin border border-dark border-3 main-div-margin'>
                 <center><h3>Register Your Donor Account</h3></center>
 
-                <form className='mx-4 mt-5'>
+                <form className='mx-4 mt-5' onSubmit={handleSubmit}>
                     <div className="mb-3 row">
-                        <input type="text" className="form-control input-type-custom col mx-1" name='OrganizaTionName' placeholder='OrganizaTion Name'/>
-                        <input type="text" className="form-control input-type-custom col mx-1" name='OrganizationType' placeholder='OrganizationType'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='OrganizationName' onChange={handleChange} value={donorData.OrganizationName} placeholder='OrganizaTion Name'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='OrganizationType' onChange={handleChange} value={donorData.OrganizationType}  placeholder='OrganizationType'/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='ContactPerson' placeholder='ContactPerson' />
-                        <input type="password" className="form-control input-type-custom col mx-1" name='Phone' placeholder='Phone'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='ContactPerson' onChange={handleChange} value={donorData.ContactPerson} placeholder='ContactPerson' />
+                        <input type="text" className="form-control input-type-custom col mx-1" name='Phone' onChange={handleChange} value={donorData.Phone} placeholder='Phone'/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='BaseDistrict' placeholder='BaseDistrict'/>
-                        <input type="password" className="form-control input-type-custom col mx-1" name='BaseProvince' placeholder='BaseProvince'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='BaseDistrict' onChange={handleChange} value={donorData.BaseDistrict} placeholder='BaseDistrict'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='BaseProvince' onChange={handleChange} value={donorData.BaseProvince} placeholder='BaseProvince'/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='Address' placeholder='Address'/>
-                        <input type="password" className="form-control input-type-custom col mx-1 " name='UserType' placeholder='UserType'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='Address' onChange={handleChange} value={donorData.Address} placeholder='Address'/>
+                        <input type="text" className="form-control input-type-custom col mx-1 " name='UserType' onChange={handleChange} value={donorData.UserType} placeholder='UserType'/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='Email' placeholder='Email'/>
-                        <input type="password" className="form-control input-type-custom col mx-1" name='OrganizaTionName' placeholder='OrganizaTionName'/>
+                        <input type="email" className="form-control input-type-custom col mx-1" name='Email' onChange={handleChange} value={donorData.Email} placeholder='Email'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='OperatingHours' onChange={handleChange} value={donorData.OperatingHours} placeholder='Operating hours'/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='Password' placeholder='Password'/>
-                        <input type="password" className="form-control input-type-custom col mx-1" name='ConfirmPassword' placeholder='ConfirmPassword'/>
+                        <input type="password" className="form-control input-type-custom col mx-1" name='Password' onChange={handleChange} value={donorData.Password} placeholder='Password'/>
+                        <input type="password" className="form-control input-type-custom col mx-1" name='ConfirmPassword' onChange={handleChange} value={donorData.ConfirmPassword} placeholder='ConfirmPassword'/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='UserName' placeholder='UserName'/>
-                        <input type="password" className="form-control input-type-custom col mx-1" name='Role' placeholder='Role'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='UserName' onChange={handleChange} value={donorData.UserName} placeholder='UserName'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='Role' onChange={handleChange} value={donorData.Role} placeholder='Role'/>
                     </div>
                     
                     <div className="form-check col checkbox-div mb-3">

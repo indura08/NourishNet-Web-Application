@@ -14,13 +14,13 @@ function App() {
   return (
     <>
       {/* <Home></Home> */}
-      {/* <DonorSignUp></DonorSignUp> */}
+      <DonorSignUp></DonorSignUp>
       {/* <RecipientSignUp></RecipientSignUp> */}
       {/* <DonorProfile></DonorProfile> */}
       {/* <FoodListsPage></FoodListsPage> */}
       {/* <RecipientProfile></RecipientProfile> */}
 
-      <DonorLogin></DonorLogin>
+      {/* <DonorLogin></DonorLogin> */}
 
       {/* <RecipientLogin></RecipientLogin> */}
     </>
