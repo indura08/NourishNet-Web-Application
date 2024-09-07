@@ -16,11 +16,11 @@ function App() {
       {/* <Home></Home> */}
       {/* <DonorSignUp></DonorSignUp> */}
       {/* <RecipientSignUp></RecipientSignUp> */}
-      <DonorProfile></DonorProfile>
+      {/* <DonorProfile></DonorProfile> */}
       {/* <FoodListsPage></FoodListsPage> */}
       {/* <RecipientProfile></RecipientProfile> */}
 
-      {/* <DonorLogin></DonorLogin> */}
+      <DonorLogin></DonorLogin>
 
       {/* <RecipientLogin></RecipientLogin> */}
     </>
