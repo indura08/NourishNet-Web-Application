@@ -9,20 +9,32 @@ import RecipientProfile from './Pages/RecipientProfile'
 import FoodListsPage from './Pages/FoodListsPage'
 import DonorLogin from './Pages/DonorLogin'
 import RecipientLogin from './Pages/RecipientLogin'
+import { BrowserRouter as Router , Routes, Navigate, Route, Link } from "react-router-dom"
 
 function App() {
   return (
     <>
       {/* <Home></Home> */}
-      <DonorSignUp></DonorSignUp>
+      {/* <DonorSignUp></DonorSignUp> */}
       {/* <RecipientSignUp></RecipientSignUp> */}
       {/* <DonorProfile></DonorProfile> */}
       {/* <FoodListsPage></FoodListsPage> */}
       {/* <RecipientProfile></RecipientProfile> */}
-
       {/* <DonorLogin></DonorLogin> */}
-
       {/* <RecipientLogin></RecipientLogin> */}
+
+      <Router>
+        <Routes>
+          <Route path = "/" element={<Home/>}/>
+          <Route path='/donor/profile' element={<DonorProfile/>}></Route>
+          <Route path='/recipient/profile' element={<RecipientProfile/>}></Route>
+          <Route path='/donor/login' element={<DonorLogin/>}></Route>
+          <Route path='/recipient/login' element={<RecipientLogin/>}></Route>
+          <Route path='/donor/register' element={<DonorSignUp/>}></Route>
+          <Route path='/recipient/register' element={<RecipientSignUp/>}></Route>
+          <Route path='/foodlists' element={<FoodListsPage/>}></Route>
+        </Routes>
+      </Router>
     </>
   )
 }

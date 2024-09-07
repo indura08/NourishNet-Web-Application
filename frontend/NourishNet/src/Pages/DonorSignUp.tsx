@@ -8,6 +8,7 @@ import { District } from '../../Models/Enums/DistrictValue'
 import { Province } from '../../Models/Enums/ProvinceValue'
 import { Role } from '../../Models/Enums/Role'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const DonorSignUp:React.FC = () => {
     const [donorData, setDonorData] = useState<Donor>({
@@ -28,6 +29,8 @@ const DonorSignUp:React.FC = () => {
         UserType: ''
     })
 
+    const navigate = useNavigate()
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name , value } = e.target
         setDonorData({
@@ -42,7 +45,7 @@ const DonorSignUp:React.FC = () => {
         try {
             const response = axios.post("http://localhost:5223/api/Donor/create" , donorData)
             if((await response).status === 200 || (await response).status === 201){
-                //to do = mekn passe DonorProfile page ekat direct krnwanna
+                navigate('donor/profile')
                 console.log("test complete user has been created successfully") //this line is for debugginf purposes 
             }
         }catch(error){

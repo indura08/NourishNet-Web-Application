@@ -3,17 +3,19 @@ import "./DonorLogin.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../Redux/MainStore'
 import { login } from '../Redux/DonorApiCalls'
+import { useNavigate } from 'react-router-dom'
 
 const DonorLogin: React.FC = () => {
 
     const [email , setEmail] = useState("")
     const [password , setPassword] = useState("")
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const {isFetching , error} = useSelector((state: RootState) => state.donor)
 
     const handleclick = (e:any):void => {
         e.preventDefault();
-        login(dispatch, { email, password });
+        login(dispatch, { email, password }, navigate);
     }
   return (
     <>
@@ -28,14 +30,14 @@ const DonorLogin: React.FC = () => {
                     <div className='d-flex align-items-center'>
                         <span className="material-symbols-outlined fs-1 mb-4 mx-2">person</span>
                         <div className="form-floating mb-3 d-flex w-100">
-                            <input type="email" className="form-control input-custom" onChange={(e) => setEmail(e.target.value)} id="floatingInput" />
+                            <input type="email" className="form-control input-custom" placeholder="indura@gmail.com" onChange={(e) => setEmail(e.target.value)} id="floatingInput" />
                             <label>Email address</label>
                         </div>
                     </div>
                     <div className='d-flex align-items-center'>
                         <span className="material-symbols-outlined fs-1 mb-4 mx-2">lock</span>
                         <div className="form-floating mb-3 d-flex w-100">
-                            <input type="password" className="form-control input-custom" id="floatingInput" onChange={(e) => setPassword(e.target.value)} />
+                            <input type="password" className="form-control input-custom" placeholder="this is not a password you theif!!" id="floatingInput" onChange={(e) => setPassword(e.target.value)} />
                             <label>Password</label>
                         </div>
                     </div>  
