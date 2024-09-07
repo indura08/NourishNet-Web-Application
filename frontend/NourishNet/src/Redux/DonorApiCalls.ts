@@ -1,7 +1,7 @@
 import axios from "axios";
 import { loginFailure, loginSuccess, loginstart } from "./DonorSlice";
 import { AppDispatch } from "./MainStore";
-import { Donor } from "../../Models/Donor";
+//import { Donor } from "../../Models/Donor";
 import { NavigateFunction } from "react-router-dom";
 
 interface LoginDto {
@@ -24,6 +24,6 @@ export const login = async(dispatch:AppDispatch , loginInfo:LoginDto , navigate:
     }
 };
 
-export const register = async(dispatch:AppDispatch , donorDto : Donor) => {
-    // dispatch()
-}
+// export const register = async(dispatch:AppDispatch , donorDto : Donor) => {
+//     // dispatch()
+// }
