@@ -1,7 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./RecipientLogin.css"
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { RootState } from '../Redux/MainStore'
+import { login } from '../Redux/RecipientApiCalls'
 
 const RecipientLogin:React.FC = () => {
+
+    const[email , setEmail] = useState("")
+    const[ password, setPassword] = useState("")
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { isFetching, error } = useSelector((state:RootState) => state.recipient)
+
+    const handleLogin = (e:any):void => {
+        e.preventDefault();
+        login(dispatch, { email, password} , navigate)
+    }
   return (
     <>
     <head>
@@ -15,21 +30,22 @@ const RecipientLogin:React.FC = () => {
                 <div className='d-flex align-items-center'>
                     <span className="material-symbols-outlined fs-1 mb-4 mx-2">person</span>
                     <div className="form-floating mb-3 d-flex w-100">
-                        <input type="email" className="form-control input-custom" id="floatingInput" placeholder="name@example.com"/>
+                        <input type="email" className="form-control input-custom" id="floatingInput" onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com"/>
                         <label>Email address</label>
                     </div>
                 </div>
                 <div className='d-flex align-items-center'>
                     <span className="material-symbols-outlined fs-1 mb-4 mx-2">lock</span>
                     <div className="form-floating mb-3 d-flex w-100">
-                        <input type="email" className="form-control input-custom" id="floatingInput" placeholder="name@example.com"/>
+                        <input type="email" className="form-control input-custom" id="floatingInput" onChange={(e) => setPassword(e.target.value)} placeholder="name@example.com"/>
                         <label>Password</label>
                     </div>
                 </div>  
             </form>
 
-            <div className='w-75 d-flex justify-content-center'>
-                <button className='btn btn-dark w-100' style={{height:"50px"}}>Login</button>
+            <div className='w-75 d-flex justify-content-center flex-column'>
+                <button className='btn btn-dark w-100' style={{height:"50px"}} onClick={handleLogin} disabled={isFetching}>Login</button>
+                {error && <p className='text-danger'>Soemthing went wrong</p>}
             </div>
             <p className="text-dark text-success text-center pharagraph">Forgot password? <a href="" className="text-link">Click here</a></p>
             <div className='d-flex flex-column justify-content-center align-items-center'>

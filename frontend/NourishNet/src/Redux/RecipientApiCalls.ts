@@ -1,8 +1,7 @@
-import axios from "axios";
-import { loginFailure, loginSuccess, loginstart } from "./DonorSlice";
-import { AppDispatch } from "./MainStore";
-//import { Donor } from "../../Models/Donor";
 import { NavigateFunction } from "react-router-dom";
+import { loginFailure, loginstart, loginSuccess } from "./RecipientSlice";
+import axios from "axios";
+import { AppDispatch } from "./MainStore";
 
 interface LoginDto {
     email:string;
@@ -12,20 +11,16 @@ interface LoginDto {
 export const login = async(dispatch:AppDispatch , loginInfo:LoginDto , navigate:NavigateFunction ) => {
     dispatch(loginstart());
     try {
-        const res = await axios.post("http://localhost:5223/api/Donor/login" , loginInfo);
+        const res = await axios.post("http://localhost:5223/api/Recipient/login" , loginInfo);
         if(res.data.flag){
-            navigate("/donor/profile")}
+            navigate("/recipient/profile")}
         else {
             dispatch(loginFailure())
         }
         console.log(res.data)
         dispatch(loginSuccess(res.data));
-        console.log(typeof(res.data.flag));
+        console.log(res.data.token);
     }catch(err){
         dispatch(loginFailure());
     }
 };
-
-// export const register = async(dispatch:AppDispatch , donorDto : Donor) => {
-//     // dispatch()
-// }
