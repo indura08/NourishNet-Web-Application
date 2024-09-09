@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NourishNet.Data;
 using NourishNet.Data.Services.Interfaces;
 using NourishNet.Models;
 using NourishNet.Models.DTOs;
@@ -13,10 +15,12 @@ namespace NourishNet.Controllers
     {
         private readonly IRecipientService _recipientService;
         private readonly IRecipientUserAccount _recipientUserAccountService;
-        public RecipientController(IRecipientService recipientService , IRecipientUserAccount recipientUserAccount)
+        private readonly UserManager<Recipient> _userManager;
+        public RecipientController(UserManager<Recipient> userManager, IRecipientService recipientService , IRecipientUserAccount recipientUserAccount)
         {
             _recipientService = recipientService;
             _recipientUserAccountService = recipientUserAccount;
+            _userManager = userManager;
         }
 
         [HttpGet("hi")]
@@ -94,7 +98,14 @@ namespace NourishNet.Controllers
         public async Task<IActionResult> RecipientLogin(LoginDTO loginDto)
         {
             var response = await _recipientUserAccountService.Login(loginDto);
-            return Ok(response);
+            var recipient = await _userManager.FindByEmailAsync(loginDto.Email);
+
+            var loginReponse = new LoginResponseDto
+            {
+                response = response,
+                recipient = recipient!
+            };
+            return Ok(loginReponse);
         }
     }
 }

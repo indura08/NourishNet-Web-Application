@@ -42,6 +42,7 @@ const RecipientSlice = createSlice({
         loginSuccess: (state, action: PayloadAction<any>) => {
             state.isFetching = false;
             state.currentRecipient = action.payload.recipient;
+            console.log(action.payload);
         },
         loginFailure: (state) => {
             state.isFetching = false ;
