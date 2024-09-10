@@ -4,22 +4,22 @@ import axios from "axios";
 import { AppDispatch } from "./MainStore";
 
 interface LoginDto {
-    Email:string;
-    Password: string
+    email:string;
+    password: string
 }
 
 export const login = async(dispatch:AppDispatch , loginInfo:LoginDto , navigate:NavigateFunction ) => {
     dispatch(loginstart());
     try {
         const res = await axios.post("http://localhost:5223/api/Recipient/login" , loginInfo);
-        // if(res.data.response.flag){
-             //navigate("/recipient/profile")}
-        // else {
-        //     dispatch(loginFailure())
-        // }
-        console.log(res.data.recipient.BaseDistrict)
-        // dispatch(loginSuccess(res.data));
-        console.log(res.data.token);
+        if(res.data){
+             navigate("/recipient/profile")}
+        else {
+            dispatch(loginFailure())
+        }
+        console.log(res.data.recipient)
+        dispatch(loginSuccess(res.data));
+        console.log(res.data);
     }catch(err){
         dispatch(loginFailure());
     }

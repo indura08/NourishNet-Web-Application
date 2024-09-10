@@ -2,12 +2,23 @@ import React from 'react'
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import card2 from "../assets/card2.png"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../Redux/MainStore'
+import { logout } from "../Redux/RecipientSlice"
+import { useNavigate } from 'react-router-dom'
 
 const RecipientProfile:React.FC = () => {
 
     const { currentRecipient } = useSelector((state:RootState) => state.recipient);
+    const { token } = useSelector((state: RootState) => state.recipient)
+    const dispatch = useDispatch();
+    console.log(currentRecipient);
+    console.log(token)
+    const navigate = useNavigate()
+    const handleLogout = (): void => {
+        dispatch(logout());
+        navigate("/")
+    }
   return (
     <>
         <head>
@@ -20,31 +31,31 @@ const RecipientProfile:React.FC = () => {
 
         <div className='container-fluid d-flex border border-3 mb-4'>
             <div className='container-fluid border border-2 col-3 justify-content-center border-dark'>   
-                <center><h4>Hello There {currentRecipient.UserName} 👋</h4></center>
+                <center><h4>Hello There {currentRecipient.recipientName} 👋</h4></center>
                 <hr/>
 
                 <div className='mt-4 d-flex'>
                     <div className='container-fluid border rounded-pill border-dark border-2 mx-2'>
-                        <center>{currentRecipient.BaseDistrict}</center>
+                        <center>{currentRecipient.baseDistrict}</center>
                     </div>
 
                     <div className='container-fluid border rounded-pill border-dark border-2'>
-                        <center>{currentRecipient.BaseProvince}</center>
+                        <center>{currentRecipient.baseProvince}</center>
                     </div>
                     
                 </div>
                 <div className='mt-4'>
-                    <h6 className='mb-4'>Recipient Name: {currentRecipient.RecipientName}</h6>
-                    <h6 className='mb-4'>Recipient Type: {currentRecipient.RecipientType}</h6>
-                    <h6 className='mb-4'>ContactPerson: {currentRecipient.ContactPerson}</h6>
-                    <h6 className='mb-4'>Phone:{currentRecipient.Phone}</h6>
-                    <h6 className='mb-4'>Address:</h6>
-                    <h6 className='mb-4'>Email</h6>
+                    <h6 className='mb-4'>Recipient Name: {currentRecipient.recipientName}</h6>
+                    <h6 className='mb-4'>Recipient Type: {currentRecipient.recipientType}</h6>
+                    <h6 className='mb-4'>ContactPerson: {currentRecipient.contactPerson}</h6>
+                    <h6 className='mb-4'>Phone:{currentRecipient.phone}</h6>
+                    <h6 className='mb-4'>Address: {currentRecipient.address}</h6>
+                    <h6 className='mb-4'>Email: {currentRecipient.email}</h6>
                 </div>
 
                 <div className='d-flex container-fluid mb-4'>
                     <button className='btn btn-success btn-custom mx-1'>Edit</button>
-                    <button className='btn btn-danger btn-custom mx-1'>Delete</button>
+                    <button className='btn btn-danger btn-custom mx-1' onClick={handleLogout}>Logout</button>
                 </div>
             </div>
 

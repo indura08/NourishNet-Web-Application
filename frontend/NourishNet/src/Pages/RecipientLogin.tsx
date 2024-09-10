@@ -8,7 +8,7 @@ import { login } from '../Redux/RecipientApiCalls'
 const RecipientLogin:React.FC = () => {
 
     const[email , setEmail] = useState("")
-    const[ password, setPassword] = useState("")
+    const[ password, setPassword ] = useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { isFetching, error } = useSelector((state:RootState) => state.recipient)
@@ -45,7 +45,7 @@ const RecipientLogin:React.FC = () => {
 
             <div className='w-75 d-flex justify-content-center flex-column'>
                 <button className='btn btn-dark w-100' style={{height:"50px"}} onClick={handleLogin} disabled={isFetching}>Login</button>
-                {error && <p className='text-danger'>Soemthing went wrong</p>}
+                {error && <p className='text-danger'>Something went wrong</p>}
             </div>
             <p className="text-dark text-success text-center pharagraph">Forgot password? <a href="" className="text-link">Click here</a></p>
             <div className='d-flex flex-column justify-content-center align-items-center'>

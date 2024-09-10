@@ -4,18 +4,18 @@ import { Role } from "./Enums/Role"
 import { RecipientType } from "./Enums/RecipientType" //this was adde like ../ to pactice path scens in react
 
 export interface Recipient{
-    Id : string,
-    RecipientName: string,
-    ContactPerson: string,
-    Phone: string,
-    BaseDistrict: District
-    BaseProvince: Province 
-    Address: string 
-    RecipientType: RecipientType
-    Role: Role
-    Email: string, 
-    Password: string , 
-    ConfirmPassword: string ,  
-    UserName: string 
-    UserType: string
+    id : string,
+    recipientName: string,
+    contactPerson: string,
+    phone: string,
+    baseDistrict: District
+    baseProvince: Province 
+    address: string 
+    recipientType: RecipientType
+    role: Role
+    email: string, 
+    password: string , 
+    confirmPassword: string ,  
+    userName: string 
+    userType: string
 }
