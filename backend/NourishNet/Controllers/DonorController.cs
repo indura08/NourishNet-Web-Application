@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NourishNet.Data.Services.Interfaces;
 using NourishNet.Models;
@@ -13,10 +14,12 @@ namespace NourishNet.Controllers
     {
         private readonly IDonorService _donorService;
         private readonly IDonorUserAccount _donorUserAccountService;
+        private readonly UserManager<Donor> _userManager;
 
-        public DonorController(IDonorService donorService, IDonorUserAccount donorUserAccountService)
+        public DonorController(UserManager<Donor> userManager, IDonorService donorService, IDonorUserAccount donorUserAccountService)
         {
             _donorService = donorService;
+            _userManager = userManager;
             _donorUserAccountService = donorUserAccountService;
         }
 
@@ -96,7 +99,14 @@ namespace NourishNet.Controllers
         public async Task<IActionResult> DonorLogin(LoginDTO loginDto)
         {
             var response = await _donorUserAccountService.Login(loginDto);
-            return Ok(response);
+            var currentdonor = await _userManager.FindByEmailAsync(loginDto.Email);
+
+            var donorLoginresponse = new DonorLoginresponse()
+            {
+                donor = currentdonor,
+                response = response
+            };
+            return Ok(donorLoginresponse);
         
         }
 

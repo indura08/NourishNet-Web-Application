@@ -5,8 +5,24 @@ import "./DonorProfile.css"
 import card2 from "../assets/card2.png"
 import cover2 from "../assets/cover4.png"
 import donation from "../assets/donation1.jpg"
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../Redux/MainStore'
+import { logout } from '../Redux/DonorSlice'
+import { useNavigate } from 'react-router-dom'
 
 const DonorProfile: React.FC = () => {
+
+    const { currentDonor, token } = useSelector((state:RootState) => state.donor)
+    const dispatch = useDispatch()
+    const navigate = useNavigate() 
+    console.log(currentDonor)
+    console.log(token)
+
+    const handleLogout = ():void => {
+        dispatch(logout())
+        navigate("/")
+    }
+
   return (
     <>
         <head>
@@ -18,30 +34,30 @@ const DonorProfile: React.FC = () => {
 
         <div className='container-fluid d-flex border border-3 mb-4'>
             <div className='container-fluid border border-2 col-3 justify-content-center border-dark'>   
-                <center><h4>Hello There Deepa 👋</h4></center>
+                <center><h4>Hello There {currentDonor.userName} 👋</h4></center>
                 <hr/>
 
                 <div className='mt-4 d-flex'>
                     <div className='container-fluid border rounded-pill border-dark border-2 mx-2'>
-                        <center>District</center>
+                        <center>{currentDonor.baseDistrict ? currentDonor.baseDistrict : "login to see"}</center>
                     </div>
 
                     <div className='container-fluid border rounded-pill border-dark border-2'>
-                        <center>Province</center>
+                        <center>{currentDonor.baseProvince ? currentDonor.baseProvince : "login to see"}</center>
                     </div>
                     
                 </div>
                 <div className='mt-4'>
-                    <h6 className='mb-4'>Organization Name:</h6>
-                    <h6 className='mb-4'>OrganizationType:</h6>
-                    <h6 className='mb-4'>ContactPerson:</h6>
-                    <h6 className='mb-4'>Phone:</h6>
-                    <h6 className='mb-4'>Address:</h6>
+                    <h6 className='mb-4'>Org. Name: {currentDonor.organizaTionName}</h6>
+                    <h6 className='mb-4'>Org. Type: {currentDonor.organizationType}</h6>
+                    <h6 className='mb-4'>ContactPerson: {currentDonor.contactPerson}</h6>
+                    <h6 className='mb-4'>Phone: {currentDonor.phone}</h6>
+                    <h6 className='mb-4'>Address: {currentDonor.address}</h6>
                 </div>
 
                 <div className='d-flex container-fluid mb-4'>
                     <button className='btn btn-success btn-custom mx-1'>Edit</button>
-                    <button className='btn btn-danger btn-custom mx-1'>Delete</button>
+                    <button className='btn btn-danger btn-custom mx-1' onClick={handleLogout}>Logout</button>
                 </div>
             </div>
 

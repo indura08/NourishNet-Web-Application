@@ -3,14 +3,19 @@ import { Donor } from "../../Models/Donor"
 import { Province } from "../../Models/Enums/ProvinceValue";
 import { District } from "../../Models/Enums/DistrictValue";
 import { Role } from "../../Models/Enums/Role";
+
+const saveddonor = localStorage.getItem("donor");
+const savedToken = localStorage.getItem("dtoken")
+
 interface UserState {
-    currentUser:Donor;
-    isFetching: boolean;
-    error:boolean
+    currentDonor:Donor;
+    isFetching: boolean,
+    error:boolean,
+    token: string
 }
 
 const initialState:UserState = {
-    currentUser: {
+    currentDonor: saveddonor ? JSON.parse(saveddonor) : {
         Id:"",
         OrganizationName:"", 
         OrganizationType: "", 
@@ -28,7 +33,8 @@ const initialState:UserState = {
         UserType: ""
     } ,
     isFetching: false,
-    error: false
+    error: false,
+    token: savedToken ? savedToken : ""
 }
 
 const donorSlice = createSlice({
@@ -40,15 +46,27 @@ const donorSlice = createSlice({
         },
         loginSuccess: (state, action: PayloadAction<any>) => {
             state.isFetching = false;
-            state.currentUser = action.payload;
+            state.currentDonor = action.payload.donor;
+            state.token = action.payload.response.token;
+
+            localStorage.setItem("donor" , JSON.stringify(state.currentDonor));
+            localStorage.setItem("dtoken", state.token)
         },
         loginFailure: (state) => {
             state.isFetching = false ;
             state.error = true;
+        },
+
+        logout : (state) => {
+            state.currentDonor = initialState.currentDonor
+            state.token = initialState.token
+
+            localStorage.removeItem("donor");
+            localStorage.removeItem("dtoken");
         }
     }
 })
 
-export const { loginstart, loginSuccess, loginFailure} = donorSlice.actions;
+export const { loginstart, loginSuccess, loginFailure, logout} = donorSlice.actions;
 
 export default donorSlice.reducer;

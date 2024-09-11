@@ -14,7 +14,9 @@ const RecipientProfile:React.FC = () => {
     const dispatch = useDispatch();
     console.log(currentRecipient);
     console.log(token)
+
     const navigate = useNavigate()
+    
     const handleLogout = (): void => {
         dispatch(logout());
         navigate("/")

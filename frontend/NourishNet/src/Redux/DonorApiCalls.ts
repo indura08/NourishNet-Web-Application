@@ -13,14 +13,14 @@ export const login = async(dispatch:AppDispatch , loginInfo:LoginDto , navigate:
     dispatch(loginstart());
     try {
         const res = await axios.post("http://localhost:5223/api/Donor/login" , loginInfo);
-        if(res.data.flag){
+        if(res.data.response.flag){
             navigate("/donor/profile")}
         else {
             dispatch(loginFailure())
         }
         console.log(res.data)
         dispatch(loginSuccess(res.data));
-        console.log(typeof(res.data.flag));
+        console.log(typeof(res.data.response.flag));
     }catch(err){
         dispatch(loginFailure());
     }

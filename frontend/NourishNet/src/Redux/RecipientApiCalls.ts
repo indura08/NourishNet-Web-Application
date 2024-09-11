@@ -12,14 +12,14 @@ export const login = async(dispatch:AppDispatch , loginInfo:LoginDto , navigate:
     dispatch(loginstart());
     try {
         const res = await axios.post("http://localhost:5223/api/Recipient/login" , loginInfo);
-        if(res.data){
+        if(res.data.response.flag){
              navigate("/recipient/profile")}
         else {
             dispatch(loginFailure())
         }
-        console.log(res.data.recipient)
         dispatch(loginSuccess(res.data));
-        console.log(res.data);
+        console.log(res.data.recipient) //'this is for debuggin purposes 
+        console.log(res.data); //this line also is for debuggin purposes
     }catch(err){
         dispatch(loginFailure());
     }
