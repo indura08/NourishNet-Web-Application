@@ -16,7 +16,7 @@ const RecipientProfile:React.FC = () => {
     console.log(token)
 
     const navigate = useNavigate()
-    
+
     const handleLogout = (): void => {
         dispatch(logout());
         navigate("/")
@@ -57,7 +57,7 @@ const RecipientProfile:React.FC = () => {
 
                 <div className='d-flex container-fluid mb-4'>
                     <button className='btn btn-success btn-custom mx-1'>Edit</button>
-                    <button className='btn btn-danger btn-custom mx-1' onClick={handleLogout}>Logout</button>
+                    <button className='btn btn-danger btn-custom mx-1' onClick={handleLogout}>{currentRecipient.id === "" || currentRecipient.id === null || currentRecipient.id === undefined  ? "Login" : "Logout"}</button>
                 </div>
             </div>
 

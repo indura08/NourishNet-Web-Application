@@ -57,7 +57,7 @@ const DonorProfile: React.FC = () => {
 
                 <div className='d-flex container-fluid mb-4'>
                     <button className='btn btn-success btn-custom mx-1'>Edit</button>
-                    <button className='btn btn-danger btn-custom mx-1' onClick={handleLogout}>Logout</button>
+                    <button className='btn btn-danger btn-custom mx-1' onClick={handleLogout}>{currentDonor.id === "" || currentDonor.id === null || currentDonor.id === undefined  ? "Login" : "Logout"}</button>
                 </div>
             </div>
 
