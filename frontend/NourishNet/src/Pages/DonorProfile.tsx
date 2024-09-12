@@ -12,11 +12,11 @@ import { useNavigate } from 'react-router-dom'
 
 const DonorProfile: React.FC = () => {
 
-    const { currentDonor , token } = useSelector((state:RootState) => state.donor)
+    const { currentDonor , dtoken } = useSelector((state:RootState) => state.donor)
     const dispatch = useDispatch()
     const navigate = useNavigate() 
     console.log(currentDonor)
-    console.log(token)
+    console.log(dtoken)
 
     const handleLogout = ():void => {
         dispatch(logout())
