@@ -3,13 +3,14 @@ import { FoodType } from "./Enums/FoodType"
 import { FoodListingStatus } from "./Enums/FoodListingStatus"
 
 export interface FoodListing {
-    DonorId : string, 
-    Donor: Donor,
-    FoodType: FoodType,
-    Description : string,
-    Quantity: number,
-    PostedDate: string,
-    ExpiryDate: string,
-    ImagePath: string,
-    CurrentStatus: FoodListingStatus
+    id: number,
+    donorId : string, 
+    donor: Donor,
+    foodType: FoodType,
+    description : string,
+    quantity: number,
+    postedDate: string,
+    expiryDate: string,
+    imagePath: string,
+    currentStatus: FoodListingStatus
 }

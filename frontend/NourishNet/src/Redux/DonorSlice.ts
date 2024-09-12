@@ -11,7 +11,7 @@ interface UserState {
     currentDonor:Donor;
     isFetching: boolean,
     error:boolean,
-    token: string
+    dtoken: string
 }
 
 const initialState:UserState = {
@@ -34,7 +34,7 @@ const initialState:UserState = {
     } ,
     isFetching: false,
     error: false,
-    token: savedToken ? savedToken : ""
+    dtoken: savedToken ? savedToken : ""
 }
 
 const donorSlice = createSlice({
@@ -47,10 +47,10 @@ const donorSlice = createSlice({
         loginSuccess: (state, action: PayloadAction<any>) => {
             state.isFetching = false;
             state.currentDonor = action.payload.donor;
-            state.token = action.payload.response.token;
+            state.dtoken = action.payload.response.token;
 
             localStorage.setItem("donor" , JSON.stringify(state.currentDonor));
-            localStorage.setItem("dtoken", state.token)
+            localStorage.setItem("dtoken", state.dtoken)
         },
         loginFailure: (state) => {
             state.isFetching = false ;
@@ -59,7 +59,7 @@ const donorSlice = createSlice({
 
         logout : (state) => {
             state.currentDonor = initialState.currentDonor
-            state.token = initialState.token
+            state.dtoken = initialState.dtoken
 
             localStorage.removeItem("donor");
             localStorage.removeItem("dtoken");

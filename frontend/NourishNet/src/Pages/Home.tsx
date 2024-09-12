@@ -5,7 +5,7 @@ import cover1 from '../assets/cover2.png'
 import cardImage1 from "../assets/card1.png"
 import card2 from "../assets/card2.png"
 import card3 from "../assets/card3.png"
-import vector1 from "../assets/vector1.jpg"
+// import vector1 from "../assets/vector1.jpg"
 import Footer from '../Components/Footer'
 
 const Home:React.FC = () => {
@@ -19,7 +19,7 @@ const Home:React.FC = () => {
         <div className='d-flex justify-content-center flex-column'>
             <div className='d-flex justify-content-center mt-5 flex-column'>
                 <div className='d-flex justify-content-center'>
-                    <h1>Do not <span className='text-warning'>feed</span> Your Bin</h1>
+                    <h1 className='custom-font'>Do not <span className='text-warning'>feed</span> Your Bin 🤚</h1>
                 </div>
 
                 <div className='d-flex justify-content-center mx-5 mt-4'>

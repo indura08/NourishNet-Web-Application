@@ -12,7 +12,7 @@ interface RecipientState {
     currentRecipient: Recipient
     isFetching: boolean,
     error:boolean
-    token:string
+    rtoken:string
 }
 
 const initialState: RecipientState = {
@@ -34,7 +34,7 @@ const initialState: RecipientState = {
     },
     isFetching: false,
     error: false,
-    token: rtoken ? rtoken : ""
+    rtoken: rtoken ? rtoken : ""
 }
 
 const RecipientSlice = createSlice({
@@ -47,11 +47,11 @@ const RecipientSlice = createSlice({
         loginSuccess: (state, action: PayloadAction<any>) => {
             state.isFetching = false;
             state.currentRecipient = action.payload.recipient;
-            state.token = action.payload.response.token;
-            console.log(state.token)
+            state.rtoken = action.payload.response.token;
+            console.log(state.rtoken)
 
             localStorage.setItem("recipient" , JSON.stringify(state.currentRecipient));
-            localStorage.setItem("rtoken", state.token)
+            localStorage.setItem("rtoken", state.rtoken)
         },
         loginFailure: (state) => {
             state.isFetching = false ;
@@ -60,7 +60,7 @@ const RecipientSlice = createSlice({
 
         logout: (state) => {
             state.currentRecipient = initialState.currentRecipient;
-            state.token = ""
+            state.rtoken = ""
 
             localStorage.removeItem("recipient");
             localStorage.removeItem("rtoken")

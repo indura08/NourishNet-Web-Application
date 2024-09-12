@@ -31,3 +31,7 @@
     background-image: url('../assets/backgroundimg.png');
     background-size: cover;
 }
+
+.custom-font{
+    font-size: 65px;;
+}

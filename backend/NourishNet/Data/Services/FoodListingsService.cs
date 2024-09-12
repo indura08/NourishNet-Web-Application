@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using NourishNet.Data.Services.Interfaces;
 using NourishNet.Models;
 
@@ -15,11 +17,19 @@ namespace NourishNet.Data.Services
 
         public async Task<List<FoodListing>> GetAll()
         {
-            return await _dbContext.FoodListings.ToListAsync();
+            return await _dbContext.FoodListings.Include(f1 => f1.Donor).ToListAsync();
         }
 
         public async Task Add(FoodListing foodListing)
         {
+            var donor = await _dbContext.Donors.FindAsync(foodListing.DonorId);
+
+            if (donor == null)
+            {
+                throw new Exception("Donor not found");
+            }
+
+            foodListing.Donor = donor;
             _dbContext.FoodListings.AddAsync(foodListing);
             await _dbContext.SaveChangesAsync();
         }

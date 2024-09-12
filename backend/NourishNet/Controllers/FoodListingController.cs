@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NourishNet.Data.Services;
 using NourishNet.Data.Services.Interfaces;
@@ -12,9 +13,11 @@ namespace NourishNet.Controllers
     public class FoodListingController : ControllerBase
     {
         private readonly IFoodListing _foodListingService;
-        public FoodListingController(IFoodListing foodListService) {
+        private readonly UserManager<Donor> _userManager;
+        public FoodListingController(IFoodListing foodListService, UserManager<Donor> userManager) {
 
             _foodListingService = foodListService;
+            _userManager = userManager;
         }
 
         [HttpGet("hi")]
@@ -41,6 +44,12 @@ namespace NourishNet.Controllers
         [HttpPost("create")]
         [Authorize(Roles = "Donor, Admin")]
         public async Task<ActionResult<string>> NewFoodListing(FoodListing newFoodListing) {
+
+            var donor = await _userManager.FindByIdAsync(newFoodListing.DonorId);
+            if (donor == null)
+            {
+                return BadRequest("Donor not found , please try agian creating afoodlist with valid donor account");
+            }
 
             await _foodListingService.Add(newFoodListing);
             return Ok("new food listing created successfully");

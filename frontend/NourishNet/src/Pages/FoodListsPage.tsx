@@ -1,9 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Components/Header'
 import "./FoodListsPage.css"
 import card2 from "../assets/card2.png"
+import { FoodListing } from "../../Models/FoodListing"
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { RootState } from '../Redux/MainStore'
 
 const FoodListsPage: React.FC = () => {
+
+    const [foodlistings , setFoodListings] = useState<FoodListing[]>([]);
+    // const [loading , setLoading] = useState<boolean>(true);
+    // const [error , setError ] = useState<string>("");
+
+    const { rtoken } = useSelector((state: RootState) => state.recipient) //45e51e62-f0cf-4c6f-aa97-53cfcd6a99e1  //
+    const { currentDonor } = useSelector((state: RootState) => state.donor);
+    const { dtoken } = useSelector((state:RootState) => state.donor)
+    
+    console.log(currentDonor)
+    //console.log(token) 
+
+    useEffect(() => {
+        const fetchFoodListings = async () => {
+            try {
+                const res = await axios.get("http://localhost:5223/api/FoodListing/all", {
+                    headers: {
+                        Authorization: dtoken ? `Bearer ${dtoken}` : `Bearer ${rtoken}` 
+                    }
+                })
+                setFoodListings(res.data)
+                console.log(foodlistings)
+                console.log(res.data)
+                //setLoading(false);
+            }catch(error){
+                //setError("failde to fetch food loading " + error)
+                //setLoading(false);
+
+                console.log("error occured : " + error) //this is for debuggin purposes
+            }
+        }
+        fetchFoodListings()
+    }, [])
+
   return (
     <>
         <Header></Header>
@@ -80,40 +118,51 @@ const FoodListsPage: React.FC = () => {
             <hr/>
             <div className='container-fluid'>
                 <div className='d-flex row justify-content-center'>
-                    <div className="card mt-3 mb-3 mx-4" style={{width: "20rem"}}>
+                    { foodlistings.map((listing:FoodListing) => (
+                        <div key={listing.id} className="card mt-3 mb-3 mx-4" style={{width: "20rem"}}>
                             <img src={card2} className="card-img-top" alt="..."/>
                             <div className="card-body">
-                                <h5 className="card-title">FoodType Quanitity</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <p>Expiry Date:</p>
-                                <p>Phone:</p>
-                                <p>Current status:</p>
+                                <center><h5 className="card-title">{listing.foodType}</h5></center>
+                                <p className="card-text">{listing.description}</p>
+                                <p>Expiry Date: {listing.expiryDate}</p>
+                                <p>Phone:{listing.postedDate}</p>
+                                <p>Current status: {listing.currentStatus}</p>
+                                <p>Donor : {listing.donor.userName}</p>
+                                <p>Donor contact : {listing.donor.phone}</p>
                                 <div className='d-flex justify-content-center'>
-                                    <a href="#" className="btn btn-success btn-custom mx-1">Edit</a>
-                                    <a href="#" className="btn btn-danger btn-custom mx-1">Delete</a>
+                                    <a href="#" className="btn btn-success btn-custom mx-1" >{currentDonor.id === listing.donor.id ? "Edit" : "Report"}</a>
+                                    <a href="#" className="btn btn-danger btn-custom mx-1 ">{currentDonor.id === listing.donor.id ? "Delete" : "Apply"}</a>
                                 </div>
                             </div>
-                    </div>
+                        </div>
+                    )) }           
+                </div>
+            </div>
+        </div>
 
-                    <div className="card mt-3 mb-3 mx-4" style={{width: "20rem"}}>
-                            <img src={card2} className="card-img-top" alt="..."/>
-                            <div className="card-body">
-                                <h5 className="card-title">FoodType Quanitity</h5>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <p>Expiry Date:</p>
-                                <p>Phone:</p>
-                                <p>Current status:</p>
-                                <div className='d-flex justify-content-center'>
-                                    <a href="#" className="btn btn-success btn-custom mx-1">Edit</a>
-                                    <a href="#" className="btn btn-danger btn-custom mx-1">Delete</a>
-                                </div>
-                            </div>
-                    </div>                
+        <div className="modal" id='edit'>
+            <div className="modal-dialog">
+                <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title">Modal title</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" className="btn btn-primary">Save changes</button>
+                </div>
                 </div>
             </div>
         </div>
     </>
   )
+
+  
 }
+
+
 
 export default FoodListsPage

@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom'
 
 const DonorProfile: React.FC = () => {
 
-    const { currentDonor, token } = useSelector((state:RootState) => state.donor)
+    const { currentDonor , token } = useSelector((state:RootState) => state.donor)
     const dispatch = useDispatch()
     const navigate = useNavigate() 
     console.log(currentDonor)
@@ -85,8 +85,8 @@ const DonorProfile: React.FC = () => {
                         <div className="card-body">
                             <h5 className="card-title">FoodType Quanitity</h5>
                             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <p>Expiry Date:</p>
-                            <p>Phone:</p>
+                            <p>Expiry Date: </p>
+                            <p>Phone: </p>
                             <p>Current status:</p>
                             <div className='d-flex justify-content-center'>
                                 <a href="#" className="btn btn-success btn-custom mx-1">Edit</a>

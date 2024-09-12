@@ -94,7 +94,7 @@ namespace NourishNet.Repositories
             {
                 return new ServiceResponse.LoginResponse(false, null!, "User does not have any roles assigned");
             }
-            var userRole = getUserRole.First(); // Assuming user has at least one role
+            var userRole = getUserRole.First(); 
             var userSession = new UserSession(currentUser.Id, currentUser.OrganizaTionName, currentUser.Email, userRole);
 
             string Token = GenerateToken(userSession);
