@@ -15,7 +15,8 @@ import { FoodListingStatus } from '../../Models/Enums/FoodListingStatus'
 
 const FoodListsPage: React.FC = () => {
 
-    const [foodlistings , setFoodListings] = useState<FoodListing[]>([]);
+    let [foodlistings , setFoodListings] = useState<FoodListing[]>([]);
+    let [filterdfoodlisitng , setFilteredFoodListings] = useState<FoodListing[]>([]);
     const [currentfoodListing , setCurrentFoodListing] = useState<FoodListing>({
         id: 0,
         donorId : "", 
@@ -45,7 +46,7 @@ const FoodListsPage: React.FC = () => {
         currentStatus: FoodListingStatus.Available
     });
 
-    const { rtoken } = useSelector((state: RootState) => state.recipient) //45e51e62-f0cf-4c6f-aa97-53cfcd6a99e1  //
+    const { rtoken } = useSelector((state: RootState) => state.recipient)
     const { currentDonor } = useSelector((state: RootState) => state.donor);
     const { dtoken } = useSelector((state:RootState) => state.donor)
 
@@ -61,14 +62,8 @@ const FoodListsPage: React.FC = () => {
                     }
                 })
                 setFoodListings(res.data)
-                // console.log(foodlistings)
-                // console.log(res.data) theses are for debuggin purposes
-                //setLoading(false);
             }catch(error){
-                //setError("failde to fetch food loading " + error)
-                //setLoading(false);
-
-                console.log("error occured : " + error) //this is for debuggin purposes
+                console.log("error occured : " + error)
             }
         }
         fetchFoodListings()
@@ -102,7 +97,124 @@ const FoodListsPage: React.FC = () => {
     } 
 
     const applyFunction = (): void => {
-        
+        currentfoodListing.currentStatus = FoodListingStatus.Claimed;
+        try {
+            const res = axios.put(`http://localhost:5223/api/FoodListing/update/${currentfoodListing.id}` , currentfoodListing, {
+                headers: {
+                    Authorization: `Bearer ${dtoken}`
+                }
+            })
+            console.log(res);
+            console.log(currentfoodListing);
+        }catch(error){
+            console.log("error occured" + error)
+        }
+    }
+
+
+
+    const filterDistrct = (value:any) : void =>  {
+ 
+        if(value == 1){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.AMPARA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value == 2){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.ANURADHAPURA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value == 3){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.BADULAA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value == 4){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.BATTICALOA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value == 5){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.COLOMBO)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value == 6){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.GALLE)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value == 7){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.GAMPAHA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value == 8){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.HAMBANTHOTA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==9){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.JAFFNA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==10){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.KALUTHARA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==11){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.KANDY)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==12){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.KEGALLE)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==13){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.KILINOCHCHI)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==14){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.KURUNEGALA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==15){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.MANNER)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==16){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.MATALE)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==17){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.MATARA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==18){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.MONARAGALA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==19){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.MULLAITIVU)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==20){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.NUWARA_ELIYA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==21){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.POLLANNARUWA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==22){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.PUTTALAM)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==23){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.RATHNAPURA)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==24){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.TRINCOMALEE)
+            setFoodListings(filterdfoodlisitng)
+        }
+          else if(value==25){
+            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.VAVUNIYA)
+            setFoodListings(filterdfoodlisitng)
+        }
     }
 
   return (
@@ -131,22 +243,22 @@ const FoodListsPage: React.FC = () => {
                 <div className="mx-5 d-flex">
                     <span className="py-1 custom-margin fw-bold">Province:</span>
                     <select className="form-select" aria-label="Default select example">
-                    <option selected>Select province</option>
-                    <option value="1">CENTRAL</option>
-                    <option value="2">EASTERN</option>
-                    <option value="3">NORTH_CENTRAL</option>
-                    <option value="4">NORTHERN</option>
-                    <option value="5">NORTH_WESTERN</option>
-                    <option value="6">SABARAGAMUWA</option>
-                    <option value="7">SOUTHERN</option>
-                    <option value="8">UVA</option>
-                    <option value="9">WESTERN</option>
+                        <option selected>Select province</option>
+                        <option value="1">CENTRAL</option>
+                        <option value="2">EASTERN</option>
+                        <option value="3">NORTH_CENTRAL</option>
+                        <option value="4">NORTHERN</option>
+                        <option value="5">NORTH_WESTERN</option>
+                        <option value="6">SABARAGAMUWA</option>
+                        <option value="7">SOUTHERN</option>
+                        <option value="8">UVA</option>
+                        <option value="9">WESTERN</option>
                     </select>
                 </div>
 
                 <div className="mx-5 d-flex">
                     <span className="py-1 custom-margin fw-bold">District:</span>
-                    <select className="form-select" aria-label="Default select example">
+                    <select className="form-select" aria-label="Default select example" onChange={(e) => filterDistrct(e.target.value)}>
                         <option selected>Select province</option>
                         <option value="1">AMPARA</option>
                         <option value="2">ANURADHAPURA</option>
@@ -182,7 +294,8 @@ const FoodListsPage: React.FC = () => {
             <div className='container-fluid'>
                 <div className='d-flex row justify-content-center'>
                     { foodlistings.map((listing:FoodListing) => (
-                        <div key={listing.id} className="card mt-3 mb-3 mx-4" style={{width: "20rem"}}>
+                        listing.currentStatus === FoodListingStatus.Available && (
+                            <div key={listing.id} className="card mt-3 mb-3 mx-4" style={{width: "20rem"}}>
                             <img src={card2} className="card-img-top" alt="..."/>
                             <div className="card-body">
                                 <center><h5 className="card-title">{listing.foodType}</h5></center>
@@ -194,13 +307,14 @@ const FoodListsPage: React.FC = () => {
                                 <p>Donor contact : {listing.donor.phone}</p>
                                 <div className='d-flex justify-content-center'>
                                     {currentDonor.id === listing.donor.id ? <button className='btn btn-success btn-custom mx-1' data-bs-toggle="modal" data-bs-target="#edit" onClick={() => setCurrentFoodListing(listing)}>Edit</button> : <button className='btn btn-warning btn-custom mx-1' data-bs-toggle="modal" data-bs-target="#report">Report</button>}
-                                    {currentDonor.id === listing.donor.id ? <button className='btn btn-danger btn-custom mx-1' data-bs-toggle="modal" data-bs-target="#delete" onClick={() => setCurrentFoodListing(listing)}>Delete</button> : <button className='btn btn-primary btn-custom mx-1' data-bs-toggle="modal" data-bs-target="#apply">Apply</button>}
+                                    {currentDonor.id === listing.donor.id ? <button className='btn btn-danger btn-custom mx-1' data-bs-toggle="modal" data-bs-target="#delete" onClick={() => setCurrentFoodListing(listing)}>Delete</button> : listing.currentStatus == FoodListingStatus.Available ? <button className='btn btn-primary btn-custom mx-1' data-bs-toggle="modal" data-bs-target="#apply" onClick={() => setCurrentFoodListing(listing)}>Apply</button> : <button className='btn btn-primary btn-custom mx-1' disabled data-bs-toggle="modal" data-bs-target="#apply">Apply</button>}
                                     
                                     {/* <button className="btn btn-success btn-custom mx-1" data-bs-toggle="modal" data-bs-target="#edit">{currentDonor.id === listing.donor.id ? "Edit" : "Report"}</button>
                                     <button className="btn btn-danger btn-custom mx-1 ">{currentDonor.id === listing.donor.id ? "Delete" : "Apply"}</button> */}
                                 </div>
                             </div>
                         </div>
+                        )
                     )) }           
                 </div>
             </div>
@@ -274,15 +388,15 @@ const FoodListsPage: React.FC = () => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Modal title</h5>
+                        <h5 className="modal-title">Apply For this donation?</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <p>Are you sure You want to apply?</p>
+                        <p>Click apply button to apply for this donation. After that contact the Donor to get the donation!</p>
                     </div>
                     <div className="modal-footer">
+                        <button type="button" className="btn btn-success" onClick={applyFunction}>Apply</button>
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
                     </div>
                     </div>
                 </div>
