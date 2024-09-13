@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import "./DonorProfile.css"
@@ -9,10 +9,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../Redux/MainStore'
 import { logout } from '../Redux/DonorSlice'
 import { useNavigate } from 'react-router-dom'
+import { FoodListing } from '../../Models/FoodListing'
+import axios from 'axios'
 
 const DonorProfile: React.FC = () => {
 
     const { currentDonor , dtoken } = useSelector((state:RootState) => state.donor)
+    const [ foodlistings , setFoolistings ] = useState<FoodListing[]>([])
+    const [usersFoodLisitngs , setUsersfoodListings] = useState<FoodListing[]>([]);
+
     const dispatch = useDispatch()
     const navigate = useNavigate() 
     console.log(currentDonor)
@@ -22,6 +27,26 @@ const DonorProfile: React.FC = () => {
         dispatch(logout())
         navigate("/")
     }
+    
+    const fetchFoodListings = async () : Promise<void> => {
+        try {
+            const res = await axios.get("http://localhost:5223/api/FoodListing/all" , {
+                headers : {
+                    Authorization: dtoken ? `Bearer ${dtoken}` : ""
+                }
+            })
+            setFoolistings(res.data)
+            setUsersfoodListings(foodlistings.filter(listing => listing.donor.id == currentDonor.id))
+            
+        }catch(error){
+            console.log(error)
+            throw error;
+        }
+    }
+
+    useEffect(() => {
+        fetchFoodListings();
+    })
 
   return (
     <>
@@ -65,7 +90,25 @@ const DonorProfile: React.FC = () => {
                 <center><h3>Donations You Made</h3></center>
                 <hr/>
                 <div className='row'>
-                    <div className="card mt-3 mb-3" style={{width: "18rem"}}>
+                    { usersFoodLisitngs.map((listing:FoodListing) => (
+                        <div key={listing.id} className="card mt-3 mb-3 mx-1" style={{width: "18rem"}}>
+                        <img src={card2} className="card-img-top" alt="..."/>
+                        <div className="card-body">
+                            <center><h5 className="card-title">{listing.foodType}</h5></center>
+                            <p className="card-text">{listing.description}</p>
+                            <p>Expiry Date: {listing.expiryDate}</p>
+                            <p>Quantity: {listing.quantity}</p>
+                            <p>Current status: <span className='text-dark fw-bolder'>{listing.currentStatus}</span></p>
+                            <p>Donor : {listing.donor.userName}</p>
+                            <p>Donor contact : {listing.donor.phone}</p>
+                            <div className='d-flex justify-content-center'>
+                                <a href="#" className="btn btn-success btn-custom mx-1">Edit</a>
+                                <a href="#" className="btn btn-danger btn-custom mx-1">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                    ))}
+                    {/* <div className="card mt-3 mb-3" style={{width: "18rem"}}>
                         <img src={card2} className="card-img-top" alt="..."/>
                         <div className="card-body">
                             <h5 className="card-title">FoodType Quanitity</h5>
@@ -78,39 +121,7 @@ const DonorProfile: React.FC = () => {
                                 <a href="#" className="btn btn-danger btn-custom mx-1">Delete</a>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="card mt-3 mb-3" style={{width: "18rem"}}>
-                        <img src={card2} className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">FoodType Quanitity</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <p>Expiry Date: </p>
-                            <p>Phone: </p>
-                            <p>Current status:</p>
-                            <div className='d-flex justify-content-center'>
-                                <a href="#" className="btn btn-success btn-custom mx-1">Edit</a>
-                                <a href="#" className="btn btn-danger btn-custom mx-1">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="card mt-3 mb-3" style={{width: "18rem"}}>
-                        <img src={card2} className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">FoodType Quanitity</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <p>Expiry Date:</p>
-                            <p>Phone:</p>
-                            <p>Current status:</p>
-                            <div className='d-flex justify-content-center'>
-                                <a href="#" className="btn btn-success btn-custom mx-1">Edit</a>
-                                <a href="#" className="btn btn-danger btn-custom mx-1">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    
+                    </div>                     */}
                 </div>
             </div>
 
