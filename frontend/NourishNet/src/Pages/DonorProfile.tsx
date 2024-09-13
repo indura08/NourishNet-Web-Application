@@ -11,6 +11,11 @@ import { logout } from '../Redux/DonorSlice'
 import { useNavigate } from 'react-router-dom'
 import { FoodListing } from '../../Models/FoodListing'
 import axios from 'axios'
+import { District } from '../../Models/Enums/DistrictValue'
+import { Province } from '../../Models/Enums/ProvinceValue'
+import { Role } from '../../Models/Enums/Role'
+import { FoodType } from '../../Models/Enums/FoodType'
+import { FoodListingStatus } from '../../Models/Enums/FoodListingStatus'
 
 const DonorProfile: React.FC = () => {
 
@@ -18,14 +23,86 @@ const DonorProfile: React.FC = () => {
     const [ foodlistings , setFoolistings ] = useState<FoodListing[]>([])
     const [usersFoodLisitngs , setUsersfoodListings] = useState<FoodListing[]>([]);
 
+    const [currentfoodListing , setCurrentFoodListing] = useState<FoodListing>({
+        id: 0,
+        donorId : "", 
+        donor: {
+            id:"",
+            organizaTionName:"", 
+            organizationType: "", 
+            contactPerson:"",
+            phone: "",
+            baseDistrict: District.COLOMBO,
+            baseProvince: Province.WESTERN, 
+            address: "",
+            operatingHours: "", 
+            email: "", 
+            password: "", 
+            confirmPassword: "", 
+            userName: "",
+            role: Role.Donor, 
+            userType: ""
+        },
+        foodType: FoodType.Dishes,
+        description : "",
+        quantity: 0,
+        postedDate: "",
+        expiryDate: "",
+        imagePath: "",
+        currentStatus: FoodListingStatus.Available
+    });
+
+    const [newDonation , setNewDonation] = useState<FoodListing>({
+        id: 0,
+        donorId : currentDonor.id, 
+        donor: currentDonor ? currentDonor : {
+            id:"",
+            organizaTionName:"", 
+            organizationType: "", 
+            contactPerson:"",
+            phone: "",
+            baseDistrict: District.COLOMBO,
+            baseProvince: Province.WESTERN, 
+            address: "",
+            operatingHours: "", 
+            email: "", 
+            password: "", 
+            confirmPassword: "", 
+            userName: "",
+            role: Role.Donor, 
+            userType: ""
+        },
+        foodType: FoodType.Dishes,
+        description : "",
+        quantity: 0,
+        postedDate: "",
+        expiryDate: "",
+        imagePath: "",
+        currentStatus: FoodListingStatus.Available
+    });
+    // const [ error , setError] = useState("")
+
     const dispatch = useDispatch()
     const navigate = useNavigate() 
-    console.log(currentDonor)
-    console.log(dtoken)
+    // console.log(currentDonor)
+    // console.log(dtoken)
 
     const handleLogout = ():void => {
         dispatch(logout())
         navigate("/")
+    }
+
+    const handleSubmit = ():void => {
+        try {
+            const res = axios.put(`http://localhost:5223/api/FoodListing/update/${currentfoodListing.id}` , currentfoodListing, {
+                headers: {
+                    Authorization: `Bearer ${dtoken}`
+                }
+            })
+            console.log(res);
+        }catch(error){
+            console.log("error occured" + error)
+        }
     }
     
     const fetchFoodListings = async () : Promise<void> => {
@@ -41,6 +118,47 @@ const DonorProfile: React.FC = () => {
         }catch(error){
             console.log(error)
             throw error;
+        }
+    }
+
+    const editdonorProfile = (): void => {
+        try {
+            const res =  axios.put(`http://localhost:5223/api/Donor/update/${currentDonor.id}` , currentDonor, {
+                headers: {
+                    Authorization: dtoken ? `Bearer ${dtoken}` : ""
+                }
+            } )
+            console.log(res)
+        }catch(error){
+            console.log("error occured " + error)
+        }
+    }
+
+    const handledelete = (): void => {
+        try {
+            const res = axios.delete(`http://localhost:5223/api/FoodListing/delete/${currentfoodListing.id}` , {
+                headers: {
+                    Authorization: `Bearer ${dtoken}`
+                }
+            })
+            console.log(currentfoodListing)
+            console.log(res)
+        }catch(error){
+            alert(`error occured ${error}`)
+        }
+    } 
+
+    const createNewdonation = (e: React.FormEvent<HTMLFormElement>): void => {
+        try {
+            const res = axios.post("http://localhost:5223/api/FoodListing/create" , newDonation, {
+                headers: {
+                    Authorization: dtoken ? `Bearer ${dtoken}` : ""
+                }
+            })
+            console.log(res);
+        }catch(error){
+            console.log(`error occured : ${error}`)
+            alert(error);
         }
     }
 
@@ -81,7 +199,7 @@ const DonorProfile: React.FC = () => {
                 </div>
 
                 <div className='d-flex container-fluid mb-4'>
-                    <button className='btn btn-success btn-custom mx-1'>Edit</button>
+                    <button className='btn btn-success btn-custom mx-1' data-bs-toggle="modal" data-bs-target="#edit">Edit</button>
                     <button className='btn btn-danger btn-custom mx-1' onClick={handleLogout}>{currentDonor.id === "" || currentDonor.id === null || currentDonor.id === undefined  ? "Login" : "Logout"}</button>
                 </div>
             </div>
@@ -102,8 +220,8 @@ const DonorProfile: React.FC = () => {
                             <p>Donor : {listing.donor.userName}</p>
                             <p>Donor contact : {listing.donor.phone}</p>
                             <div className='d-flex justify-content-center'>
-                                <a href="#" className="btn btn-success btn-custom mx-1">Edit</a>
-                                <a href="#" className="btn btn-danger btn-custom mx-1">Delete</a>
+                                <button className="btn btn-success btn-custom mx-1" onClick={() => setCurrentFoodListing(listing)} data-bs-toggle="modal" data-bs-target="#editDonation">Edit</button>
+                                <button className="btn btn-danger btn-custom mx-1" onClick={() => setCurrentFoodListing(listing)} data-bs-toggle="modal" data-bs-target="#delete">Delete</button>
                             </div>
                         </div>
                     </div>
@@ -162,25 +280,25 @@ const DonorProfile: React.FC = () => {
                     <div className='div-custom-margin border rounded-5 w-50 py-2 justify-content-center border mb-4 border-dark border-3 main-div-margin'>
                         <center><h3>Simply Fill This Food Listing form</h3></center>
 
-                        <form className='mx-4 mt-5'>
+                        <form className='mx-4 mt-5' onSubmit={createNewdonation}>
                             <div className="mb-3 row">
-                                <input type="text" className="form-control input-type-custom col mx-1" name='Donor' placeholder='Donor'/>
-                                <input type="text" className="form-control input-type-custom col mx-1" name='FoodType' placeholder='FoodType'/>
+                                <input type="text" className="form-control input-type-custom col mx-1" name='DonorId' placeholder={currentDonor.userName} readOnly />
+                                <input type="text" className="form-control input-type-custom col mx-1" name='FoodType' placeholder='FoodType' onChange={(e) => newDonation.foodType = e.target.value}/>
                             </div>
 
                             <div className="mb-3 row">
-                                <input type="email" className="form-control input-type-custom col mx-1" name='Description' placeholder='Description' />
-                                <input type="password" className="form-control input-type-custom col mx-1" name='Quantity' placeholder='Quantity (kg)'/>
+                                <input type="text" className="form-control input-type-custom col mx-1" name='Description' placeholder='Description' onChange={(e) => newDonation.description = e.target.value}/>
+                                <input type="text" className="form-control input-type-custom col mx-1" name='Quantity' placeholder='Quantity (kg)' onChange={(e) => newDonation.quantity = e.target.value}/>
                             </div>
 
                             <div className="mb-3 row">
-                                <input type="email" className="form-control input-type-custom col mx-1" name='PostedDate' placeholder='PostedDate (DD/MM/YYYY)'/>
-                                <input type="password" className="form-control input-type-custom col mx-1" name='ExpiryDate' placeholder='ExpiryDate (DD/MM/YYYY)'/>
+                                <input type="text" className="form-control input-type-custom col mx-1" name='PostedDate' placeholder='PostedDate (DD/MM/YYYY)' onChange={(e) => newDonation.postedDate = e.target.value}/>
+                                <input type="text" className="form-control input-type-custom col mx-1" name='ExpiryDate' placeholder='ExpiryDate (DD/MM/YYYY)' onChange={(e) => newDonation.expiryDate = e.target.value}/>
                             </div>
 
                             <div className="mb-3 row">
-                                <input type="email" className="form-control input-type-custom col mx-1" name='ImagePath' placeholder='ImagePath'/>
-                                <input type="password" className="form-control input-type-custom col mx-1 " name='CurrentStatus' placeholder='CurrentStatus'/>
+                                <input type="text" className="form-control input-type-custom col mx-1" name='ImagePath' placeholder='ImagePath' onChange={(e) => newDonation.imagePath = e.target.value}/>
+                                <input type="text" className="form-control input-type-custom col mx-1 " name='CurrentStatus' placeholder="Available" readOnly/>
                             </div>
                             
                             <div className="form-check col checkbox-div mb-3">
@@ -193,7 +311,7 @@ const DonorProfile: React.FC = () => {
                             </div>
 
                             <div className="row mb-3">
-                                <button type="submit" className="btn btn-success col mx-1">Register</button>
+                                <button type="submit" className="btn btn-success col mx-1">Create Donation</button>
                                 <button type="reset" className="btn btn-danger col">Reset Form</button>
                             </div>
 
@@ -211,6 +329,128 @@ const DonorProfile: React.FC = () => {
             </div>
         </div>
         <Footer></Footer>
+
+        {/* edit user profile modal*/}
+        <div className="modal" id='edit'>
+            <div className="modal-dialog">
+                <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title">Edit Your Donor profile</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                    <form className='mx-4' onSubmit={editdonorProfile}>
+                        <div className="mb-3 row">
+                            <input type="text" className="form-control input-type-custom col mx-1" name={currentDonor.organizaTionName} placeholder={currentDonor.organizaTionName} onChange={(e) => currentDonor.organizaTionName = e.target.value}/>
+                            <input type="text" className="form-control input-type-custom col mx-1" name={currentDonor.organizationType}  placeholder={currentDonor.organizationType} onChange={(e) => currentDonor.organizationType = e.target.value}/>
+                        </div>
+
+                        <div className="mb-3 row">
+                            <input type="text" className="form-control input-type-custom col mx-1" name={currentDonor.contactPerson}  placeholder={currentDonor.contactPerson} onChange={(e) => currentDonor.contactPerson = e.target.value}/>
+                            <input type="text" className="form-control input-type-custom col mx-1" name={currentDonor.phone} placeholder={currentDonor.phone} onChange={(e) => currentDonor.phone = e.target.value}/>
+                        </div>
+
+                        <div className="mb-3 row">
+                            <input type="text" className="form-control input-type-custom col mx-1" name={currentDonor.baseDistrict} placeholder={currentDonor.baseDistrict} onChange={(e) => currentDonor.baseDistrict = e.target.value}/>
+                            <input type="text" className="form-control input-type-custom col mx-1" name={currentDonor.baseProvince} placeholder={currentDonor.baseProvince} onChange={(e) => currentDonor.baseProvince = e.target.value}/>
+                        </div>
+
+                        <div className="mb-3 row">
+                            <input type="text" className="form-control input-type-custom col mx-1" name={currentDonor.address} placeholder={currentDonor.address} onChange={(e) => currentDonor.address = e.target.value}/>
+                            <input type="text" className="form-control input-type-custom col mx-1 " name={currentDonor.userType} placeholder={currentDonor.userType} readOnly/>
+                        </div>
+
+                        <div className="mb-3 row">
+                            <input type="email" className="form-control input-type-custom col mx-1" name={currentDonor.email} placeholder={currentDonor.email} onChange={(e) => currentDonor.email = e.target.value}/>
+                            <input type="text" className="form-control input-type-custom col mx-1" name={currentDonor.operatingHours} placeholder={currentDonor.operatingHours} onChange={(e) => currentDonor.operatingHours = e.target.value}/>
+                        </div>
+
+                        <div className="mb-3 row">
+                            <input type="password" className="form-control input-type-custom col mx-1" name={currentDonor.password}  placeholder="You cant change your password here" />
+                            <input type="password" className="form-control input-type-custom col mx-1" name={currentDonor.confirmPassword} placeholder="(Try changin password in userManagement Page)"/>
+                        </div>
+
+                        <div className="mb-3 row">
+                            <input type="text" className="form-control input-type-custom col mx-1" name={currentDonor.userName} placeholder={currentDonor.userName} onChange={(e) => currentDonor.userName = e.target.value}/>
+                            <input type="text" className="form-control input-type-custom col mx-1" name={currentDonor.role} placeholder={currentDonor.role} readOnly/>
+                        </div>
+
+                        <div className="row mb-3">
+                            <button type="submit" className="btn btn-success col mx-1">Update</button>
+                            <button type="reset" className="btn btn-danger col">Reset Form</button>
+                        </div>
+                    </form>
+                </div>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        {/* edit  donation modal*/}
+        <div className="modal" id='editDonation'>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Edit Your Donation Information</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <form className='mx-4' onClick={handleSubmit}>
+                                <div className="mb-3 row">
+                                    <input type="text" className="form-control input-type-custom col mx-1" name={currentfoodListing.donor.userName} placeholder={currentfoodListing.donor.userName} readOnly/>
+                                    <input type="text" className="form-control input-type-custom col mx-1" name={currentfoodListing.foodType} placeholder={currentfoodListing.foodType} 
+                                        onChange={(e) => currentfoodListing.foodType == e.target.value}/>
+                                </div>
+
+                                <div className="mb-3 row">
+                                    <input type="text" className="form-control input-type-custom col mx-1" name={currentfoodListing.description} placeholder={currentfoodListing.description} onChange={(e) => currentfoodListing.description = e.target.value}/>
+                                    <input type="number" className="form-control input-type-custom col mx-1" name={currentfoodListing.quantity} placeholder={currentfoodListing.quantity} onChange={(e) => currentfoodListing.quantity = Number(e.target.value)}/>
+                                </div>
+
+                                <div className="mb-3 row">
+                                    <input type="text" className="form-control input-type-custom col mx-1" name={currentfoodListing.postedDate} placeholder={currentfoodListing.postedDate} onChange={(e) => currentfoodListing.postedDate = e.target.value}/>
+                                    <input type="text" className="form-control input-type-custom col mx-1" name={currentfoodListing.expiryDate} placeholder={currentfoodListing.expiryDate} onChange={(e) => currentfoodListing.expiryDate = e.target.value}/>
+                                </div>
+
+                                <div className="mb-3 row">
+                                    <input type="text" className="form-control input-type-custom col mx-1" name={currentfoodListing.imagePath} placeholder={currentfoodListing.imagePath} onChange={(e) => currentfoodListing.imagePath = e.target.value}/>
+                                    <input type="text" className="form-control input-type-custom col mx-1 " name={currentfoodListing.currentStatus} placeholder={currentfoodListing.currentStatus} readOnly/>
+                                </div>
+
+                                <div className="row mb-3">
+                                    <button type="submit" className="btn btn-success col mx-1">Update</button>
+                                    <button type="reset" className="btn btn-danger col">Reset</button>
+                                </div>
+                        </form>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* delete modal */}
+            <div className="modal" id='delete'>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Delete?</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <p>Are you sure you want to delete this ?</p>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-danger" onClick={() => handledelete()}>Delete</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
     </>
   )
 }

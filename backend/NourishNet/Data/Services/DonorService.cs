@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using NourishNet.Data.Services.Interfaces;
 using NourishNet.Models;
 
@@ -7,9 +8,11 @@ namespace NourishNet.Data.Services
     public class DonorService : IDonorService
     {
         private readonly AppDBContext _dbContext;
+        private readonly UserManager<Donor> _userManager;
 
-        public DonorService(AppDBContext dbContext) { 
+        public DonorService(AppDBContext dbContext , UserManager<Donor> userManager) { 
             _dbContext = dbContext;
+            _userManager = userManager;
         }
         public async Task AddNewDonor(Donor donor)
         {
@@ -35,12 +38,36 @@ namespace NourishNet.Data.Services
 
         public async Task<string> UpdateDonorById(string id, Donor donor)
         {
-            var currentDonor = await _dbContext.Donors.FindAsync(donor.Id);
+            var currentDonor = await _userManager.FindByIdAsync(id);
             if (currentDonor != null)
             {
-                _dbContext.Entry(donor).CurrentValues.SetValues(currentDonor);
-                _dbContext.SaveChanges();
-                return "Updated";
+                _dbContext.Entry(currentDonor).State = EntityState.Detached;
+
+                currentDonor.OrganizaTionName = donor.OrganizaTionName;
+                currentDonor.OrganizationType = donor.OrganizationType;
+                currentDonor.ContactPerson = donor.ContactPerson;
+                currentDonor.Phone = donor.Phone;
+                currentDonor.BaseDistrict = donor.BaseDistrict;
+                currentDonor.BaseProvince = donor.BaseProvince;
+                currentDonor.Address = donor.Address;
+                currentDonor.OperatingHours = donor.OperatingHours;
+                currentDonor.Email = donor.Email;
+                currentDonor.UserName = donor.UserName;
+                currentDonor.Role = donor.Role;
+                currentDonor.UserType = donor.UserType;
+
+                await _dbContext.SaveChangesAsync();
+
+                var result = await _userManager.UpdateAsync(currentDonor);
+
+                if (result.Succeeded)
+                {
+                    return "Updated";
+                }
+                else
+                {
+                    return $"Error Occurred: {string.Join(", ", result.Errors.Select(e => e.Description))}";
+                }
             }
             else {
                 return "Error Occured";
