@@ -70,8 +70,6 @@ const RecipientSignUp:React.FC = () => {
         </div>
 
         <Footer></Footer>
-
-        
     </>
   )
 }

@@ -69,7 +69,7 @@ namespace NourishNet.Controllers
         }
 
         [HttpPut("update/{id}")]
-        [Authorize(Roles = "Admin , Donor")]
+        [Authorize(Roles = "Admin , Donor, Recipient")]
         public async Task<ActionResult<string>> updateById(int id, FoodListing foodListing)     //ActionResult<string> indicates that the method will either return a string (usually indicating success) or any other action result like BadRequest, NotFound, etc.
         {
 

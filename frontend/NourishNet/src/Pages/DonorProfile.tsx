@@ -22,7 +22,7 @@ const DonorProfile: React.FC = () => {
     const { currentDonor , dtoken } = useSelector((state:RootState) => state.donor)
     const [ foodlistings , setFoolistings ] = useState<FoodListing[]>([])
     const [usersFoodLisitngs , setUsersfoodListings] = useState<FoodListing[]>([]);
-
+    // const [ isformValid , setIsformValid ] = useState(false)
     const [currentfoodListing , setCurrentFoodListing] = useState<FoodListing>({
         id: 0,
         donorId : "", 
@@ -109,7 +109,7 @@ const DonorProfile: React.FC = () => {
         try {
             const res = await axios.get("http://localhost:5223/api/FoodListing/all" , {
                 headers : {
-                    Authorization: dtoken ? `Bearer ${dtoken}` : ""
+                    Authorization: `Bearer ${dtoken}`
                 }
             })
             setFoolistings(res.data)
@@ -134,15 +134,15 @@ const DonorProfile: React.FC = () => {
         }
     }
 
-    const handledelete = (): void => {
+    const handledelete = async (): Promise<void> => {
         try {
             const res = axios.delete(`http://localhost:5223/api/FoodListing/delete/${currentfoodListing.id}` , {
                 headers: {
                     Authorization: `Bearer ${dtoken}`
                 }
             })
-            console.log(currentfoodListing)
             console.log(res)
+            console.log(currentfoodListing)
         }catch(error){
             alert(`error occured ${error}`)
         }
@@ -158,14 +158,14 @@ const DonorProfile: React.FC = () => {
             console.log(res);
         }catch(error){
             console.log(`error occured : ${error}`)
-            alert(error);
+            throw error
         }
     }
 
     useEffect(() => {
         fetchFoodListings();
     })
-
+    
   return (
     <>
         <head>
