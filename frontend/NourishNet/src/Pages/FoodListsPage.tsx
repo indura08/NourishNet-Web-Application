@@ -53,19 +53,22 @@ const FoodListsPage: React.FC = () => {
     console.log(currentDonor)
     //console.log(token) 
 
-    useEffect(() => {
-        const fetchFoodListings = async () => {
-            try {
-                const res = await axios.get("http://localhost:5223/api/FoodListing/all", {
-                    headers: {
-                        Authorization: dtoken ? `Bearer ${dtoken}` : `Bearer ${rtoken}` 
-                    }
-                })
-                setFoodListings(res.data)
-            }catch(error){
-                console.log("error occured : " + error)
-            }
+    const fetchFoodListings = async (): Promise<FoodListing[]> => {
+        try {
+            const res = await axios.get("http://localhost:5223/api/FoodListing/all", {
+                headers: {
+                    Authorization: dtoken ? `Bearer ${dtoken}` : `Bearer ${rtoken}` 
+                }
+            })
+            setFoodListings(res.data)
+            return res.data
+        }catch(error){
+            console.log("error occured : " + error)
+            throw error;        //mehma damme catch blok ekn aniwaryen deyk retunr wenna one hinda , dan promise eka reject wenne catch ekn hinda apita return eka widiyt throw ekk denna puluwan 
         }
+    }
+
+    useEffect(() => {
         fetchFoodListings()
     }, [])
 
@@ -111,110 +114,183 @@ const FoodListsPage: React.FC = () => {
         }
     }
 
-
-
-    const filterDistrct = (value:any) : void =>  {
+    const filterDistrct = async (value:any) : Promise<void> =>  {
  
         if(value == 1){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.AMPARA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.AMPARA)
+            setFoodListings(foodlistings);
         }
           else if(value == 2){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.ANURADHAPURA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.ANURADHAPURA)
+            setFoodListings(foodlistings);
         }
           else if(value == 3){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.BADULAA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.BADULAA)
+            setFoodListings(foodlistings);
         }
           else if(value == 4){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.BATTICALOA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.BATTICALOA)
+            setFoodListings(foodlistings);
         }
           else if(value == 5){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.COLOMBO)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.COLOMBO)
+            setFoodListings(foodlistings);
         }
           else if(value == 6){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.GALLE)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.GALLE)
+            setFoodListings(foodlistings);
         }
           else if(value == 7){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.GAMPAHA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.GAMPAHA)
+            setFoodListings(foodlistings);
         }
           else if(value == 8){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.HAMBANTHOTA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.HAMBANTHOTA)
+            setFoodListings(foodlistings);
         }
           else if(value==9){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.JAFFNA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.JAFFNA)
+            setFoodListings(foodlistings);
         }
           else if(value==10){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.KALUTHARA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.KALUTHARA)
+            setFoodListings(foodlistings);
         }
           else if(value==11){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.KANDY)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.KANDY)
+            setFoodListings(foodlistings);
         }
           else if(value==12){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.KEGALLE)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.KEGALLE)
+            setFoodListings(foodlistings);
         }
           else if(value==13){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.KILINOCHCHI)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.KILINOCHCHI)
+            setFoodListings(foodlistings);
         }
           else if(value==14){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.KURUNEGALA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.KURUNEGALA)
+            setFoodListings(foodlistings);
         }
           else if(value==15){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.MANNER)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.MANNER)
+            setFoodListings(foodlistings);
         }
           else if(value==16){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.MATALE)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.MATALE)
+            setFoodListings(foodlistings);
         }
           else if(value==17){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.MATARA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.MATARA)
+            setFoodListings(foodlistings);
         }
           else if(value==18){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.MONARAGALA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.MONARAGALA)
+            setFoodListings(foodlistings);
         }
           else if(value==19){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.MULLAITIVU)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.MULLAITIVU)
+            setFoodListings(foodlistings);
         }
           else if(value==20){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.NUWARA_ELIYA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.NUWARA_ELIYA)
+            setFoodListings(foodlistings);
         }
           else if(value==21){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.POLLANNARUWA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.POLLANNARUWA)
+            setFoodListings(foodlistings);
         }
           else if(value==22){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.PUTTALAM)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.PUTTALAM)
+            setFoodListings(foodlistings);
         }
           else if(value==23){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.RATHNAPURA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.RATHNAPURA)
+            setFoodListings(foodlistings);
         }
           else if(value==24){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.TRINCOMALEE)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.TRINCOMALEE)
+            setFoodListings(foodlistings);
         }
           else if(value==25){
-            filterdfoodlisitng = foodlistings.filter(listing => listing.donor.baseDistrict == District.VAVUNIYA)
-            setFoodListings(filterdfoodlisitng)
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseDistrict == District.VAVUNIYA)
+            setFoodListings(foodlistings);
         }
+    }
+
+    const filterProvince = async(value:any) : Promise<void> => {
+        if(value == 1) {
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseProvince == Province.CENTRAL)
+            setFoodListings(foodlistings);
+        }
+        else if (value == 2) {
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseProvince == Province.EASTERN)
+            setFoodListings(foodlistings);
+        }
+
+        else if (value == 3) {
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseProvince == Province.NORTH_CENTRAL)
+            setFoodListings(foodlistings);
+        }
+        else if (value == 4) {
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseProvince == Province.NORTHERN)
+            setFoodListings(foodlistings);
+        }
+        else if (value == 5) {
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseProvince == Province.NORTH_WESTERN)
+            setFoodListings(foodlistings);
+        }
+        else if (value == 6) {
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseProvince == Province.SABARAGAMUWA)
+            setFoodListings(foodlistings);
+        }
+        else if (value == 7) {
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseProvince == Province.SOUTHERN)
+            setFoodListings(foodlistings);
+        }
+        else if (value == 8) {
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseProvince == Province.UVA)
+            setFoodListings(foodlistings);
+        }
+        else if (value == 9) {
+            filterdfoodlisitng = await fetchFoodListings()
+            foodlistings = filterdfoodlisitng.filter(listing => listing.donor.baseProvince == Province.WESTERN)
+            setFoodListings(foodlistings);
+        }
+
     }
 
   return (
@@ -242,7 +318,7 @@ const FoodListsPage: React.FC = () => {
 
                 <div className="mx-5 d-flex">
                     <span className="py-1 custom-margin fw-bold">Province:</span>
-                    <select className="form-select" aria-label="Default select example">
+                    <select className="form-select" aria-label="Default select example" onChange={(e) => filterProvince(e.target.value)}>
                         <option selected>Select province</option>
                         <option value="1">CENTRAL</option>
                         <option value="2">EASTERN</option>
