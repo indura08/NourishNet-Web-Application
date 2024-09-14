@@ -131,6 +131,10 @@ const RecipientProfile: React.FC = () => {
         }
     }
 
+    const handlenavigation = () => {
+        navigate("/foodlists")
+    }
+
     useEffect(() => {
         fetchFoodListings();
     }, [])
@@ -200,7 +204,7 @@ const RecipientProfile: React.FC = () => {
 
 
                         <div className='d-flex container-fluid justify-content-center mb-4'>
-                            <button className='btn btn-dark text-white btn-custom'>See All Donations</button>
+                            <button className='btn btn-dark text-white btn-custom' onClick={handlenavigation}>See All Donations</button>
                         </div>
                     </div>
                 </div>

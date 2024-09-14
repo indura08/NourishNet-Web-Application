@@ -1,10 +1,73 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Footer from '../Components/Footer'
 import Header from '../Components/Header'
 import "./RecipientSignUp.css"
 import loginimg from "../assets/login2.jpeg"
+import { District } from '../../Models/Enums/DistrictValue'
+import { Province } from '../../Models/Enums/ProvinceValue'
+import { RecipientType } from '../../Models/Enums/RecipientType'
+import { Role } from '../../Models/Enums/Role'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const RecipientSignUp:React.FC = () => {
+
+    const navigate = useNavigate()
+    const [ isValid , setIsValid] = useState(false);
+    const [ newRecipient, setNewRecipient ] = useState({
+        id : "",
+        recipientName: "",
+        contactPerson: "",
+        phone: "",
+        baseDistrict: District.COLOMBO,
+        baseProvince: Province.WESTERN,
+        address: "" ,
+        recipientType: RecipientType.Volunteer,
+        role: Role.Recipient,
+        email: "", 
+        password: "" , 
+        confirmPassword: "" ,  
+        userName: "" ,
+        userType: ""
+    })
+
+    const areAllformFeildsfilled = () => {
+        return Object.values(newRecipient).every((field) => field.trim() !== '');
+    }
+
+    const handleIsValid = (e:React.ChangeEvent<HTMLInputElement>) => {
+        if(areAllformFeildsfilled() && e.target.checked){
+            setIsValid(false);
+        }else {
+            setIsValid(true)
+        }
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name , value } = e.target
+            setNewRecipient(
+                {
+                    ...newRecipient,
+                    [name]:value
+                }
+            )
+    }
+
+    const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        try {
+            const res = axios.post("http://localhost:5223/api/Recipient/create" , newRecipient)
+
+            if((await res).status == 200 || (await res).status == 201){
+                console.log("user created successfully")
+                navigate("/recipient/login")
+            }
+        }catch(error){
+            throw error;
+            console.log(error);
+        }
+    }
+
   return (
     <>
         <Header></Header>
@@ -17,43 +80,43 @@ const RecipientSignUp:React.FC = () => {
             <div className='border w-50 py-2 mx-3 justify-content-center divMargin border border-dark border-3 main-div-margin'>
                 <center><h3>Register Your Recipient Account</h3></center>
 
-                <form className='mx-4 mt-4'>
+                <form className='mx-4 mt-4' onSubmit={handleSubmit}>
                     <div className="mb-3 row">
-                        <input type="text" className="form-control input-type-custom col mx-1" name='RecipientName' placeholder='RecipientName'/>
-                        <input type="text" className="form-control input-type-custom col mx-1" name='RecipientType' placeholder='RecipientType'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='recipientName' placeholder='RecipientName' onChange={handleChange}/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='recipientType' placeholder='RecipientType' onChange={handleChange}/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='ContactPerson' placeholder='ContactPerson' />
-                        <input type="password" className="form-control input-type-custom col mx-1" name='Phone' placeholder='Phone'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='contactPerson' placeholder='ContactPerson' onChange={handleChange}/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='phone' placeholder='Phone' onChange={handleChange}/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='BaseDistrict' placeholder='BaseDistrict'/>
-                        <input type="password" className="form-control input-type-custom col mx-1" name='BaseProvince' placeholder='BaseProvince'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='baseDistrict' placeholder='BaseDistrict' onChange={handleChange}/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='baseProvince' placeholder='BaseProvince' onChange={handleChange}/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='Address' placeholder='Address'/>
-                        <input type="password" className="form-control input-type-custom col mx-1 " name='UserType' placeholder='UserType'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='address' placeholder='Address' onChange={handleChange}/>
+                        <input type="text" className="form-control input-type-custom col mx-1 " name='userType' placeholder='UserType' onChange={handleChange}/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='Email' placeholder='Email'/>
-                        <input type="email" className="form-control input-type-custom col mx-1" name='UserName' placeholder='UserName'/>
+                        <input type="email" className="form-control input-type-custom col mx-1" name='email' placeholder='Email' onChange={handleChange}/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='userName' placeholder='UserName' onChange={handleChange}/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="email" className="form-control input-type-custom col mx-1" name='Password' placeholder='Password'/>
-                        <input type="password" className="form-control input-type-custom col mx-1" name='ConfirmPassword' placeholder='ConfirmPassword'/>
+                        <input type="password" className="form-control input-type-custom col mx-1" name='password' placeholder='Password' onChange={handleChange}/>
+                        <input type="password" className="form-control input-type-custom col mx-1" name='confirmPassword' placeholder='ConfirmPassword' onChange={handleChange}/>
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="password" className="form-control input-type-custom col mx-1" name='Role' placeholder='Role'/>
+                        <input type="text" className="form-control input-type-custom col mx-1" name='role' placeholder='Role' onChange={handleChange}/>
                     </div>
                     
                     <div className="form-check col checkbox-div mb-3">
-                        <input type="checkbox" className="form-check-input border border-dark border-2 input-type-custom" name="checkbox1" id="exampleCheck1"/>
+                        <input type="checkbox" className="form-check-input border border-dark border-2 input-type-custom" name="checkbox1" id="exampleCheck1" onChange={handleIsValid}/>
                         <label className="form-check-label">I aggree to terms and conditions</label><a href="#">Terms and conditions</a> 
                     </div>
 
@@ -62,7 +125,7 @@ const RecipientSignUp:React.FC = () => {
                     </div>
 
                     <div className="row mb-3">
-                        <button type="submit" className="btn btn-success col mx-1">Register</button>
+                        <button type="submit" className="btn btn-success col mx-1" disabled={!isValid}>Register</button>
                         <button type="reset" className="btn btn-danger col">Reset Form</button>
                     </div>
                 </form>
