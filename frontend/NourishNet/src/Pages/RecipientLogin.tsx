@@ -37,7 +37,7 @@ const RecipientLogin:React.FC = () => {
                 <div className='d-flex align-items-center'>
                     <span className="material-symbols-outlined fs-1 mb-4 mx-2">lock</span>
                     <div className="form-floating mb-3 d-flex w-100">
-                        <input type="email" className="form-control input-custom" id="floatingInput" onChange={(e) => setPassword(e.target.value)} placeholder="name@example.com"/>
+                        <input type="password" className="form-control input-custom" id="floatingInput" onChange={(e) => setPassword(e.target.value)} placeholder="name@example.com"/>
                         <label>Password</label>
                     </div>
                 </div>  

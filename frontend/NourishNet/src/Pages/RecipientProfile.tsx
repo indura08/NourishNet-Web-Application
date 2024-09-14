@@ -14,8 +14,7 @@ import { Province } from '../../Models/Enums/ProvinceValue'
 import { Role } from '../../Models/Enums/Role'
 import { FoodType } from '../../Models/Enums/FoodType'
 import { FoodListingStatus } from '../../Models/Enums/FoodListingStatus'
-import { Recipient } from '../../Models/Recipient'
-import { RecipientType } from '../../Models/Enums/RecipientType'
+import { NotificationDonor } from '../../Models/NotificationDonor'
 
 const RecipientProfile: React.FC = () => {
 
@@ -116,6 +115,28 @@ const RecipientProfile: React.FC = () => {
         }
     }
 
+    const today = new Date().toLocaleDateString()
+    const time = new Date().toLocaleTimeString();
+
+    const donationApplyNotification : NotificationDonor = {
+        id: 0,
+        donorId: currentfoodListing.donorId,
+        donor: currentfoodListing.donor,
+        description: `Your donation "${currentfoodListing.description}" has been applied by "${currentRecipient.userName}".
+                        please contact them now: ${currentRecipient.phone}`,
+        createdDate: today.toString(),
+        createtime: time.toString()
+    }
+
+    const notificationCreation = () => {
+        try {
+            const responseNotification = axios.post("http://localhost:5223/api/NotificationDonor/create" , donationApplyNotification);
+            console.log(responseNotification);
+        }catch (error){
+            console.log(`Error occured and the error is : ${error}`);
+        }
+    }
+
     const applyFunction = (): void => {
         currentfoodListing.currentStatus = FoodListingStatus.Claimed;
         try {
@@ -124,6 +145,7 @@ const RecipientProfile: React.FC = () => {
                     Authorization: `Bearer ${rtoken}`
                 }
             })
+            notificationCreation();
             console.log(res);
             console.log(currentfoodListing);
         } catch (error) {

@@ -15,7 +15,10 @@ namespace NourishNet.Data.Services
 
         public async Task Add(NotificationDonor notificationDonor)
         {
-            _dbContext.DonorNotifications.Add(notificationDonor);
+            var donor = await _dbContext.Donors.FindAsync(notificationDonor.DonorId);
+            notificationDonor.Donor = donor;
+
+            _dbContext.DonorNotifications.AddAsync(notificationDonor);
             await _dbContext.SaveChangesAsync();
         }
 

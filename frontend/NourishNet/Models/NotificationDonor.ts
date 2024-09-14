@@ -1,10 +1,10 @@
 import { Donor } from "./Donor";
 
 export interface NotificationDonor {
-    Id : number ,
-    DonorId: string,
-    Donor: Donor,
-    Description: string,
-    CreatedDate : string,
-    Createtime : string
+    id : number ,
+    donorId: string,
+    donor: Donor,
+    description: string,
+    createdDate : string,
+    createtime : string
 }

@@ -16,13 +16,15 @@ import { Province } from '../../Models/Enums/ProvinceValue'
 import { Role } from '../../Models/Enums/Role'
 import { FoodType } from '../../Models/Enums/FoodType'
 import { FoodListingStatus } from '../../Models/Enums/FoodListingStatus'
+import { NotificationDonor } from '../../Models/NotificationDonor'
 
 const DonorProfile: React.FC = () => {
 
     const { currentDonor , dtoken } = useSelector((state:RootState) => state.donor)
     const [ foodlistings , setFoolistings ] = useState<FoodListing[]>([])
     const [usersFoodLisitngs , setUsersfoodListings] = useState<FoodListing[]>([]);
-    // const [ isformValid , setIsformValid ] = useState(false)
+    const [filteredNotification , setFilteredNotification] = useState<NotificationDonor[]>([]);
+    const [ notificationList , setNotificationList] = useState<NotificationDonor[]>([]);
     const [currentfoodListing , setCurrentFoodListing] = useState<FoodListing>({
         id: 0,
         donorId : "", 
@@ -81,6 +83,15 @@ const DonorProfile: React.FC = () => {
         currentStatus: FoodListingStatus.Available
     });
     // const [ error , setError] = useState("")
+
+    const [ currentNotification , setCurrentNotification ] = useState({
+        id: 0,
+        donorId: currentfoodListing.donorId,
+        donor: currentfoodListing.donor,
+        description: "",
+        createdDate: "",
+        createtime: ""
+    });
 
     const dispatch = useDispatch()
     const navigate = useNavigate() 
@@ -162,8 +173,30 @@ const DonorProfile: React.FC = () => {
         }
     }
 
+    const fetchNotifications = async () => {
+        //vackend eke me controller ekt access krnna puluwan donrati admin ta withrk wenn hdnna 
+        try {
+            const res = axios.get("http://localhost:5223/api/NotificationDonor/all")
+            console.log((await res).data)
+            setNotificationList((await res).data);
+            setFilteredNotification(notificationList.filter(notification => notification.donorId == currentDonor.id));
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+    const deleteNotification = () => {
+        try {
+            const res = axios.delete(`http://localhost:5223/api/NotificationDonor/delete/${currentNotification.id}`)
+            console.log(res)
+        }catch(error){
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         fetchFoodListings();
+        fetchNotifications();
     })
     
   return (
@@ -226,20 +259,7 @@ const DonorProfile: React.FC = () => {
                         </div>
                     </div>
                     ))}
-                    {/* <div className="card mt-3 mb-3" style={{width: "18rem"}}>
-                        <img src={card2} className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">FoodType Quanitity</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <p>Expiry Date:</p>
-                            <p>Phone:</p>
-                            <p>Current status:</p>
-                            <div className='d-flex justify-content-center'>
-                                <a href="#" className="btn btn-success btn-custom mx-1">Edit</a>
-                                <a href="#" className="btn btn-danger btn-custom mx-1">Delete</a>
-                            </div>
-                        </div>
-                    </div>                     */}
+
                 </div>
             </div>
 
@@ -249,14 +269,21 @@ const DonorProfile: React.FC = () => {
                 </div>
                 <hr/>
                 <div className='mt-3 d-flex'>
-                    <div className='d-flex'>
-                        <div>
-                            <p style={{ fontSize:"15px"}}>your donation has been taken please contact the person now</p>
-                        </div>
+                    <div className='row'>
+                        { filteredNotification.map((notification:NotificationDonor) => (
+                            <div className='border border-2 mb-1'>
+                                <p style={{ fontSize:"15px"}} className='fw-bold'>{notification.description}</p>
+                                <div className='d-flex flex-row'>
+                                    <p style={{ fontSize:"12px"}} className='mx-2'>{notification.createdDate} </p>
+                                    <p style={{ fontSize:"12px"}} className='mx-2'>{notification.createtime} </p>
+                                    <div style={{marginLeft:"48px"}}>
+                                        <button className='btn btn-danger button-custom d-flex align-items-center justify-content-center mx-3' data-bs-toggle="modal" data-bs-target="#deleteNotification" onClick={() => setCurrentNotification(notification)}><span className="material-symbols-outlined fs-6">delete</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                         
-                        <div>
-                            <button className='btn btn-danger'><span className="material-symbols-outlined fs-5">delete</span></button>
-                        </div> 
+                        
                     </div>
                 </div>                
             </div>
@@ -445,6 +472,25 @@ const DonorProfile: React.FC = () => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-danger" onClick={() => handledelete()}>Delete</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* delete notification*/}
+            <div className="modal" id='deleteNotification'>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Delete Notification?</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <p>Are you sure you want to delete this notification?</p>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-danger" onClick={() => deleteNotification()}>Delete</button>
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                     </div>

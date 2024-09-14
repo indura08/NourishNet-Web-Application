@@ -28,3 +28,8 @@
 .img-custom-border{
     border: 30px;
 }
+
+.button-custom{
+    height:30px;
+    width:30px;
+}
