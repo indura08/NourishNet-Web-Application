@@ -7,6 +7,7 @@ import { RootState } from '../Redux/MainStore'
 const Header: React.FC = () => {
 
     const { currentDonor } = useSelector((state:RootState) => state.donor);
+    const { currentRecipient } = useSelector((state:RootState) => state.recipient);
 
   return (
     <>
@@ -24,7 +25,7 @@ const Header: React.FC = () => {
             <div className='d-flex justify-content-center align-items-left'>
                 
                     <ul className='navbar-nav ms-auto'>
-                        <li className='nav-item mx-4'><a href='' style={{color:"inherit", textDecoration:"none"}}>Home</a></li>
+                        <li className='nav-item mx-4'><a href='/' style={{color:"inherit", textDecoration:"none"}}>Home</a></li>
                         <li className='nav-item mx-4'><a href='' style={{color:"inherit", textDecoration:"none"}}>About us</a></li>
                         { currentDonor ? <li className='nav-item mx-4'><a href='/donor/profile' style={{color:"inherit", textDecoration:"none"}}>Donate</a></li> : <li className='nav-item mx-4'><a href='/donor/login' style={{color:"inherit", textDecoration:"none"}}>Donate</a></li>}
                         <li className='nav-item mx-4'><a href='/foodlists' style={{color:"inherit", textDecoration:"none"}}>Available Donations</a></li>
@@ -33,9 +34,12 @@ const Header: React.FC = () => {
 
             <div className=' ' style={{marginLeft: "60px"}}>
                 <ul className='navbar-nav ms-auto'>
-                    <li className='nav-item mx-4'><a href='/donor/login' style={{color:"inherit", textDecoration:"none"}}>Sign In</a></li>
+                    { currentDonor ? <li className='nav-item mx-4'><a href='/donor/profile' style={{color:"inherit", textDecoration:"none"}}>Hello { currentDonor.userName}</a></li> 
+                    : currentRecipient ? <li className='nav-item mx-4'><a href='/recipient/profile' style={{color:"inherit", textDecoration:"none"}}>hello { currentRecipient.userName }</a></li> 
+                    : <li className='nav-item mx-4'><a href='/donor/login' style={{color:"inherit", textDecoration:"none"}}>Sign In</a></li>}
+                    
                     <li className='nav-item mx-4'><a href='/donor/register' style={{color:"inherit", textDecoration:"none"}}>Sign Up</a></li>    
-                </ul>       {/* donor or recipient log wela nm * header eke signin eka poddk balala hdnna */}
+                </ul>     
             </div>
         </div>
     </nav>
