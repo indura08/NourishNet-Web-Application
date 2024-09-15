@@ -215,8 +215,8 @@ const DonorProfile: React.FC = () => {
 
         <center><h1 className="mb-4 text-success">Welcome Donor, You contribution values more than you think!!</h1></center>
 
-        <div className='container-fluid d-flex border border-3 mb-4'>
-            <div className='container-fluid border border-2 col-3 justify-content-center border-dark'>   
+        <div className='container-fluid d-flex flex-column flex-md-row border border-3 mb-4'>
+            <div className='container-fluid border border-2 col-12 col-md-3 justify-content-center border-dark mb-3 mb-md-0'>   
                 <center><h4>Hello There {currentDonor.userName} 👋</h4></center>
                 <hr/>
 
@@ -244,7 +244,7 @@ const DonorProfile: React.FC = () => {
                 </div>
             </div>
 
-            <div className='container-fluid border border-2 mx-1 col-6 fixed-size-scrollable border-dark'>
+            <div className='container-fluid border border-2 mx-1 col-12 col-md-6 fixed-size-scrollable border-dark mb-3 mb-md-0'>
                 <center><h3>Donations You Made</h3></center>
                 <hr/>
                 <div className='row'>
@@ -270,7 +270,7 @@ const DonorProfile: React.FC = () => {
                 </div>
             </div>
 
-            <div className='border border-2 container-fluid col-3 fixed-size-scrollable border-dark'>
+            <div className='border border-2 container-fluid col-12 col-md-3 fixed-size-scrollable border-dark'>
                 <div className=''>
                     <center><h4>Notifications</h4></center>
                 </div>
@@ -305,12 +305,12 @@ const DonorProfile: React.FC = () => {
 
             <div className='container-fluid d-flex flex-column '>
 
-                <div className='d-flex'>
+                <div className='d-flex flex-column flex-md-row'>
                     <div className='w-50 mb-4 d-flex justify-content-center'>
-                        <img src={donation} style={{width:"100%", height:"35rem"}} />
+                        <img src={donation} style={{width:"100%", height:"35rem"}} className='d-none d-md-block'/>
                     </div>
 
-                    <div className='div-custom-margin border rounded-5 w-50 py-2 justify-content-center border mb-4 border-dark border-3 main-div-margin'>
+                    <div className='div-custom-margin border rounded-5 w-100 w-md-50 py-2 justify-content-center mb-4 border-dark border-3 d-flex flex-column main-div-margin'>
                         <center><h3>Simply Fill This Food Listing form</h3></center>
 
                         <form className='mx-4 mt-5' onSubmit={createNewdonation}>

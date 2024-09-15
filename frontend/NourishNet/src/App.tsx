@@ -23,7 +23,7 @@ function App() {
 
       <Router>
         <Routes>
-          <Route path = "/" element={<Home/>}/>
+          <Route path = "/" element={<Home/>}/>     {/* responsive - done */}
           <Route path='/donor/profile' element={<DonorProfile/>}></Route>
           <Route path='/recipient/profile' element={<RecipientProfile/>}></Route>
           <Route path='/donor/login' element={<DonorLogin/>}></Route>

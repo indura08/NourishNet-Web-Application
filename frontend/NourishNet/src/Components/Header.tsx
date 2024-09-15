@@ -22,7 +22,11 @@ const Header: React.FC = () => {
                 <span className='fw-bolder'>NourishNet</span>
             </div>
 
-            <div className='d-flex justify-content-center align-items-left'>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"> 
+                <span className="navbar-toggler-icon"></span>
+            </button>
+
+            <div className='collapse navbar-collapse' id='navmenu'>
                 
                     <ul className='navbar-nav ms-auto'>
                         <li className='nav-item mx-4'><a href='/' style={{color:"inherit", textDecoration:"none"}}>Home</a></li>
@@ -32,10 +36,10 @@ const Header: React.FC = () => {
                     </ul>
             </div>
 
-            <div className=' ' style={{marginLeft: "60px"}}>
+            <div className='d-none d-md-block' style={{marginLeft: "60px"}} id='navmenu'>
                 <ul className='navbar-nav ms-auto'>
                     { currentDonor ? <li className='nav-item mx-4'><a href='/donor/profile' style={{color:"inherit", textDecoration:"none"}}>Hello { currentDonor.userName}</a></li> 
-                    : currentRecipient ? <li className='nav-item mx-4'><a href='/recipient/profile' style={{color:"inherit", textDecoration:"none"}}>hello { currentRecipient.userName }</a></li> 
+                    : currentRecipient ? <li className='nav-item mx-4'><a href='/recipient/profile' style={{color:"inherit", textDecoration:"none"}}>Hello { currentRecipient.userName }</a></li> 
                     : <li className='nav-item mx-4'><a href='/donor/login' style={{color:"inherit", textDecoration:"none"}}>Sign In</a></li>}
                     
                     <li className='nav-item mx-4'><a href='/donor/register' style={{color:"inherit", textDecoration:"none"}}>Sign Up</a></li>    

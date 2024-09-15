@@ -41,15 +41,15 @@ const Home:React.FC = () => {
             </div>
             
             <div className='d-flex justify-content-center'>
-            <img src={cover1} className='cover1'/>
+              <img src={cover1} className='cover1 img-fluid'/>
             </div>
         </div>
         <hr className='mx-5'/>
 
         <div className='container-fluid d-flex flex-column'>
             <center><h1 className='mb-5'>What NourishNet Does?</h1></center>
-            <div className='d-flex justify-content-center'>
-                <div className="card mx-4 cardComponent">
+            <div className='d-flex flex-wrap justify-content-center'>
+                <div className="card mx-4 mb-4 mb-md-0 cardComponent">
                     <img src={cardImage1} className="card-img-top" alt="..."/>
                     <div className="card-body">
                         <center><h5 className="card-title">Donate Foods</h5></center>
@@ -64,7 +64,7 @@ const Home:React.FC = () => {
                     </div>
                 </div>
 
-                <div className="card mx-4 cardComponent">
+                <div className="card mx-4 mb-4 mb-md-0 cardComponent ">
                     <img src={card2} className="card-img-top" alt="..."/>
                     <div className="card-body">
                     <center><h5 className="card-title">Recieve Donations</h5></center>
@@ -77,7 +77,7 @@ const Home:React.FC = () => {
                     </div>
                 </div>
 
-                <div className="card mx-4 cardComponent">
+                <div className="card mx-4 mb-4 mb-md-0 cardComponent">
                     <img src={card3} className="card-img-top" alt="..."/>
                     <div className="card-body">
                     <center><h5 className="card-title">Reduce Food waste</h5></center>
