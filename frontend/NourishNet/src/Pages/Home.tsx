@@ -34,8 +34,8 @@ const Home:React.FC = () => {
                 </div>
 
                 <div className='d-flex justify-content-center mt-2'>
-                    <button className='btn btn-dark mx-2 buttonCustom'>Donate Food</button>
-                    <button className='btn btn-dark mx-2 buttonCustom'>Receive Food</button>
+                    <button className='btn btn-dark mx-2 buttonCustom'><a href='/donor/login' style={{color:"inherit", textDecoration:"none"}}>Donate Food</a></button>
+                    <button className='btn btn-dark mx-2 buttonCustom'><a href='/recipient/login' style={{color:"inherit", textDecoration:"none"}}>Receive Food</a></button>
                 </div>
                 
             </div>
@@ -60,7 +60,7 @@ const Home:React.FC = () => {
                             promoting sustainability and reducing food waste. 
                             Join us in making a difference, one meal at a time.
                         </p>
-                        <center><a href="#" className="btn btn-primary">Sign Up As Donor</a></center>
+                        <center><a href="/donor/register" className="btn btn-primary">Sign Up As Donor</a></center>
                     </div>
                 </div>
 
@@ -73,7 +73,7 @@ const Home:React.FC = () => {
                             This food can be used for personal consumption or distributed to others in need, 
                             ensuring that it reaches those who can benefit from it the most. 
                             By connecting donors and recipients, we help reduce food waste and support community well-being.</p>
-                        <center><a href="#" className="btn btn-primary">Sign Up As Recipient</a></center>
+                        <center><a href="/recipient/register" className="btn btn-primary">Sign Up As Recipient</a></center>
                     </div>
                 </div>
 

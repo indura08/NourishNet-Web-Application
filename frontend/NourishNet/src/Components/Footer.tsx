@@ -28,9 +28,9 @@ const Footer:React.FC = () => {
 
             <div className="w-25 div-text-wrap">
                 <span className="fs-7 text-white">More NourishNet</span><br/>
-                <a href="#" className="a-decorations">sign up as Donor</a><br/>
-                <a href="#" className="a-decorations">sign up as Recipient</a><br/>
-                <a href="#" className="a-decorations">View services</a><br/>
+                <a href="/donor/register" className="a-decorations">sign up as Donor</a><br/>
+                <a href="/recipient/register" className="a-decorations">sign up as Recipient</a><br/>
+                <a href="/foodlists" className="a-decorations">View services</a><br/>
                 <a href="#" className="a-decorations">Price policy</a><br/>
             </div>
 
