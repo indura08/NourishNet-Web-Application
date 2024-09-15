@@ -14,7 +14,12 @@ namespace NourishNet.Data.Services
 
         public async Task Add(NotificationRecipient notificationRecipient)
         {
-            _dbContext.RecipientNotifications.Add(notificationRecipient);
+            var recipient = await _dbContext.Recipients.FindAsync(notificationRecipient.RecipientId);
+
+            notificationRecipient.Recipient = recipient;
+
+            await _dbContext.RecipientNotifications.AddAsync(notificationRecipient);
+
             await _dbContext.SaveChangesAsync();
         }
 

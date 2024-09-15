@@ -15,12 +15,23 @@ import { Role } from '../../Models/Enums/Role'
 import { FoodType } from '../../Models/Enums/FoodType'
 import { FoodListingStatus } from '../../Models/Enums/FoodListingStatus'
 import { NotificationDonor } from '../../Models/NotificationDonor'
+import { NotificationRecipient } from '../../Models/NotificationRecipient'
 
 const RecipientProfile: React.FC = () => {
 
     const { currentRecipient } = useSelector((state: RootState) => state.recipient);
     const { rtoken } = useSelector((state: RootState) => state.recipient);
     const dispatch = useDispatch();
+    const [ recipientNotificationList , setRecipientNotificationList] = useState<NotificationRecipient[]>([]);
+    const [ currentRecipientNotification , setCurrentRecipientNotification ] = useState<NotificationRecipient[]>([]);
+    const [ selectedNotification , setSelectedNotification] = useState({
+        id: 0,
+        recipientId: currentRecipient.id,
+        recipient: currentRecipient,
+        description: "",
+        createdDate: "",
+        createdTime: ""
+    });
     console.log(currentRecipient);
 
     const [updatedRecipiet, setUpdatedRecipient] = useState({
@@ -115,8 +126,18 @@ const RecipientProfile: React.FC = () => {
         }
     }
 
-    const today = new Date().toLocaleDateString()
+    const today = new Date().toLocaleDateString();
     const time = new Date().toLocaleTimeString();
+
+    const newRecipientNotification : NotificationRecipient = {
+        id: 0,
+        recipientId: currentRecipient.id,
+        recipient: currentRecipient,
+        description: `You have applied to "${currentfoodListing.description}" Donation. 
+                        Now you can contact the donor. tele: ${currentfoodListing.donor.phone}`,
+        createdDate: today.toString(),
+        createdTime: time.toString()
+    }
 
     const donationApplyNotification : NotificationDonor = {
         id: 0,
@@ -137,6 +158,15 @@ const RecipientProfile: React.FC = () => {
         }
     }
 
+    const recipientNotificationCreation = () => {
+        try {
+            const responseNotification = axios.post("http://localhost:5223/api/NotificationRecipient/create" , newRecipientNotification);
+            console.log(responseNotification);
+        }catch (error){
+            console.log(`Error occured and the error is : ${error}`);
+        }
+    }
+
     const applyFunction = (): void => {
         currentfoodListing.currentStatus = FoodListingStatus.Claimed;
         try {
@@ -146,6 +176,7 @@ const RecipientProfile: React.FC = () => {
                 }
             })
             notificationCreation();
+            recipientNotificationCreation();
             console.log(res);
             console.log(currentfoodListing);
         } catch (error) {
@@ -153,13 +184,33 @@ const RecipientProfile: React.FC = () => {
         }
     }
 
+    const fetchNotification = async () => {
+        try {
+            const res = axios.get("http://localhost:5223/api/NotificationRecipient/all")
+            setRecipientNotificationList((await res).data)
+            setCurrentRecipientNotification(recipientNotificationList.filter(notification => notification.recipientId == currentRecipient.id))
+        }catch(error){
+            console.log(`error occured : ${error}`);
+        }
+    }
+
     const handlenavigation = () => {
         navigate("/foodlists")
     }
 
+    const deleteNotification = () => {
+        try {
+            const res = axios.delete(`http://localhost:5223/api/NotificationRecipient/delete/${selectedNotification.id}`)
+            console.log(res)
+        }catch(error){
+            console.log(error);
+        }
+    } 
+
     useEffect(() => {
         fetchFoodListings();
-    }, [])
+        fetchNotification();
+    })
 
     return (
         <>
@@ -237,15 +288,21 @@ const RecipientProfile: React.FC = () => {
                     </div>
                     <hr />
                     <div className='mt-3 d-flex'>
-                        <div className='d-flex'>
-                            <div>
-                                <p style={{ fontSize: "15px" }}>your donation has been taken please contact the person now</p>
+                    <div className='row'>
+                        { currentRecipientNotification.map((notification:NotificationRecipient) => (
+                            <div className='border border-2 mb-1'>
+                                <p style={{ fontSize:"15px"}} className='fw-bold'>{notification.description}</p>
+                                <div className='d-flex flex-row'>
+                                    <p style={{ fontSize:"12px"}} className='mx-1'>{notification.createdDate} </p>
+                                    <p style={{ fontSize:"12px"}} className='mx-1'>{notification.createdTime} </p>
+                                    <div style={{marginLeft:"48px"}} className="d-flex">
+                                        <button className='btn btn-danger button-custom d-flex align-items-center justify-content-center mx-1' data-bs-toggle="modal" data-bs-target="#deleteNotification" onClick={() => setSelectedNotification(notification)}><span className="material-symbols-outlined fs-6">delete</span></button>
+                                        <button className='btn btn-primary button-custom d-flex align-items-center justify-content-center mx-1' data-bs-toggle="modal" data-bs-target="#Confrimartion" onClick={() => setSelectedNotification(notification)}><span className="material-symbols-outlined fs-6">check_circle</span></button>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div>
-                                <button className='btn btn-danger'><span className="material-symbols-outlined fs-5">delete</span></button>
-                            </div>
-                        </div>
+                        ))}
+                    </div>
                     </div>
                 </div>
 
@@ -354,6 +411,25 @@ const RecipientProfile: React.FC = () => {
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+
+            {/* delete notification*/}
+            <div className="modal" id='deleteNotification'>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Delete Notification?</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <p>Are you sure you want to delete this notification?</p>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-danger" onClick={() => deleteNotification()}>Delete</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                     </div>
                 </div>
             </div>

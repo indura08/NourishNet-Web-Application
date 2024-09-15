@@ -18,7 +18,7 @@ namespace NourishNet.Data.Services
             var donor = await _dbContext.Donors.FindAsync(notificationDonor.DonorId);
             notificationDonor.Donor = donor;
 
-            _dbContext.DonorNotifications.AddAsync(notificationDonor);
+            await _dbContext.DonorNotifications.AddAsync(notificationDonor);
             await _dbContext.SaveChangesAsync();
         }
 

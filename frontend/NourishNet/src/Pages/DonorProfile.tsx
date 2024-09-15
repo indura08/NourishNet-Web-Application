@@ -192,7 +192,13 @@ const DonorProfile: React.FC = () => {
         }catch(error){
             console.log(error);
         }
-    }
+    } 
+
+    // const giveApprovetoRecipient = async () =>{
+    //     try {
+    //         const res = axios.post("http://localhost:5223/api/NotificationRecipient/create")
+    //     }
+    // } 
 
     useEffect(() => {
         fetchFoodListings();
@@ -202,6 +208,7 @@ const DonorProfile: React.FC = () => {
   return (
     <>
         <head>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         </head>
         <Header></Header>
@@ -232,8 +239,8 @@ const DonorProfile: React.FC = () => {
                 </div>
 
                 <div className='d-flex container-fluid mb-4'>
-                    <button className='btn btn-success btn-custom mx-1' data-bs-toggle="modal" data-bs-target="#edit">Edit</button>
-                    <button className='btn btn-danger btn-custom mx-1' onClick={handleLogout}>{currentDonor.id === "" || currentDonor.id === null || currentDonor.id === undefined  ? "Login" : "Logout"}</button>
+                    <button className='btn btn-success btn-custom mx-1 text-white' data-bs-toggle="modal" data-bs-target="#edit">Edit</button>
+                    <button className='btn btn-danger btn-custom mx-1 text-white' onClick={handleLogout}>{currentDonor.id === "" || currentDonor.id === null || currentDonor.id === undefined  ? "Login" : "Logout"}</button>
                 </div>
             </div>
 
@@ -253,8 +260,8 @@ const DonorProfile: React.FC = () => {
                             <p>Donor : {listing.donor.userName}</p>
                             <p>Donor contact : {listing.donor.phone}</p>
                             <div className='d-flex justify-content-center'>
-                                <button className="btn btn-success btn-custom mx-1" onClick={() => setCurrentFoodListing(listing)} data-bs-toggle="modal" data-bs-target="#editDonation">Edit</button>
-                                <button className="btn btn-danger btn-custom mx-1" onClick={() => setCurrentFoodListing(listing)} data-bs-toggle="modal" data-bs-target="#delete">Delete</button>
+                                <button className="btn btn-success btn-custom mx-1 text-white" onClick={() => setCurrentFoodListing(listing)} data-bs-toggle="modal" data-bs-target="#editDonation">Edit</button>
+                                <button className="btn btn-danger btn-custom mx-1 text-white" onClick={() => setCurrentFoodListing(listing)} data-bs-toggle="modal" data-bs-target="#delete">Delete</button>
                             </div>
                         </div>
                     </div>
@@ -274,16 +281,15 @@ const DonorProfile: React.FC = () => {
                             <div className='border border-2 mb-1'>
                                 <p style={{ fontSize:"15px"}} className='fw-bold'>{notification.description}</p>
                                 <div className='d-flex flex-row'>
-                                    <p style={{ fontSize:"12px"}} className='mx-2'>{notification.createdDate} </p>
-                                    <p style={{ fontSize:"12px"}} className='mx-2'>{notification.createtime} </p>
-                                    <div style={{marginLeft:"48px"}}>
-                                        <button className='btn btn-danger button-custom d-flex align-items-center justify-content-center mx-3' data-bs-toggle="modal" data-bs-target="#deleteNotification" onClick={() => setCurrentNotification(notification)}><span className="material-symbols-outlined fs-6">delete</span></button>
+                                    <p style={{ fontSize:"12px"}} className='mx-1'>{notification.createdDate} </p>
+                                    <p style={{ fontSize:"12px"}} className='mx-1'>{notification.createtime} </p>
+                                    <div style={{marginLeft:"48px"}} className="d-flex">
+                                        <button className='btn btn-danger button-custom d-flex align-items-center justify-content-center mx-1' data-bs-toggle="modal" data-bs-target="#deleteNotification" onClick={() => setCurrentNotification(notification)}><span className="material-symbols-outlined fs-6">delete</span></button>
+                                        <button className='btn btn-dark button-custom d-flex align-items-center justify-content-center mx-1' data-bs-toggle="modal" data-bs-target="#Confrimartion" onClick={() => setCurrentNotification(notification)}><span className="material-symbols-outlined fs-6">check_circle</span></button>
                                     </div>
                                 </div>
                             </div>
                         ))}
-                        
-                        
                     </div>
                 </div>                
             </div>
@@ -488,6 +494,25 @@ const DonorProfile: React.FC = () => {
                     </div>
                     <div className="modal-body">
                         <p>Are you sure you want to delete this notification?</p>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-danger" onClick={() => deleteNotification()}>Delete</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* confirmation */}
+            <div className="modal" id='Confrimartion'>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Confrim donation?</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <p>are you sure you want to confirm the donation?</p>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-danger" onClick={() => deleteNotification()}>Delete</button>

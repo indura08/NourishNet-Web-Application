@@ -31,7 +31,7 @@ namespace NourishNet.Controllers
                 return Ok(notificationList);
             }
             else {
-                return NotFound();
+                return Ok("No notifications found");
             }
         }
 
