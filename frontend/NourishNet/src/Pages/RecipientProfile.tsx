@@ -222,8 +222,8 @@ const RecipientProfile: React.FC = () => {
 
             <center><h1 className="mb-4 text-success">Welcome Recipient!!</h1></center>
 
-            <div className='container-fluid d-flex border border-3 mb-4'>
-                <div className='container-fluid border border-2 col-3 justify-content-center border-dark'>
+            <div className='container-fluid d-flex flex-column flex-md-row border border-3 mb-4'>
+                <div className='container-fluid border border-2 col-12 col-md-3 mb-3 mb-md-0 justify-content-center border-dark'>
                     <center><h4>Hello There {currentRecipient.recipientName} 👋</h4></center>
                     <hr />
 
@@ -252,7 +252,7 @@ const RecipientProfile: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='container-fluid border border-2 mx-1 col-6 custom-height border-dark'>
+                <div className='container-fluid border border-2 mx-1 col-12 col-md-6 mb-3 mb-md-0 custom-height border-dark'>
                     <center><h3>Popular Donations </h3></center>
                     <hr />
                     <div className='row'>
@@ -282,7 +282,7 @@ const RecipientProfile: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='border border-2 container-fluid col-3 custom-heights border-dark'>
+                <div className='border border-2 container-fluid col-12 col-md-3 custom-heights border-dark'>
                     <div className=''>
                         <center><h4>Notifications</h4></center>
                     </div>
