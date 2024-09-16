@@ -1,7 +1,7 @@
 .background-custom{
     background-image: url("../assets/background4.png");
     height: 600px;
-    background-size:cover;
+    background-size: cover;
     background-position: center;
 }
 

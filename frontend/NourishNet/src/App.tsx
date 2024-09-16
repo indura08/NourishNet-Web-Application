@@ -24,10 +24,10 @@ function App() {
       <Router>
         <Routes>
           <Route path = "/" element={<Home/>}/>     {/* responsive - done */}
-          <Route path='/donor/profile' element={<DonorProfile/>}></Route>
-          <Route path='/recipient/profile' element={<RecipientProfile/>}></Route>
-          <Route path='/donor/login' element={<DonorLogin/>}></Route>
-          <Route path='/recipient/login' element={<RecipientLogin/>}></Route>
+          <Route path='/donor/profile' element={<DonorProfile/>}></Route> {/* responsive - done */}
+          <Route path='/recipient/profile' element={<RecipientProfile/>}></Route> {/* responsive - done */}
+          <Route path='/donor/login' element={<DonorLogin/>}></Route> {/* responsive - done */}
+          <Route path='/recipient/login' element={<RecipientLogin/>}></Route> {/* responsive - done */}
           <Route path='/donor/register' element={<DonorSignUp/>}></Route>
           <Route path='/recipient/register' element={<RecipientSignUp/>}></Route>
           <Route path='/foodlists' element={<FoodListsPage/>}></Route>
