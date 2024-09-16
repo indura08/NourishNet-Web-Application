@@ -72,12 +72,12 @@ const RecipientSignUp:React.FC = () => {
     <>
         <Header></Header>
         
-        <div className='d-flex container-fluid mb-3'>
-            <div className='d-flex divMargin align-items-center justify-content-center'>
+        <div className='d-flex flex-column flex-md-row align-items-center justify-content-center container-fluid mb-3'>
+            <div className='d-flex divMargin align-items-center justify-content-center d-none d-md-block'>
                 <img src={loginimg} className="imgstyle"/>
             </div>
 
-            <div className='border w-50 py-2 mx-3 justify-content-center divMargin border border-dark border-3 main-div-margin'>
+            <div className='border w-100 w-md-50 py-2 mx-3 justify-content-center divMargin border border-dark border-3 main-div-margin mx-4'>
                 <center><h3>Register Your Recipient Account</h3></center>
 
                 <form className='mx-4 mt-4' onSubmit={handleSubmit}>
