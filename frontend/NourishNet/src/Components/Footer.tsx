@@ -18,7 +18,7 @@ const Footer:React.FC = () => {
                     <span className="fs-7 text-white">Do not feed your bin, feed the people who need it!</span>
                 </div>
 
-                <div className="d-flex mt-3">
+                <div className="d-flex flex-column flex-md-row mt-3">
                     <div className=""><img src={instagram} className="image-resize mx-2"/></div>
                     <div className=""><img src={facebook} className="image-resize-linked-in mx-2"/></div>
                     <div className=""><img src={twitter} className="image-resize mx-2"/></div>
@@ -26,7 +26,7 @@ const Footer:React.FC = () => {
                 </div>
             </div>
 
-            <div className="w-25 div-text-wrap">
+            <div className="w-25 div-text-wrap d-none d-md-block">
                 <span className="fs-7 text-white">More NourishNet</span><br/>
                 <a href="/donor/register" className="a-decorations">sign up as Donor</a><br/>
                 <a href="/recipient/register" className="a-decorations">sign up as Recipient</a><br/>
@@ -34,7 +34,7 @@ const Footer:React.FC = () => {
                 <a href="#" className="a-decorations">Price policy</a><br/>
             </div>
 
-            <div className="w-25">
+            <div className="w-25 mx-4 mx-md-0">
                 <h6 className="text-white">Contact-Us</h6>
 
                 <div className="row mt-2">

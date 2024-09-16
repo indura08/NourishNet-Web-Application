@@ -69,12 +69,12 @@ const DonorSignUp:React.FC = () => {
     <>
         <Header></Header>
         
-        <div className='d-flex container-fluid mb-3'>
-            <div className='d-flex divMargin align-items-center justify-content-center'>
-                <img src={loginimg} className="imgstyle"/>
+        <div className='d-flex flex-column flex-md-row align-items-center justify-content-center container-fluid mb-3'>
+            <div className='d-flex divMargin align-items-center justify-content-center d-none d-md-block'>
+                <img src={loginimg} className=""/>
             </div>
 
-            <div className='border w-50 py-2 justify-content-center divMargin border border-dark border-3 main-div-margin'>
+            <div className='border w-100 w-md-100 py-2 divMargin border border-dark border-3 main-div-margin mx-5'>
                 <center><h3>Register Your Donor Account</h3></center>
 
                 <form className='mx-4 mt-5' onSubmit={handleSubmit}>
