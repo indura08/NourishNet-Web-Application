@@ -11,6 +11,8 @@ import { Province } from '../../Models/Enums/ProvinceValue'
 import { Role } from '../../Models/Enums/Role'
 import { FoodType } from '../../Models/Enums/FoodType'
 import { FoodListingStatus } from '../../Models/Enums/FoodListingStatus'
+import { NotificationDonor } from '../../Models/NotificationDonor'
+import { NotificationRecipient } from '../../Models/NotificationRecipient'
 //import { FoodListingStatus } from '../../Models/Enums/FoodListingStatus'
 
 const FoodListsPage: React.FC = () => {
@@ -46,11 +48,33 @@ const FoodListsPage: React.FC = () => {
         currentStatus: FoodListingStatus.Available
     });
 
-    const { rtoken } = useSelector((state: RootState) => state.recipient)
+    const { rtoken, currentRecipient } = useSelector((state: RootState) => state.recipient)
     const { currentDonor } = useSelector((state: RootState) => state.donor);
     const { dtoken } = useSelector((state:RootState) => state.donor)
 
-    console.log(currentDonor)
+    const today = new Date().toLocaleDateString();
+    const time = new Date().toLocaleTimeString();
+
+    const donationApplyNotification : NotificationDonor = {
+        id: 0,
+        donorId: currentfoodListing.donorId,
+        donor: currentfoodListing.donor,
+        description: `Your donation "${currentfoodListing.description}" has been applied by "${currentRecipient.userName}".
+                        please contact them now: ${currentRecipient.phone}`,
+        createdDate: today.toString(),
+        createtime: time.toString()
+    }
+
+    const newRecipientNotification : NotificationRecipient = {
+        id: 0,
+        recipientId: currentRecipient.id,
+        recipient: currentRecipient,
+        description: `You have applied to "${currentfoodListing.description}" Donation. 
+                        Now you can contact the donor. tele: ${currentfoodListing.donor.phone}`,
+        createdDate: today.toString(),
+        createdTime: time.toString()
+    }
+
     //console.log(token) 
 
     const fetchFoodListings = async (): Promise<FoodListing[]> => {
@@ -68,9 +92,23 @@ const FoodListsPage: React.FC = () => {
         }
     }
 
-    useEffect(() => {
-        fetchFoodListings()
-    }, [])
+    const notificationCreation = () => {
+        try {
+            const responseNotification = axios.post("http://localhost:5223/api/NotificationDonor/create" , donationApplyNotification);
+            console.log(responseNotification);
+        }catch (error){
+            console.log(`Error occured and the error is : ${error}`);
+        }
+    }
+
+    const recipientNotificationCreation = () => {
+        try {
+            const responseNotification = axios.post("http://localhost:5223/api/NotificationRecipient/create" , newRecipientNotification);
+            console.log(responseNotification);
+        }catch (error){
+            console.log(`Error occured and the error is : ${error}`);
+        }
+    }
 
     const handleSubmit = ():void => {
         try {
@@ -104,15 +142,18 @@ const FoodListsPage: React.FC = () => {
         try {
             const res = axios.put(`http://localhost:5223/api/FoodListing/update/${currentfoodListing.id}` , currentfoodListing, {
                 headers: {
-                    Authorization: `Bearer ${dtoken}`
+                    Authorization: dtoken ? `Bearer ${dtoken}` : `Bearer ${rtoken}`
                 }
             })
+            notificationCreation();
+            recipientNotificationCreation();
             console.log(res);
             console.log(currentfoodListing);
         }catch(error){
             console.log("error occured" + error)
         }
     }
+
 
     const filterDistrct = async (value:any) : Promise<void> =>  {
  
@@ -292,6 +333,10 @@ const FoodListsPage: React.FC = () => {
         }
 
     }
+
+    useEffect(() => {
+        fetchFoodListings()
+    }, [])
 
   return (
     <>
