@@ -269,7 +269,7 @@ const RecipientProfile: React.FC = () => {
                                     <p>Donor contact : {listing.donor.phone}</p>
                                     <div className='d-flex justify-content-center'>
                                         <button className="btn btn-warning btn-custom mx-1" data-bs-toggle="modal" data-bs-target="#report">Report</button>
-                                        <button className="btn btn-primary text-white btn-custom mx-1" data-bs-toggle="modal" data-bs-target="#apply" onClick={() => setCurrentFoodListing(listing)}>Apply</button>
+                                        { listing.currentStatus == FoodListingStatus.Available ? <button className="btn btn-primary text-white btn-custom mx-1" data-bs-toggle="modal" data-bs-target="#apply" onClick={() => setCurrentFoodListing(listing)}>Apply</button> : <button className="btn btn-primary text-white btn-custom mx-1" disabled>Apply</button>}
                                     </div>
                                 </div>
                             </div>
