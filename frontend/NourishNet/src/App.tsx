@@ -29,7 +29,7 @@ function App() {
           <Route path='/donor/login' element={<DonorLogin/>}></Route> {/* responsive - done */}
           <Route path='/recipient/login' element={<RecipientLogin/>}></Route> {/* responsive - done */}
           <Route path='/donor/register' element={<DonorSignUp/>}></Route> {/* responsive - done */}
-          <Route path='/recipient/register' element={<RecipientSignUp/>}></Route>
+          <Route path='/recipient/register' element={<RecipientSignUp/>}></Route> {/* responsive - done */}
           <Route path='/foodlists' element={<FoodListsPage/>}></Route>
         </Routes>
       </Router>

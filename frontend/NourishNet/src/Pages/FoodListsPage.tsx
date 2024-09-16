@@ -297,26 +297,28 @@ const FoodListsPage: React.FC = () => {
     <>
         <Header></Header>
         <div className='container-fluid desc-div'>
-            <div className='w-50 mx-3'>
+            <div className='w-50 mx-3 d-flex flex-column flex-md-column'>
                 <h1 className='h1-font mt-4'>Find <span className='text-warning'>Kind</span> Donations:</h1><br/>
-                <h6>Welcome to our Food Donation Listings! Here you'll find a variety of food items generously 
+                <h6 className='d-none d-md-block'>Welcome to our Food Donation Listings! Here you'll find a variety of food items generously 
                     contributed by donors, ready to be shared with those in need. 
                     Each listing represents an opportunity to help reduce food waste and support communities. 
                     Browse through the available donations and make a positive impact today by choosing the 
                     items that can make a difference in someone's life. To hae more seamless services we Provide:</h6>
-                <button className='btn btn-dark mx-1 mt-3'>Sign Up As Donor</button>
-                <button className='btn btn-dark mx-1 mt-3'>SignUp As Recipient</button>
+                <div>
+                    <button className='btn btn-dark mx-1 mt-3'>Sign Up As Donor</button>
+                    <button className='btn btn-dark mx-1 mt-3'>SignUp As Recipient</button>
+                </div>
             </div> 
         </div>
 
         <div className='container-fluid mt-4 mb-3'>
             <center><h1 className='text-dark'>Donations</h1></center>
-            <div className="d-flex justify-content-between py-2 container-fluid">
-                <div className="mx-5">
-                    sort jobs by:
+            <div className="d-flex flex-column flex-md-row justify-content-between py-2 container-fluid">
+                <div className="mx-5 mb-3 mb-md-0">
+                    <h5 className='fw-bolder'>sort jobs by:</h5>
                 </div>
 
-                <div className="mx-5 d-flex">
+                <div className="mx-5 d-flex mb-3 mb-md-0">
                     <span className="py-1 custom-margin fw-bold">Province:</span>
                     <select className="form-select" aria-label="Default select example" onChange={(e) => filterProvince(e.target.value)}>
                         <option selected>Select province</option>
@@ -332,7 +334,7 @@ const FoodListsPage: React.FC = () => {
                     </select>
                 </div>
 
-                <div className="mx-5 d-flex">
+                <div className="mx-5 d-flex mb-3 mb-md-0">
                     <span className="py-1 custom-margin fw-bold">District:</span>
                     <select className="form-select" aria-label="Default select example" onChange={(e) => filterDistrct(e.target.value)}>
                         <option selected>Select province</option>
