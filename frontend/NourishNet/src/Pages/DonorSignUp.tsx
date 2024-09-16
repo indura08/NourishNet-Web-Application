@@ -106,7 +106,7 @@ const DonorSignUp:React.FC = () => {
                 <form className='mx-4 mt-5' onSubmit={handleSubmit}>
                     <div className="mb-3 row">
                         <input type="text" className="form-control input-type-custom col mx-1" name='OrganizationName' onChange={handleChange} placeholder='OrganizaTion Name'/>
-                        <select className="form-control input-type-custom col mx-1" name='OrganizationType' onChange={handleDistrictChange} defaultValue={donorData.organizationType}  placeholder='OrganizationType'>
+                        <select className="form-control input-type-custom col mx-1" name='OrganizationType' onChange={handleDistrictChange} defaultValue={donorData.organizationType}>
                             {orgType.map((orgType) => (
                                 <option key={orgType} value={orgType}>{orgType}</option>
                             ))}
@@ -119,8 +119,17 @@ const DonorSignUp:React.FC = () => {
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="text" className="form-control input-type-custom col mx-1" name='BaseDistrict' onChange={handleChange}  placeholder='BaseDistrict'/>
-                        <input type="text" className="form-control input-type-custom col mx-1" name='BaseProvince' onChange={handleChange} placeholder='BaseProvince'/>
+                        <select className="form-control input-type-custom col mx-1" name='BaseDistrict' onChange={handleDistrictChange}>
+                            { district.map((district) => (
+                                <option key={district} value={district}>{district}</option>
+                            ))}
+                        </select>
+                        
+                        <select className="form-control input-type-custom col mx-1" name='BaseProvince' onChange={handleProvinceChange}>
+                            {province.map((province) => (
+                                    <option key={province} value={province}>{province}</option>
+                                ))}
+                        </select>
                     </div>
 
                     <div className="mb-3 row">

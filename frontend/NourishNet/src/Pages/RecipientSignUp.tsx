@@ -31,6 +31,31 @@ const RecipientSignUp:React.FC = () => {
         userType: ""
     })
 
+    const recipientType = Object.values(RecipientType)
+    const district = Object.values(District)
+    const province = Object.values(Province)
+
+    const handleDistrictChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setNewRecipient({
+            ...newRecipient,
+            baseDistrict:e.target.value as District
+        })
+    }
+
+    const handleProvinceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setNewRecipient({
+            ...newRecipient,
+            baseProvince:e.target.value as Province
+        })
+    }
+
+    const handleRecipientType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setNewRecipient({
+            ...newRecipient,
+            recipientType:e.target.value as RecipientType
+        })
+    }
+
     const areAllformFeildsfilled = () => {
         return Object.values(newRecipient).every((field) => field.trim() !== '');
     }
@@ -83,7 +108,12 @@ const RecipientSignUp:React.FC = () => {
                 <form className='mx-4 mt-4' onSubmit={handleSubmit}>
                     <div className="mb-3 row">
                         <input type="text" className="form-control input-type-custom col mx-1" name='recipientName' placeholder='RecipientName' onChange={handleChange}/>
-                        <input type="text" className="form-control input-type-custom col mx-1" name='recipientType' placeholder='RecipientType' onChange={handleChange}/>
+                        
+                        <select className="form-control input-type-custom col mx-1" name='recipientType' onChange={handleRecipientType}>
+                            {recipientType.map((recipient) => (
+                                    <option key={recipient} value={recipient}>{recipient}</option>
+                                ))}
+                        </select>
                     </div>
 
                     <div className="mb-3 row">
@@ -92,8 +122,17 @@ const RecipientSignUp:React.FC = () => {
                     </div>
 
                     <div className="mb-3 row">
-                        <input type="text" className="form-control input-type-custom col mx-1" name='baseDistrict' placeholder='BaseDistrict' onChange={handleChange}/>
-                        <input type="text" className="form-control input-type-custom col mx-1" name='baseProvince' placeholder='BaseProvince' onChange={handleChange}/>
+                        <select className="form-control input-type-custom col mx-1" name='baseDistrict' onChange={handleDistrictChange}>
+                            {district.map((district) => (
+                                    <option key={district} value={district}>{district}</option>
+                                ))}
+                        </select>
+                        
+                        <select className="form-control input-type-custom col mx-1" name='baseProvince' onChange={handleProvinceChange}>
+                            {province.map((province) => (
+                                    <option key={province} value={province}>{province}</option>
+                                ))}
+                        </select>
                     </div>
 
                     <div className="mb-3 row">
