@@ -305,13 +305,13 @@ const DonorProfile: React.FC = () => {
 
             <div className='container-fluid d-flex flex-column '>
 
-                <div className='d-flex flex-column flex-md-row'>
-                    <div className='w-50 mb-4 d-flex justify-content-center'>
-                        <img src={donation} style={{width:"100%", height:"35rem"}} className='d-none d-md-block'/>
+                <div className='d-flex flex-column flex-md-row '>
+                    <div className='w-50s mb-4 d-flex justify-content-center d-none d-md-block'>
+                        <img src={donation} style={{width:"100%", height:"35rem"}} className=''/>
                     </div>
 
-                    <div className='div-custom-margin border rounded-5 w-100 w-md-50 py-2 justify-content-center mb-4 border-dark border-3 d-flex flex-column main-div-margin'>
-                        <center><h3>Simply Fill This Food Listing form</h3></center>
+                    <div className='div-custom-margin border rounded-5 py-2 justify-content-center mb-4 border-dark border-3 main-div-margin'>
+                        <center><h3 className='px-3 px-md-0'>Simply Fill This Food Listing form</h3></center>
 
                         <form className='mx-4 mt-5' onSubmit={createNewdonation}>
                             <div className="mb-3 row">
@@ -343,8 +343,8 @@ const DonorProfile: React.FC = () => {
                                 <p className="mb-3 fw-normal">Are you a Recipient?<a href=""><span>Register as Recipient</span></a></p> 
                             </div>
 
-                            <div className="row mb-3">
-                                <button type="submit" className="btn btn-success col mx-1">Create Donation</button>
+                            <div className="d-flex flex-column flex-md-row mb-3">
+                                <button type="submit" className="btn btn-success col mx-1 mb-2 mb-md-0">Create Donation</button>
                                 <button type="reset" className="btn btn-danger col">Reset Form</button>
                             </div>
 

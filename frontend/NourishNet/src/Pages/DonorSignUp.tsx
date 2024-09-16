@@ -9,6 +9,7 @@ import { Province } from '../../Models/Enums/ProvinceValue'
 import { Role } from '../../Models/Enums/Role'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { OrganizationType } from "../../Models/Enums/OrganizationType"
 
 const DonorSignUp:React.FC = () => {
     const [ isValid , setIsValid] = useState(false);
@@ -29,6 +30,31 @@ const DonorSignUp:React.FC = () => {
         role: Role.Donor, 
         userType: ''
     })
+
+    const district = Object.values(District);
+    const province = Object.values(Province);
+    const orgType = Object.values(OrganizationType);
+
+    const handleDistrictChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setDonorData({
+            ...donorData,
+            baseDistrict:e.target.value as District
+        })
+    }
+
+    const handleProvinceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setDonorData({
+            ...donorData,
+            baseProvince:e.target.value as Province
+        })
+    }
+
+    const handleorgTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setDonorData({
+            ...donorData,
+            organizationType:e.target.value as District
+        })
+    }
 
     const areAllformFeildsfilled = () => {
         return Object.values(donorData).every((field) => field.trim() !== '');
@@ -80,7 +106,11 @@ const DonorSignUp:React.FC = () => {
                 <form className='mx-4 mt-5' onSubmit={handleSubmit}>
                     <div className="mb-3 row">
                         <input type="text" className="form-control input-type-custom col mx-1" name='OrganizationName' onChange={handleChange} placeholder='OrganizaTion Name'/>
-                        <input type="text" className="form-control input-type-custom col mx-1" name='OrganizationType' onChange={handleChange} defaultValue={donorData.organizationType}  placeholder='OrganizationType'/>
+                        <select className="form-control input-type-custom col mx-1" name='OrganizationType' onChange={handleDistrictChange} defaultValue={donorData.organizationType}  placeholder='OrganizationType'>
+                            {orgType.map((orgType) => (
+                                <option key={orgType} value={orgType}>{orgType}</option>
+                            ))}
+                        </select> 
                     </div>
 
                     <div className="mb-3 row">
