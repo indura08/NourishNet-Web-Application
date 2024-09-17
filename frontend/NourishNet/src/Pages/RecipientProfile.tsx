@@ -303,7 +303,7 @@ const RecipientProfile: React.FC = () => {
                     <div className='row'>
                         {foodListings.map((listing: FoodListing) => (
                             <div key={listing.id} className="card mt-3 mb-3 mx-1" style={{ width: "18rem" }}>
-                                <img src={card2} className="card-img-top" alt="..." />
+                                <img src={listing.imagePath} className="card-img-top" alt="..." />
                                 <div className="card-body">
                                     <center><h5 className="card-title">{listing.foodType}</h5></center>
                                     <p className="card-text">{listing.description}</p>
@@ -327,7 +327,7 @@ const RecipientProfile: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='border border-2 container-fluid col-12 col-md-3 custom-heights border-dark'>
+                <div className='border border-2 container-fluid col-12 col-md-3 custom-height border-dark'>
                     <div className=''>
                         <center><h4>Notifications</h4></center>
                     </div>

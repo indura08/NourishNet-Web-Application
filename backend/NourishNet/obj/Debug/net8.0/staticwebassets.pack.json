@@ -1,8 +1,24 @@
 {
   "Files": [
     {
+      "Id": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\20a.jpg",
+      "PackagePath": "staticwebassets\\images\\20a.jpg"
+    },
+    {
+      "Id": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\2b3cb209-e4ab-4d82-95a1-595574956732_1200x1200.png",
+      "PackagePath": "staticwebassets\\images\\2b3cb209-e4ab-4d82-95a1-595574956732_1200x1200.png"
+    },
+    {
       "Id": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\fish.jpg",
       "PackagePath": "staticwebassets\\images\\fish.jpg"
+    },
+    {
+      "Id": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\paratha-recipe-12.jpg",
+      "PackagePath": "staticwebassets\\images\\paratha-recipe-12.jpg"
+    },
+    {
+      "Id": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\rice-6324796_1280.jpg",
+      "PackagePath": "staticwebassets\\images\\rice-6324796_1280.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.NourishNet.Microsoft.AspNetCore.StaticWebAssets.props",

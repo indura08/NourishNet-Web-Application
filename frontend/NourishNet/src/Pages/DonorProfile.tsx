@@ -107,8 +107,15 @@ const DonorProfile: React.FC = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate() 
-    // console.log(currentDonor)
-    // console.log(dtoken)
+    
+    const foodType = Object.values(FoodType);
+
+    const handlefoodTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setNewDonation({
+            ...newDonation,
+            FoodType:e.target.value as FoodType
+        })
+    }
 
     const handleLogout = ():void => {
         dispatch(logout())
@@ -172,8 +179,7 @@ const DonorProfile: React.FC = () => {
     } 
 
     const createNewdonation = (e: React.FormEvent<HTMLFormElement>): void => {
-        e.preventDefault()
-
+        // e.preventDefault();
         const donationObjectToPass :FoodListingVM = {
             Id: 0,
             DonorId: currentDonor.id,
@@ -187,19 +193,6 @@ const DonorProfile: React.FC = () => {
             CurrentStatus: FoodListingStatus.Available
         }
 
-        // // formData.append('donorId' , newDonation.donorId)
-        // // formData.append('donor' , newDonation.donor),
-        // // formData.append('foodType', newDonation.foodType);
-        // // formData.append('description', newDonation.description);
-        // // formData.append('quantity', newDonation.quantity.toString());
-        // // formData.append('postedDate', newDonation.postedDate);
-        // // formData.append('expiryDate', newDonation.expiryDate);
-        // // formData.append('currentStatus', newDonation.currentStatus);
-        
-        // if(newDonation.image instanceof File){
-        //     formData.append('image' , newDonation.image);
-        // }
-
         try {
             const res = axios.post("http://localhost:5223/api/FoodListing/create" , donationObjectToPass, {
                 headers: {
@@ -211,17 +204,6 @@ const DonorProfile: React.FC = () => {
         }catch(error){
             console.log(error);
         }
-        // try {
-        //     const res = axios.post("http://localhost:5223/api/FoodListing/create" , newDonation, {
-        //         headers: {
-        //             Authorization: dtoken ? `Bearer ${dtoken}` : ""
-        //         }
-        //     })
-        //     console.log(res);
-        // }catch(error){
-        //     console.log(`error occured : ${error}`)
-        //     throw error
-        // }
     }
 
     const fetchNotifications = async () => {
@@ -367,7 +349,11 @@ const DonorProfile: React.FC = () => {
                         <form className='mx-4 mt-5' onSubmit={createNewdonation}>
                             <div className="mb-3 row">
                                 <input type="text" className="form-control input-type-custom col mx-1" name='DonorId' placeholder={currentDonor.userName} readOnly />
-                                <input type="text" className="form-control input-type-custom col mx-1" name='FoodType' placeholder='FoodType' onChange={(e) => newDonation.FoodType = e.target.value}/>
+                                <select className="form-control input-type-custom col mx-1" name='FoodType' onChange={handlefoodTypeChange}>
+                                    {foodType.map((foodType) => (
+                                    <option key={foodType} value={foodType}>{foodType}</option>
+                                ))}
+                                </select>
                             </div>
 
                             <div className="mb-3 row">

@@ -357,7 +357,7 @@ const FoodListsPage: React.FC = () => {
         </div>
 
         <div className='container-fluid mt-4 mb-3'>
-            <center><h1 className='text-dark'>Donations</h1></center>
+            <center><h1 className='text-dark'>Available Donations</h1></center>
             <div className="d-flex flex-column flex-md-row justify-content-between py-2 container-fluid">
                 <div className="mx-5 mb-3 mb-md-0">
                     <h5 className='fw-bolder'>sort jobs by:</h5>
@@ -419,7 +419,7 @@ const FoodListsPage: React.FC = () => {
                     { foodlistings.map((listing:FoodListing) => (
                         listing.currentStatus === FoodListingStatus.Available && (
                             <div key={listing.id} className="card mt-3 mb-3 mx-4" style={{width: "20rem"}}>
-                            <img src={card2} className="card-img-top" alt="..."/>
+                            <img src={listing.imagePath} className="card-img-top" alt="..."/>
                             <div className="card-body">
                                 <center><h5 className="card-title">{listing.foodType}</h5></center>
                                 <p className="card-text">{listing.description}</p>

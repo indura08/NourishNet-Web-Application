@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jpoecVL/0MikV6AfnzdTW730idkXO46PSs/NYb3D6u4=",
+  "Hash": "Ae+Xtbs84bpjGL6ry79YdQEBc/T3fE6VjVEC7MH85Yk=",
   "Source": "NourishNet",
   "BasePath": "_content/NourishNet",
   "Mode": "Default",
@@ -16,6 +16,44 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\20a.jpg",
+      "SourceId": "NourishNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\",
+      "BasePath": "_content/NourishNet",
+      "RelativePath": "images/20a.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\20a.jpg"
+    },
+    {
+      "Identity": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\2b3cb209-e4ab-4d82-95a1-595574956732_1200x1200.png",
+      "SourceId": "NourishNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\",
+      "BasePath": "_content/NourishNet",
+      "RelativePath": "images/2b3cb209-e4ab-4d82-95a1-595574956732_1200x1200.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\2b3cb209-e4ab-4d82-95a1-595574956732_1200x1200.png"
+    },
     {
       "Identity": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\fish.jpg",
       "SourceId": "NourishNet",
@@ -34,6 +72,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\fish.jpg"
+    },
+    {
+      "Identity": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\paratha-recipe-12.jpg",
+      "SourceId": "NourishNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\",
+      "BasePath": "_content/NourishNet",
+      "RelativePath": "images/paratha-recipe-12.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\paratha-recipe-12.jpg"
+    },
+    {
+      "Identity": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\rice-6324796_1280.jpg",
+      "SourceId": "NourishNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\",
+      "BasePath": "_content/NourishNet",
+      "RelativePath": "images/rice-6324796_1280.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\rice-6324796_1280.jpg"
     }
   ]
 }

@@ -49,11 +49,11 @@ const DonorLogin: React.FC = () => {
                 </div>
                 <p className="text-dark text-success text-center pharagraph">Forgot password? <a href="" className="text-link">Click here</a></p>
                 <div className='d-flex flex-column justify-content-center align-items-center'>
-                    <p className="text-success fs-7"><a href="worker/login"><h4>Login as Recipient</h4></a></p>
+                    <p className="text-success fs-7"><a href="/recipient/login"><h4>Login as Recipient</h4></a></p>
                     <p className="text-dark fs-7">new to NourishNet?</p>
                     <div className="d-flex flex-column flex-md-row ">
-                        <button type="submit" className="btn btn-primary mb-3 py-2 flex-grow-1 mx-1 regitser-button" style={{borderRadius:"10px"}}><a href="user/register" className='btn-custom'>Sign up as Donor</a></button>
-                        <button type="submit" className="btn btn-primary mb-3 py-2 flex-grow-1 mx-1 regitser-button" style={{borderRadius:"10px"}}><a href="worker/register" className='btn-custom'>Sign up as Recipient</a></button>
+                        <button type="submit" className="btn btn-primary mb-3 py-2 flex-grow-1 mx-1 regitser-button" style={{borderRadius:"10px"}}><a href="/donor/register" className='btn-custom'>Sign up as Donor</a></button>
+                        <button type="submit" className="btn btn-primary mb-3 py-2 flex-grow-1 mx-1 regitser-button" style={{borderRadius:"10px"}}><a href="/recipient/register" className='btn-custom'>Sign up as Recipient</a></button>
                     </div>
                 </div>
             </div>
