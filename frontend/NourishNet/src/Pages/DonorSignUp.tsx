@@ -52,7 +52,7 @@ const DonorSignUp:React.FC = () => {
     const handleorgTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setDonorData({
             ...donorData,
-            organizationType:e.target.value as District
+            organizationType:e.target.value as OrganizationType
         })
     }
 
@@ -106,7 +106,7 @@ const DonorSignUp:React.FC = () => {
                 <form className='mx-4 mt-5' onSubmit={handleSubmit}>
                     <div className="mb-3 row">
                         <input type="text" className="form-control input-type-custom col mx-1" name='OrganizationName' onChange={handleChange} placeholder='OrganizaTion Name'/>
-                        <select className="form-control input-type-custom col mx-1" name='OrganizationType' onChange={handleDistrictChange} defaultValue={donorData.organizationType}>
+                        <select className="form-control input-type-custom col mx-1" name='OrganizationType' onChange={handleorgTypeChange} defaultValue={donorData.organizationType}>
                             {orgType.map((orgType) => (
                                 <option key={orgType} value={orgType}>{orgType}</option>
                             ))}
