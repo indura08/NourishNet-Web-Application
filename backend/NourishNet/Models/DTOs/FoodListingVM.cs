@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
-using NourishNet.Models.Enums;
+﻿using NourishNet.Models.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.OpenApi;
 using System.ComponentModel.DataAnnotations;
 
-namespace NourishNet.Models
+namespace NourishNet.Models.DTOs
 {
-    public class FoodListing
+    public class FoodListingVM
     {
         public int Id { get; set; }
 
@@ -21,11 +18,8 @@ namespace NourishNet.Models
         public double Quantity { get; set; }
         public string PostedDate { get; set; }
         public String ExpiryDate { get; set; }
-        public string ImagePath { get; set; }
+        public IFormFile Image { get; set; }
         [EnumDataType(typeof(FoodListingStatus), ErrorMessage = "check status again , the current status is wrong")]
         public string CurrentStatus { get; set; }
-
     }
-
-
 }

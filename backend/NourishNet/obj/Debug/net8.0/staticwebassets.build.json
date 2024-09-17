@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "3jIUygcyW58rtCtX3dwZMa3dyjwAI5Ylo3/4LBPN0FU=",
+  "Hash": "M7GGDPN4FU3jwGKhCRTDAqt+ecY/feQMXJIsZu3knCs=",
   "Source": "NourishNet",
   "BasePath": "_content/NourishNet",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "NourishNet\\wwwroot",
+      "Source": "NourishNet",
+      "ContentRoot": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\",
+      "BasePath": "_content/NourishNet",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

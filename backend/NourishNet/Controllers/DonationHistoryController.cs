@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NourishNet.Data.Services;
 using NourishNet.Data.Services.Interfaces;
@@ -46,6 +47,7 @@ namespace NourishNet.Controllers
         }
 
         [HttpPost("create")]
+        [Authorize(Roles = "Recipient , Admin")]
         public async Task<IActionResult> CreateNewDonationHistory(DonationHistory donationHistory) { 
             await _donationHistoryService.AddNewDonoationHistory(donationHistory);
             return Ok(donationHistory);

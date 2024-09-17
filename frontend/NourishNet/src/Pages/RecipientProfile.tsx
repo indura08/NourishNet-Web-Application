@@ -16,6 +16,7 @@ import { FoodType } from '../../Models/Enums/FoodType'
 import { FoodListingStatus } from '../../Models/Enums/FoodListingStatus'
 import { NotificationDonor } from '../../Models/NotificationDonor'
 import { NotificationRecipient } from '../../Models/NotificationRecipient'
+import { DonationHistory } from "../../Models/DonationHistory";
 
 const RecipientProfile: React.FC = () => {
 
@@ -149,18 +150,36 @@ const RecipientProfile: React.FC = () => {
         createtime: time.toString()
     }
 
-    const notificationCreation = () => {
+    const confrimationDonorNotification : NotificationDonor = {
+        id: 0,
+        donorId: currentfoodListing.donorId,
+        donor: currentfoodListing.donor,
+        description: `You donation has been confrimed by th recipient ${currentRecipient.userName}`,
+        createdDate: today.toString(),
+        createtime: time.toString()
+    }
+
+    const confrimationRecipientNotification : NotificationRecipient = {
+        id: 0,
+        recipientId: currentRecipient.id,
+        recipient: currentRecipient,
+        description: `You have confrimed a donation you just got from`,
+        createdDate: today.toString(),
+        createdTime: time.toString()
+    }
+
+    const notificationCreation = (NotificationDonor:NotificationDonor) => {
         try {
-            const responseNotification = axios.post("http://localhost:5223/api/NotificationDonor/create" , donationApplyNotification);
+            const responseNotification = axios.post("http://localhost:5223/api/NotificationDonor/create" , NotificationDonor);
             console.log(responseNotification);
         }catch (error){
             console.log(`Error occured and the error is : ${error}`);
         }
     }
 
-    const recipientNotificationCreation = () => {
+    const recipientNotificationCreation = (notificationRecipient : NotificationRecipient) => {
         try {
-            const responseNotification = axios.post("http://localhost:5223/api/NotificationRecipient/create" , newRecipientNotification);
+            const responseNotification = axios.post("http://localhost:5223/api/NotificationRecipient/create" , notificationRecipient);
             console.log(responseNotification);
         }catch (error){
             console.log(`Error occured and the error is : ${error}`);
@@ -175,8 +194,8 @@ const RecipientProfile: React.FC = () => {
                     Authorization: `Bearer ${rtoken}`
                 }
             })
-            notificationCreation();
-            recipientNotificationCreation();
+            notificationCreation(donationApplyNotification);
+            recipientNotificationCreation(newRecipientNotification);
             console.log(res);
             console.log(currentfoodListing);
         } catch (error) {
@@ -206,6 +225,32 @@ const RecipientProfile: React.FC = () => {
             console.log(error);
         }
     } 
+
+    const newDonationHistory:DonationHistory = ({
+        donationId: 0 ,
+        recipientId: currentRecipient.id,
+        recipient: currentRecipient,
+        foodListingId: null,
+        foodListing: null,
+        dataRecieved: today 
+    })
+
+    const createDonationHistory = () => {
+        const res = axios.post("http://localhost:5223/api/DonationHistory/create" , newDonationHistory , {
+            headers: {
+                Authorization: `Bearer ${rtoken}`
+            }
+        }
+    ).then(() => {
+            console.log(res)
+            notificationCreation(confrimationDonorNotification);
+            recipientNotificationCreation(confrimationRecipientNotification);
+        }).catch((error) => {
+            console.log(error);
+            notificationCreation(confrimationDonorNotification);
+            recipientNotificationCreation(confrimationRecipientNotification);
+        })
+    }
 
     useEffect(() => {
         fetchFoodListings();
@@ -297,7 +342,7 @@ const RecipientProfile: React.FC = () => {
                                     <p style={{ fontSize:"12px"}} className='mx-1'>{notification.createdTime} </p>
                                     <div style={{marginLeft:"48px"}} className="d-flex">
                                         <button className='btn btn-danger button-custom d-flex align-items-center justify-content-center mx-1' data-bs-toggle="modal" data-bs-target="#deleteNotification" onClick={() => setSelectedNotification(notification)}><span className="material-symbols-outlined fs-6">delete</span></button>
-                                        <button className='btn btn-primary button-custom d-flex align-items-center justify-content-center mx-1' data-bs-toggle="modal" data-bs-target="#Confrimartion" onClick={() => setSelectedNotification(notification)}><span className="material-symbols-outlined fs-6">check_circle</span></button>
+                                        <button className='btn btn-primary button-custom d-flex align-items-center justify-content-center mx-1' data-bs-toggle="modal" data-bs-target="#confrimation" onClick={() => setSelectedNotification(notification)}><span className="material-symbols-outlined fs-6">check_circle</span></button>
                                     </div>
                                 </div>
                             </div>
@@ -429,6 +474,25 @@ const RecipientProfile: React.FC = () => {
                     <div className="modal-footer">
                         <button type="button" className="btn btn-danger" onClick={() => deleteNotification()}>Delete</button>
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            {/*Confirmation model*/}
+            <div className="modal" id='confrimation'>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Confrimation of recieving donations!!</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <p>Did you get the donations successfully , please consider that after you confrimed this we will close the donation process for you current donation</p>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-primary" onClick={() => createDonationHistory()}>Confrim</button>
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
                     </div>
                     </div>
                 </div>

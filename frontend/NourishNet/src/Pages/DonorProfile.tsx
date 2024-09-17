@@ -17,6 +17,8 @@ import { Role } from '../../Models/Enums/Role'
 import { FoodType } from '../../Models/Enums/FoodType'
 import { FoodListingStatus } from '../../Models/Enums/FoodListingStatus'
 import { NotificationDonor } from '../../Models/NotificationDonor'
+import { Donor } from '../../Models/Donor'
+import { FoodListingVM } from "../../Models/FoodListingVM"
 
 const DonorProfile: React.FC = () => {
 
@@ -54,10 +56,10 @@ const DonorProfile: React.FC = () => {
         currentStatus: FoodListingStatus.Available
     });
 
-    const [newDonation , setNewDonation] = useState<FoodListing>({
-        id: 0,
-        donorId : currentDonor.id, 
-        donor: currentDonor ? currentDonor : {
+    const [newDonation , setNewDonation] = useState<FoodListingVM>({
+        Id: 0,
+        DonorId : currentDonor.id, 
+        Donor: currentDonor ? currentDonor : {
             id:"",
             organizaTionName:"", 
             organizationType: "", 
@@ -74,14 +76,24 @@ const DonorProfile: React.FC = () => {
             role: Role.Donor, 
             userType: ""
         },
-        foodType: FoodType.Dishes,
-        description : "",
-        quantity: 0,
-        postedDate: "",
-        expiryDate: "",
-        imagePath: "",
-        currentStatus: FoodListingStatus.Available
+        FoodType: FoodType.Dishes,
+        Description : "",
+        Quantity: 0,
+        PostedDate: "",
+        ExpiryDate: "",
+        Image: "",
+        CurrentStatus: FoodListingStatus.Available
     });
+
+    const handleImageUpload = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const image = e.target.files?.[0]
+        if(image){
+            setNewDonation({
+                ...newDonation,
+                Image:image
+            })
+        }
+    } 
     // const [ error , setError] = useState("")
 
     const [ currentNotification , setCurrentNotification ] = useState({
@@ -160,17 +172,56 @@ const DonorProfile: React.FC = () => {
     } 
 
     const createNewdonation = (e: React.FormEvent<HTMLFormElement>): void => {
+        e.preventDefault()
+
+        const donationObjectToPass :FoodListingVM = {
+            Id: 0,
+            DonorId: currentDonor.id,
+            Donor: currentDonor,
+            FoodType: newDonation.FoodType,
+            Description: newDonation.Description,
+            Quantity: newDonation.Quantity,
+            PostedDate: newDonation.PostedDate,
+            ExpiryDate: newDonation.ExpiryDate,
+            Image: newDonation.Image instanceof File ? newDonation.Image : "no image",
+            CurrentStatus: FoodListingStatus.Available
+        }
+
+        // // formData.append('donorId' , newDonation.donorId)
+        // // formData.append('donor' , newDonation.donor),
+        // // formData.append('foodType', newDonation.foodType);
+        // // formData.append('description', newDonation.description);
+        // // formData.append('quantity', newDonation.quantity.toString());
+        // // formData.append('postedDate', newDonation.postedDate);
+        // // formData.append('expiryDate', newDonation.expiryDate);
+        // // formData.append('currentStatus', newDonation.currentStatus);
+        
+        // if(newDonation.image instanceof File){
+        //     formData.append('image' , newDonation.image);
+        // }
+
         try {
-            const res = axios.post("http://localhost:5223/api/FoodListing/create" , newDonation, {
+            const res = axios.post("http://localhost:5223/api/FoodListing/create" , donationObjectToPass, {
                 headers: {
+                    'Content-Type': 'multipart/form-data',
                     Authorization: dtoken ? `Bearer ${dtoken}` : ""
                 }
             })
-            console.log(res);
+            console.log(res)
         }catch(error){
-            console.log(`error occured : ${error}`)
-            throw error
+            console.log(error);
         }
+        // try {
+        //     const res = axios.post("http://localhost:5223/api/FoodListing/create" , newDonation, {
+        //         headers: {
+        //             Authorization: dtoken ? `Bearer ${dtoken}` : ""
+        //         }
+        //     })
+        //     console.log(res);
+        // }catch(error){
+        //     console.log(`error occured : ${error}`)
+        //     throw error
+        // }
     }
 
     const fetchNotifications = async () => {
@@ -203,7 +254,7 @@ const DonorProfile: React.FC = () => {
     useEffect(() => {
         fetchFoodListings();
         fetchNotifications();
-    })
+    }, [])
     
   return (
     <>
@@ -316,21 +367,21 @@ const DonorProfile: React.FC = () => {
                         <form className='mx-4 mt-5' onSubmit={createNewdonation}>
                             <div className="mb-3 row">
                                 <input type="text" className="form-control input-type-custom col mx-1" name='DonorId' placeholder={currentDonor.userName} readOnly />
-                                <input type="text" className="form-control input-type-custom col mx-1" name='FoodType' placeholder='FoodType' onChange={(e) => newDonation.foodType = e.target.value}/>
+                                <input type="text" className="form-control input-type-custom col mx-1" name='FoodType' placeholder='FoodType' onChange={(e) => newDonation.FoodType = e.target.value}/>
                             </div>
 
                             <div className="mb-3 row">
-                                <input type="text" className="form-control input-type-custom col mx-1" name='Description' placeholder='Description' onChange={(e) => newDonation.description = e.target.value}/>
-                                <input type="text" className="form-control input-type-custom col mx-1" name='Quantity' placeholder='Quantity (kg)' onChange={(e) => newDonation.quantity = e.target.value}/>
+                                <input type="text" className="form-control input-type-custom col mx-1" name='Description' placeholder='Description' onChange={(e) => newDonation.Description = e.target.value}/>
+                                <input type="text" className="form-control input-type-custom col mx-1" name='Quantity' placeholder='Quantity (kg)' onChange={(e) => newDonation.Quantity = e.target.value}/>
                             </div>
 
                             <div className="mb-3 row">
-                                <input type="text" className="form-control input-type-custom col mx-1" name='PostedDate' placeholder='PostedDate (DD/MM/YYYY)' onChange={(e) => newDonation.postedDate = e.target.value}/>
-                                <input type="text" className="form-control input-type-custom col mx-1" name='ExpiryDate' placeholder='ExpiryDate (DD/MM/YYYY)' onChange={(e) => newDonation.expiryDate = e.target.value}/>
+                                <input type="text" className="form-control input-type-custom col mx-1" name='PostedDate' placeholder='PostedDate (DD/MM/YYYY)' onChange={(e) => newDonation.PostedDate = e.target.value}/>
+                                <input type="text" className="form-control input-type-custom col mx-1" name='ExpiryDate' placeholder='ExpiryDate (DD/MM/YYYY)' onChange={(e) => newDonation.ExpiryDate = e.target.value}/>
                             </div>
 
                             <div className="mb-3 row">
-                                <input type="text" className="form-control input-type-custom col mx-1" name='ImagePath' placeholder='ImagePath' onChange={(e) => newDonation.imagePath = e.target.value}/>
+                                <input type="file" className="form-control input-type-custom col mx-1" name='ImagePath' placeholder='ImagePath' onChange={handleImageUpload}/>
                                 <input type="text" className="form-control input-type-custom col mx-1 " name='CurrentStatus' placeholder="Available" readOnly/>
                             </div>
                             

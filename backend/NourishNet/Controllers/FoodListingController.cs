@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using NourishNet.Data.Services;
 using NourishNet.Data.Services.Interfaces;
 using NourishNet.Models;
+using NourishNet.Models.DTOs;
 
 namespace NourishNet.Controllers
 {
@@ -43,7 +44,7 @@ namespace NourishNet.Controllers
 
         [HttpPost("create")]
         [Authorize(Roles = "Donor, Admin")]
-        public async Task<ActionResult<string>> NewFoodListing(FoodListing newFoodListing) {
+        public async Task<ActionResult<string>> NewFoodListing(FoodListingVM newFoodListing) {
 
             var donor = await _userManager.FindByIdAsync(newFoodListing.DonorId);
             if (donor == null)

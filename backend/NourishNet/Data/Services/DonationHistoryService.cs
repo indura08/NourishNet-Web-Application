@@ -15,6 +15,12 @@ namespace NourishNet.Data.Services
         }
         public async Task AddNewDonoationHistory(DonationHistory donationHistory)
         {
+            var recipient = await _dbContext.Recipients.FindAsync(donationHistory.RecipientId);
+            var foodlisting = await _dbContext.FoodListings.FindAsync(donationHistory.FoodListingId);
+
+            donationHistory.Recipient = recipient;
+            donationHistory.FoodListing = foodlisting;
+            
             _dbContext.DonationHistories.Add(donationHistory);
             await _dbContext.SaveChangesAsync();
         }
