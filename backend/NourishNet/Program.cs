@@ -155,6 +155,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseStaticFiles(); //meka damme asp.net backend eka static file serve krnna puluwan wena widiyt hdgnnai  //meka damma hari giya picture k load wenne nathi case ek 
+
 app.MapControllers();
 
 app.Run();

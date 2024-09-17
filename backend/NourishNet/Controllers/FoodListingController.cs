@@ -35,6 +35,15 @@ namespace NourishNet.Controllers
             var foodListings = await _foodListingService.GetAll();
             if (foodListings.Count > 0)
             {
+                foreach (var listing in foodListings)
+                {
+                    if (!string.IsNullOrEmpty(listing.ImagePath)) 
+                    {
+                        listing.ImagePath = $"{Request.Scheme}://{Request.Host}/images/{Path.GetFileName(listing.ImagePath)}";
+                          
+                    }
+                }
+
                 return Ok(foodListings);
             }
             else {

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "M7GGDPN4FU3jwGKhCRTDAqt+ecY/feQMXJIsZu3knCs=",
+  "Hash": "jpoecVL/0MikV6AfnzdTW730idkXO46PSs/NYb3D6u4=",
   "Source": "NourishNet",
   "BasePath": "_content/NourishNet",
   "Mode": "Default",
@@ -15,5 +15,25 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\fish.jpg",
+      "SourceId": "NourishNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\",
+      "BasePath": "_content/NourishNet",
+      "RelativePath": "images/fish.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\fish.jpg"
+    }
+  ]
 }

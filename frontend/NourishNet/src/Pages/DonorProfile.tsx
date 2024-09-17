@@ -254,7 +254,7 @@ const DonorProfile: React.FC = () => {
     useEffect(() => {
         fetchFoodListings();
         fetchNotifications();
-    }, [])
+    })
     
   return (
     <>
@@ -301,7 +301,7 @@ const DonorProfile: React.FC = () => {
                 <div className='row'>
                     { usersFoodLisitngs.map((listing:FoodListing) => (
                         <div key={listing.id} className="card mt-3 mb-3 mx-1" style={{width: "18rem"}}>
-                        <img src={card2} className="card-img-top" alt="..."/>
+                        <img src={listing.imagePath} alt={listing.imagePath} className="card-img-top"/>
                         <div className="card-body">
                             <center><h5 className="card-title">{listing.foodType}</h5></center>
                             <p className="card-text">{listing.description}</p>
