@@ -154,7 +154,7 @@ const RecipientProfile: React.FC = () => {
         id: 0,
         donorId: currentfoodListing.donorId,
         donor: currentfoodListing.donor,
-        description: `You donation has been confrimed by th recipient ${currentRecipient.userName}`,
+        description: `You donation has been confrimed by the recipient ${currentRecipient.userName}`,
         createdDate: today.toString(),
         createtime: time.toString()
     }
@@ -163,7 +163,7 @@ const RecipientProfile: React.FC = () => {
         id: 0,
         recipientId: currentRecipient.id,
         recipient: currentRecipient,
-        description: `You have confrimed a donation you just got from`,
+        description: `You have confrimed a donation you just got`,
         createdDate: today.toString(),
         createdTime: time.toString()
     }
