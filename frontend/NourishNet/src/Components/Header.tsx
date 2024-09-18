@@ -39,15 +39,16 @@ const Header: React.FC = () => {
 
             <div className='d-none d-md-block' style={{marginLeft: "60px"}} id='navmenu'>
                 <ul className='navbar-nav ms-auto'>
-                    { currentDonor && !currentRecipient ? <li className='nav-item mx-4'><a href='/donor/profile' style={{color:"inherit", textDecoration:"none"}}>Hello {currentDonor.userName}</a></li>
-                        : currentRecipient && !currentDonor ? <li className='nav-item mx-4'><a href='/recipient/profile' style={{color:"inherit", textDecoration:"none"}}>Hello {currentRecipient.userName}</a></li>
-                        : currentRecipient && currentDonor ? <li className='nav-item mx-4'><a href='/donor/profile' style={{color:"inherit", textDecoration:"none"}}>Hello there</a></li>
-                        : <li className='nav-item mx-4'><a href='/donor/login' style={{color:"inherit", textDecoration:"none"}}>Sign In</a></li>}
-                    <li className='nav-item mx-4'><a href='/donor/register' style={{color:"inherit", textDecoration:"none"}}>Sign Up</a></li>    
+                    { currentDonor.id != String(0)  && currentRecipient.id == String(0) ? <li className='nav-item mx-4'><a href='/donor/profile' style={{color:"inherit", textDecoration:"none"}}>{currentDonor.userName}</a></li> : 
+                        currentRecipient.id != String(0) && currentDonor.id == String(0) ? <li className='nav-item mx-4'><a href='/recipient/profile' style={{color:"inherit", textDecoration:"none"}}>{currentRecipient.userName}</a></li> :
+                        currentDonor.id != String(0) && currentRecipient.id != String(0) ? <div><li className='nav-item mx-4'><a href='/donor/profile' style={{color:"inherit", textDecoration:"none"}}>Donor Account</a></li> 
+                                                                                                <li className='nav-item mx-4'><a href='/recipient/profile' style={{color:"inherit", textDecoration:"none"}}>Recipient Account</a></li></div> : currentDonor.id == String(0) && currentRecipient.id == String(0) ? <li className='nav-item mx-4'><a href='/donor/register' style={{color:"inherit", textDecoration:"none"}}>Sign In</a></li>  
+                                                                                                : "Hi"}    
+                    <li className='nav-item mx-4'><a href='/donor/register' style={{color:"inherit", textDecoration:"none"}}>Sign Up</a></li>
                 </ul>     
             </div>
         </div>
-    </nav>
+    </nav>     
     </>
     
   )

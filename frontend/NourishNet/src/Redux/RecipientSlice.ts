@@ -17,7 +17,7 @@ interface RecipientState {
 
 const initialState: RecipientState = {
     currentRecipient: savedRecipient ? JSON.parse(savedRecipient) : {
-        id : "",
+        id : "0",
         recipientName: "",
         contactPerson: "",
         phone: "",

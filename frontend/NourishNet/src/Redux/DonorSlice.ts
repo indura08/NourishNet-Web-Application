@@ -16,7 +16,7 @@ interface UserState {
 
 const initialState:UserState = {
     currentDonor: saveddonor ? JSON.parse(saveddonor) : {
-        Id:"",
+        Id:"0",
         OrganizationName:"", 
         OrganizationType: "", 
         ContactPerson:"",

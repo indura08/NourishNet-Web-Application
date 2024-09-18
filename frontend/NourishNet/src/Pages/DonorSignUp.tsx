@@ -158,7 +158,8 @@ const DonorSignUp:React.FC = () => {
                     </div>
 
                     <div>
-                        <p className="mb-3 fw-normal">Are you a Recipient?<a href=""><span>Register as Recipient</span></a></p> 
+                        <p className="mb-3 fw-normal">Have an Account?<a href="/donor/login"><span>Login</span></a></p>
+                        <p className="mb-3 fw-normal">Are you a Recipient?<a href="/recipient/register"><span>Register as Recipient</span></a></p> 
                     </div>
 
                     <div className="row mb-3">

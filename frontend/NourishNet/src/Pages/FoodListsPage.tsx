@@ -424,7 +424,7 @@ const FoodListsPage: React.FC = () => {
                                 <center><h5 className="card-title">{listing.foodType}</h5></center>
                                 <p className="card-text">{listing.description}</p>
                                 <p>Expiry Date: {listing.expiryDate}</p>
-                                <p>Quantity: {listing.quantity}</p>
+                                <p>Quantity: {listing.quantity}kg</p>
                                 <p>Current status: {listing.currentStatus}</p>
                                 <p>Donor : {listing.donor.userName}</p>
                                 <p>Donor contact : {listing.donor.phone}</p>
@@ -518,7 +518,7 @@ const FoodListsPage: React.FC = () => {
                         <p>Click apply button to apply for this donation. After that contact the Donor to get the donation!</p>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-success" onClick={applyFunction}>Apply</button>
+                        <button type="button" className="btn btn-success" onClick={() => applyFunction()}>Apply</button>
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                     </div>

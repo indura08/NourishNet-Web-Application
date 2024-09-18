@@ -288,7 +288,7 @@ const DonorProfile: React.FC = () => {
                             <center><h5 className="card-title">{listing.foodType}</h5></center>
                             <p className="card-text">{listing.description}</p>
                             <p>Expiry Date: {listing.expiryDate}</p>
-                            <p>Quantity: {listing.quantity}</p>
+                            <p>Quantity: {listing.quantity}kg</p>
                             <p>Current status: <span className='text-dark fw-bolder'>{listing.currentStatus}</span></p>
                             <p>Donor : {listing.donor.userName}</p>
                             <p>Donor contact : {listing.donor.phone}</p>

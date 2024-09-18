@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Ae+Xtbs84bpjGL6ry79YdQEBc/T3fE6VjVEC7MH85Yk=",
+  "Hash": "4HbSLkTECa4+mNwIvRTsF4YNDBnVIj4jQBcVVcpRhYo=",
   "Source": "NourishNet",
   "BasePath": "_content/NourishNet",
   "Mode": "Default",
@@ -55,6 +55,25 @@
       "OriginalItemSpec": "wwwroot\\images\\2b3cb209-e4ab-4d82-95a1-595574956732_1200x1200.png"
     },
     {
+      "Identity": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\BFV21142_Cream_Cheese_and_Fruit_Pastries_Final.jpg",
+      "SourceId": "NourishNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\",
+      "BasePath": "_content/NourishNet",
+      "RelativePath": "images/BFV21142_Cream_Cheese_and_Fruit_Pastries_Final.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\BFV21142_Cream_Cheese_and_Fruit_Pastries_Final.jpg"
+    },
+    {
       "Identity": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\fish.jpg",
       "SourceId": "NourishNet",
       "SourceType": "Discovered",
@@ -72,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\fish.jpg"
+    },
+    {
+      "Identity": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\o-25111849.jpg",
+      "SourceId": "NourishNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\",
+      "BasePath": "_content/NourishNet",
+      "RelativePath": "images/o-25111849.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\o-25111849.jpg"
     },
     {
       "Identity": "F:\\intern projecrts\\Food waste reduction asp.net and react project\\Project\\backend\\NourishNet\\wwwroot\\images\\paratha-recipe-12.jpg",
