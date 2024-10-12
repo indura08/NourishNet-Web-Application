@@ -28,7 +28,7 @@ pipeline {
                         node --version
                         npm --version 
                         npm ci
-                        vite build
+                        npx vite build
                     '''
                 }
             }
