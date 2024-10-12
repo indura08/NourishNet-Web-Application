@@ -36,6 +36,7 @@ const RecipientSignUp:React.FC = () => {
     const province = Object.values(Province)
 
     const handleDistrictChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        e.preventDefault()
         setNewRecipient({
             ...newRecipient,
             baseDistrict:e.target.value as District
