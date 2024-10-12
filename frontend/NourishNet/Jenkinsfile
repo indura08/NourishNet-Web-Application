@@ -7,14 +7,13 @@ pipeline {
         //me tokens dws 60kin expire wena mokk hari awlk unoth passe kraddi poddk token ek blnna 
     }
 
-    stage('Checkout'){
-        steps{
-            //this is because my repo is not private , if my repo was private i have to provide git crednetials in envrionment section
-            git branch : 'master',  url:'https://github.com/indura08/NourishNet-Web-Application.git'
-        }
-    }
-
     stages {
+        stage('Checkout'){
+            steps{
+                //this is because my repo is not private , if my repo was private i have to provide git crednetials in envrionment section
+                git branch : 'master',  url:'https://github.com/indura08/NourishNet-Web-Application.git'
+            }
+        }
         stage('build frontend') {
             agent {
                 docker {
@@ -32,25 +31,27 @@ pipeline {
                     '''
                 }
             }
-        }
-    }
 
-    stage ("deploy"){
-        agent {
-            docker {
-                image 'node:20-alpine'
-                reuseNode true
+        stage ("deploy"){
+            agent {
+                docker {
+                    image 'node:20-alpine'
+                    reuseNode true
+                }
             }
-        }
-        steps{
-            sh ''' 
-                npm install netlify-cli
-                node_modules/.bin/netlify --version
-                echo "deployin to prodcution. Site id: $NETLIFY_SITE_ID"
-                node_modules/.bin/netlify status
-                node_modules/.bin/netlify deploy --dir=dist --prod
-            '''
-        }
+            steps{
+                sh ''' 
+                    npm install netlify-cli
+                    node_modules/.bin/netlify --version
+                    echo "deployin to prodcution. Site id: $NETLIFY_SITE_ID"
+                    node_modules/.bin/netlify status
+                    node_modules/.bin/netlify deploy --dir=dist --prod
+                '''
+            }
 
+}
+        }
     }
+
+    
 }
