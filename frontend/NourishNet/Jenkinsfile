@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    environment{
+        NETLIFY_SITE_ID = credentials('nourishnet-siteID')
+        NETLIFY_AUTH_TOKEN = credentials('netlify-token')
+        //me tokens dws 60kin expire wena mokk hari awlk unoth passe kraddi poddk token ek blnna 
+    }
+
+    stages {
+        stage('build') {
+            agent {
+                docker {
+                    image 'node:20-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh ''' 
+                    node --version
+                    npm --version 
+                    npm ci
+                    vite build
+                '''
+            }
+        }
+    }
+
+    stage ("deploy"){
+        agent {
+            docker {
+                image 'node:20-alpine'
+                reuseNode true
+            }
+        }
+        steps{
+            sh ''' 
+                npm install netlify-cli
+                node_modules/.bin/netlify --version
+                echo "deployin to prodcution. Site id: $NETLIFY_SITE_ID"
+                node_modules/.bin/netlify status
+                node_modules/.bin/netlify deploy --dir=dist --prod
+            '''
+        }
+
+    }
+}
