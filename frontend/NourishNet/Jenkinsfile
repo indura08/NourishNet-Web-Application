@@ -23,7 +23,7 @@ pipeline {
                 }
             }
             steps {
-                dir('frontend'){
+                dir('frontend/NourishNet'){
                     sh ''' 
                         node --version
                         npm --version 
