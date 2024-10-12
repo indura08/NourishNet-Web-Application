@@ -28,7 +28,7 @@ pipeline {
                         node --version
                         npm --version 
                         npm ci
-                        vite build
+                        node_modules/.bin/vite build
                     '''
                 }
             }
