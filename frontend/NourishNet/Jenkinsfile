@@ -7,8 +7,15 @@ pipeline {
         //me tokens dws 60kin expire wena mokk hari awlk unoth passe kraddi poddk token ek blnna 
     }
 
+    stage('Checkout'){
+        steps{
+            //this is because my repo is not private , if my repo was private i have to provide git crednetials in envrionment section
+            git branch : 'master',  url:'https://github.com/indura08/NourishNet-Web-Application.git'
+        }
+    }
+
     stages {
-        stage('build') {
+        stage('build frontend') {
             agent {
                 docker {
                     image 'node:20-alpine'
@@ -16,12 +23,14 @@ pipeline {
                 }
             }
             steps {
-                sh ''' 
-                    node --version
-                    npm --version 
-                    npm ci
-                    vite build
-                '''
+                dir('frontend'){
+                    sh ''' 
+                        node --version
+                        npm --version 
+                        npm ci
+                        vite build
+                    '''
+                }
             }
         }
     }
