@@ -35,14 +35,16 @@ pipeline {
         }
 
         stage("Test"){
-            script{
-                sh '''
-                    if grep -q "NourishNet" frontend/NourishNet/dist/index.html; then
-                        echo "Text found , Test has been passed"
-                    else 
-                        echo "Text not found! Test failed"
-                    fi
-                '''
+            steps {
+                script{
+                    sh '''
+                        if grep -q "NourishNet" frontend/NourishNet/dist/index.html; then
+                            echo "Text found , Test has been passed"
+                        else 
+                            echo "Text not found! Test failed"
+                        fi
+                    '''
+                }
             }
         }
 
