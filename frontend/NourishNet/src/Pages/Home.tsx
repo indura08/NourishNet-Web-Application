@@ -163,9 +163,6 @@ const Home:React.FC = () => {
 </div>
 
     <Footer></Footer>
-    <div>
-        This was a test paharagraphto check jenkins automation works successfully.
-    </div>
     </>
     
   )
