@@ -163,6 +163,10 @@ const Home:React.FC = () => {
 </div>
 
     <Footer></Footer>
+
+    <div>
+      <h1>This text was added to check jenkins pipeline Automation!!!</h1>
+    </div>
     </>
     
   )
