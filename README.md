@@ -39,13 +39,7 @@ The application is fully integrated with a Jenkins CI/CD pipeline to ensure smoo
 - Visual Studio 2022 (Community Edition)
 - Visual Studio Code
 - Git & GitHub
-
----
-
-## 📸 Screenshots
-
-> *Coming soon! Include screenshots or demo gifs here.*
-
+  
 ---
 
 ## 📂 Project Structure
