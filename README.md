@@ -65,7 +65,8 @@ The application is fully integrated with a Jenkins CI/CD pipeline to ensure smoo
 ### Backend Setup (ASP.NET Core)
 1. Navigate to the `server` folder:
     ```bash
-    cd server
+    cd backend
+    cd NourishNet
     ```
 2. Configure `appsettings.json` for your MySQL connection string.
 3. Run migrations (if using EF Core):
@@ -80,7 +81,7 @@ The application is fully integrated with a Jenkins CI/CD pipeline to ensure smoo
 ### Frontend Setup (React)
 1. Navigate to the `client` folder:
     ```bash
-    cd client
+    cd frontend
     ```
 2. Install dependencies:
     ```bash
@@ -103,20 +104,11 @@ The application is fully integrated with a Jenkins CI/CD pipeline to ensure smoo
 
 2. Use the `Jenkinsfile` in the root directory to define your build pipeline.
 
-3. Setup GitHub Webhooks (optional) to trigger builds on each push.
-
 ---
 
 ## 👥 Contributors
 
-- **Your Name** - [LinkedIn](https://www.linkedin.com) | [GitHub](https://github.com/yourusername)
-- Team Members (add others here)
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- **Indura Perera - an individul project of mine**
 
 ---
 
